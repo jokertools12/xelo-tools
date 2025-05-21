@@ -12,6 +12,7 @@ const { checkAchievements, trackSectionVisit } = require('./middleware/achieveme
 const Achievement = require('./models/Achievement');
 const UserAchievement = require('./models/UserAchievement');
 const Language = require('./models/Language');
+const __dirname = path.resolve();
 
 // تضمين النماذج (إذا كان ذلك ضروريًا في تطبيقك)
 require('./models/User');
@@ -1535,10 +1536,6 @@ app.use(errorHandler);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-  // يمكن وضع هذا السطر لفحص حالة السيرفر في بيئة الإنتاج
-  app.get('/', (req, res) => {
-    res.send('Server is running in production!');
-  });
 
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
