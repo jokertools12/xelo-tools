@@ -46,6 +46,9 @@ const connectMongoDB = async () => {
 };
 
 const app = express();
+
+const port = process.env.PORT || 3000;
+
 // Initialize database connections
 connectMongoDB();
 // إضافة إنشاء المجلدات اللازمة عند بدء التشغيل
@@ -1542,7 +1545,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 5000;
+
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
 // Improved server startup with port conflict handling
