@@ -47,7 +47,8 @@ const connectMongoDB = async () => {
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+// استخدام بورت من البيئة أو 5000 كافتراضي
+const PORT = parseInt(process.env.PORT, 10) || 5000;
 
 // Initialize database connections
 connectMongoDB();
