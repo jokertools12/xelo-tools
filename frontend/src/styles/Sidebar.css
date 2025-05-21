@@ -1,0 +1,1102 @@
+/* 
+ * Main Sidebar Styles
+ * Organized structure with RTL support
+ */
+
+/* Base Sidebar Container */
+.sidebar {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  z-index: 1001;
+  height: 100vh;
+  min-height: 100%;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(to bottom, #0f2547, #1a1f38);
+  width: 250px;
+}
+
+/* RTL/LTR Support */
+html[dir="rtl"] .sidebar {
+  direction: rtl;
+  float: right;
+  right: 0;
+  left: auto !important;
+  border-left: 1px solid rgba(99, 102, 241, 0.1);
+  border-right: none;
+  position: fixed !important;
+  z-index: 1001;
+}
+
+html[dir="ltr"] .sidebar {
+  direction: ltr;
+  float: left;
+  left: 0;
+  right: auto !important;
+  border-right: 1px solid rgba(99, 102, 241, 0.1);
+  border-left: none;
+  position: fixed !important;
+  z-index: 1001;
+}
+
+/* RTL/LTR specific classes */
+.sidebar-rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.sidebar-ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Menu RTL/LTR specific classes */
+.menu-rtl .ant-menu-title-content {
+  text-align: right;
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+.menu-ltr .ant-menu-title-content {
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+/* Collapse trigger positioning for RTL/LTR */
+.collapse-trigger-rtl {
+  left: 0;
+  right: auto;
+  border-radius: 0 4px 4px 0;
+}
+
+.collapse-trigger-ltr {
+  right: 0;
+  left: auto;
+  border-radius: 4px 0 0 4px;
+}
+
+/* Collapsed sidebar */
+.sidebar-collapsed {
+  width: 80px !important;
+}
+
+/* Mobile sidebar */
+.sidebar-mobile-visible {
+  transform: translateX(0) !important;
+}
+
+/* Hide mobile sidebar by default */
+@media (max-width: 768px) {
+  html[dir="rtl"] .sidebar {
+    transform: translateX(250px);
+    right: 0;
+    left: auto !important;
+    position: fixed !important;
+  }
+  
+  html[dir="ltr"] .sidebar {
+    transform: translateX(-250px);
+    left: 0;
+    right: auto !important;
+    position: fixed !important;
+  }
+  
+  html[dir="rtl"] .sidebar-mobile-visible {
+    transform: translateX(0) !important;
+    right: 0 !important;
+    left: auto !important;
+  }
+  
+  html[dir="ltr"] .sidebar-mobile-visible {
+    transform: translateX(0) !important;
+    left: 0 !important;
+    right: auto !important;
+  }
+}
+
+/* Subtle background pattern for visual interest */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.05) 0%, transparent 12%),
+    radial-gradient(circle at 80% 40%, rgba(79, 70, 229, 0.07) 0%, transparent 15%),
+    radial-gradient(circle at 40% 70%, rgba(99, 102, 241, 0.03) 0%, transparent 10%),
+    radial-gradient(circle at 70% 90%, rgba(79, 70, 229, 0.05) 0%, transparent 12%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Sidebar Content Container */
+.sidebar-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: calc(100vh - 64px - 40px); /* Viewport height minus header and collapse trigger */
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 10px; /* Make space for collapse trigger */
+  padding-left: 0;
+  padding-right: 0;
+}
+
+html[dir="rtl"] .sidebar-content {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] .sidebar-content {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Hide scrollbar for better aesthetics */
+.sidebar-content::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+.sidebar-content {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Logo Container */
+.logo-container {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  justify-content: center; /* Center logo for all languages */
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.logo-container:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+html[dir="rtl"] .logo-container {
+  flex-direction: row-reverse;
+  padding: 0 16px; /* Consistent padding */
+}
+
+html[dir="ltr"] .logo-container {
+  flex-direction: row;
+  padding: 0 16px; /* Consistent padding */
+}
+
+/* Logo styling */
+.logo-expanded {
+  height: 40px;
+  width: auto;
+  margin-right: 12px;
+  transition: all 0.3s;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+}
+
+.logo-collapsed {
+  height: 45px;
+  width: auto;
+  margin: 0 auto;
+  transition: all 0.3s;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+}
+
+html[dir="rtl"] .logo-expanded {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
+html[dir="ltr"] .logo-expanded {
+  margin-right: 12px;
+  margin-left: 0;
+}
+
+/* Logo text */
+.logo-text {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+html[dir="rtl"] .logo-text {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+html[dir="ltr"] .logo-text {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* Fallback for when logo image is not available */
+.logo-text-fallback {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+html[dir="rtl"] .logo-text-fallback {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
+html[dir="ltr"] .logo-text-fallback {
+  margin-right: 12px;
+  margin-left: 0;
+}
+
+/* Menu Styles */
+.sidebar-menu {
+  margin-top: 8px;
+  border: none;
+  background: transparent;
+  padding: 6px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Basic menu item styling */
+.sidebar-menu .ant-menu-item,
+.sidebar-menu .ant-menu-submenu-title {
+  margin: 4px 8px;
+  padding: 0 16px;
+  border-radius: 8px;
+  height: 46px;
+  line-height: 46px;
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  flex-direction: row; /* Change to row to keep icon and label in order */
+  text-align: left;
+  position: relative;
+  justify-content: flex-start;
+  padding-right: 20px;
+  padding-left: 16px;
+}
+
+/* Fix inconsistent icon positioning in submenus */
+.sidebar-menu .ant-menu-submenu-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 20px; /* Consistent padding */
+}
+
+/* Ensure all menu icons (both regular and submenu) have consistent styling */
+.sidebar-menu .ant-menu-item .anticon,
+.sidebar-menu .ant-menu-submenu-title .anticon,
+.sidebar-menu .menu-icon,
+.sidebar-menu .submenu-icon {
+  margin-left: 0;
+  margin-right: 10px;
+  order: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px; /* Fixed width for consistency */
+  text-align: center;
+}
+
+/* Make sure submenu arrow is positioned correctly */
+.sidebar-menu .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  position: absolute;
+  left: 16px;
+  right: auto;
+}
+
+/* Hover effect */
+.sidebar-menu .ant-menu-item:hover,
+.sidebar-menu .ant-menu-submenu-title:hover {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.15), rgba(79, 70, 229, 0.05));
+}
+
+/* Selected item styling */
+.sidebar-menu .ant-menu-item-selected {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.5), rgba(79, 70, 229, 0.3));
+  border-right: 3px solid #6366f1;
+}
+
+/* Menu items animation - shimmer effect */
+.sidebar-menu .ant-menu-item-selected::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  animation: shimmer 3s infinite linear;
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Icon styling */
+.menu-icon,
+.submenu-icon {
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 0;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  order: 0; /* This makes icons appear first (on left in LTR) */
+}
+
+/* Fix menu and submenu icon alignment */
+.sidebar-menu .ant-menu-item .anticon,
+.sidebar-menu .ant-menu-submenu-title .anticon,
+.sidebar-menu .menu-icon,
+.sidebar-menu .submenu-icon {
+  margin-left: 0;
+  margin-right: 10px;
+  float: none;
+  order: 0;
+  min-width: 20px; /* Ensure all icons have the same minimum width */
+  text-align: center;
+}
+
+.sidebar-menu .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  position: absolute;
+  left: 16px;
+  right: auto;
+}
+
+/* Menu text content */
+.ant-menu-title-content {
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Divider styling */
+.ant-menu-item-divider {
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 4px 16px;
+  padding: 0;
+  height: 1px;
+}
+
+/* Icon hover effect */
+.ant-menu-item:hover .menu-icon,
+.ant-menu-submenu-title:hover .menu-icon,
+.ant-menu-item:hover .submenu-icon,
+.ant-menu-submenu-title:hover .submenu-icon {
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 0 3px rgba(99, 102, 241, 0.5));
+  transform: scale(1.1);
+}
+
+/* Selected item icon */
+.ant-menu-item-selected .menu-icon,
+.ant-menu-item-selected .submenu-icon {
+  color: white;
+  filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.7));
+}
+
+/* Submenus and Dropdowns */
+/* Submenu arrow positioning */
+.ant-menu-submenu-arrow {
+  left: 16px;
+  right: auto;
+  transition: transform 0.3s ease;
+}
+
+/* In RTL mode, we need to flip the default arrow direction to point left (180deg) */
+.sidebar .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  transform: rotate(180deg); 
+}
+
+/* When open, rotate to point downward (270deg) in RTL mode */
+.sidebar .ant-menu-submenu-open > .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  transform: rotate(270deg);
+}
+
+/* Submenu popup container */
+.rtl-submenu-popup {
+  direction: rtl;
+}
+
+.rtl-submenu-popup .ant-menu {
+  background: linear-gradient(to bottom, #0f2547, #1a1f38);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 4px;
+  min-width: 180px;
+}
+
+/* Submenu items with proper RTL alignment */
+.rtl-submenu-popup .ant-menu-item {
+  margin: 2px 0;
+  padding: 0 16px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row; /* Ensure icon stays on left in RTL */
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+/* Fix submenu icon positioning */
+.rtl-submenu-popup .ant-menu-item .anticon,
+.rtl-submenu-popup .submenu-icon {
+  margin-left: 0;
+  margin-right: 10px;
+  float: none;
+  order: 0;
+}
+
+/* Ensure submenu items have proper spacing and alignment */
+.ant-menu-submenu-popup .ant-menu-vertical {
+  direction: rtl;
+}
+
+/* Fix for collapsed state */
+.sidebar-collapsed .ant-menu-submenu .ant-menu-submenu-title {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.ant-menu-submenu-popup ul {
+  text-align: left;
+}
+
+/* Submenu popup container */
+.rtl-submenu-popup {
+  direction: rtl;
+}
+
+.rtl-submenu-popup .ant-menu {
+  background: linear-gradient(to bottom, #0f2547, #1a1f38);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 4px;
+  min-width: 180px;
+}
+
+/* Submenu items */
+.rtl-submenu-popup .ant-menu-item {
+  margin: 2px 0;
+  padding: 0 16px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  width: 100%;
+  flex-direction: row; /* Change to row to keep icon and label in order */
+  padding-right: 16px;
+}
+
+.rtl-submenu-popup .ant-menu-item:hover {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.15), rgba(79, 70, 229, 0.08));
+}
+
+.rtl-submenu-popup .ant-menu-item-selected {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.5), rgba(79, 70, 229, 0.3));
+}
+
+/* Submenu icon alignment */
+.rtl-submenu-popup .ant-menu-item .anticon,
+.rtl-submenu-popup .submenu-icon {
+  margin-left: 0;
+  margin-right: 10px;
+  float: none; /* Remove float */
+  order: 0; /* Show icon first (on left in LTR) */
+}
+
+/* Points Container */
+.points-container {
+  margin: 16px;
+  margin-top: auto; /* Push to bottom of flex container */
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(79, 70, 229, 0.15), rgba(99, 102, 241, 0.25));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: calc(100% - 32px); /* Account for margins */
+}
+
+/* Collapsed state */
+.points-container-collapsed {
+  padding: 8px;
+  margin: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover effect */
+.points-container:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Animated gradient effect */
+.points-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(79, 70, 229, 0) 0%,
+    rgba(99, 102, 241, 0.1) 50%,
+    rgba(79, 70, 229, 0) 100%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 0;
+  animation: gradientMove 8s infinite alternate;
+}
+
+.points-container:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.points-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.points-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(79, 70, 229, 0.2), rgba(99, 102, 241, 0.4));
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  color: white;
+  animation: pulse 3s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  }
+}
+
+.points-title {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.points-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Recharge button */
+.recharge-button {
+  background: linear-gradient(to right, #4338ca, #6366f1, #4338ca);
+  background-size: 200% auto;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.6);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulse-glow 2s infinite alternate;
+  z-index: 2;
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 6px 18px rgba(99, 102, 241, 0.6); }
+  100% { box-shadow: 0 8px 25px rgba(99, 102, 241, 0.9); }
+}
+
+.recharge-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.8);
+  background-position: right center;
+}
+
+/* Button shimmer effect */
+.recharge-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  transform: rotate(30deg);
+  animation: buttonShimmer 2s infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.recharge-button:hover::after {
+  opacity: 1;
+}
+
+@keyframes buttonShimmer {
+  0% { transform: rotate(30deg) translateX(-300%); }
+  100% { transform: rotate(30deg) translateX(300%); }
+}
+
+/* Button text */
+.button-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Collapsed sidebar styles */
+.sidebar-collapsed .logo-container {
+  padding: 0 8px;
+  justify-content: center;
+}
+
+/* Common styling for all menu items in collapsed state */
+.sidebar-collapsed .ant-menu-item,
+.sidebar-collapsed .ant-menu-submenu-title {
+  padding: 0;
+  margin: 4px auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Use column to stack icon and arrow if needed */
+  height: 46px;
+  position: relative;
+  width: 60px; /* Fixed width in collapsed state */
+}
+
+/* All icons in collapsed state */
+.sidebar-collapsed .menu-icon,
+.sidebar-collapsed .submenu-icon,
+.sidebar-collapsed .ant-menu-item .anticon,
+.sidebar-collapsed .ant-menu-submenu-title .anticon {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Handle submenu arrow in collapsed state */
+.sidebar-collapsed .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(90deg) scale(0.7); /* Point down in collapsed state */
+}
+
+/* Specifically override any RTL related transforms in collapsed mode */
+.sidebar-collapsed .sidebar .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  transform: rotate(90deg) scale(0.7);
+}
+
+/* Make sure open submenus have consistent arrow direction in collapsed mode */
+.sidebar-collapsed .sidebar .ant-menu-submenu-open > .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  transform: rotate(270deg) scale(0.7);
+}
+
+/* Ensure popup submenus display correctly when triggered from collapsed sidebar */
+.ant-menu-submenu-popup .ant-menu-vertical {
+  padding: 4px;
+}
+
+/* Collapse trigger button at bottom */
+.collapse-trigger {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(15, 37, 71, 0.95);
+  cursor: pointer;
+  border-top: 1px solid rgba(99, 102, 241, 0.2);
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  /* Sidebar positioning */
+  .sidebar {
+    position: fixed;
+    right: 0;
+    transform: translateX(100%);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .sidebar-mobile-visible {
+    transform: translateX(0);
+  }
+
+  /* Adjust sizes for mobile */
+  .sidebar .ant-menu-item,
+  .sidebar .ant-menu-submenu-title {
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    padding: 0 16px;
+  }
+
+  .sidebar .menu-icon,
+  .sidebar .submenu-icon {
+    font-size: 20px;
+  }
+
+  /* Collapse trigger hide on mobile */
+  .collapse-trigger {
+    display: none;
+  }
+
+  /* Points container more compact */
+  .points-container {
+    margin: 10px 8px;
+    padding: 12px 8px;
+  }
+}
+
+/* Menu styling */
+.sidebar-menu {
+  border-right: 0;
+  background: transparent;
+}
+
+html[dir="rtl"] .sidebar-menu {
+  text-align: right;
+}
+
+html[dir="ltr"] .sidebar-menu {
+  text-align: left;
+}
+
+/* Menu item styling */
+.sidebar-menu .ant-menu-item {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  margin: 4px 0;
+  padding: 0 16px;
+  border-radius: 0;
+  transition: all 0.3s;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+}
+
+html[dir="rtl"] .sidebar-menu .ant-menu-item {
+  border-right: 3px solid transparent;
+  border-left: none;
+  padding-right: 24px;
+  padding-left: 16px;
+  text-align: right;
+}
+
+html[dir="ltr"] .sidebar-menu .ant-menu-item {
+  border-left: 3px solid transparent;
+  border-right: none;
+  padding-left: 24px;
+  padding-right: 16px;
+  text-align: left;
+}
+
+/* Menu item hover effect */
+.sidebar-menu .ant-menu-item:hover {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.15), rgba(79, 70, 229, 0.05));
+}
+
+html[dir="rtl"] .sidebar-menu .ant-menu-item:hover {
+  background: linear-gradient(to left, rgba(99, 102, 241, 0.15), rgba(79, 70, 229, 0.05));
+}
+
+/* Selected menu item */
+.sidebar-menu .ant-menu-item-selected {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.5), rgba(79, 70, 229, 0.3));
+}
+
+html[dir="rtl"] .sidebar-menu .ant-menu-item-selected {
+  background: linear-gradient(to left, rgba(99, 102, 241, 0.5), rgba(79, 70, 229, 0.3));
+  border-right: 3px solid #6366f1;
+  border-left: none;
+}
+
+html[dir="ltr"] .sidebar-menu .ant-menu-item-selected {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.5), rgba(79, 70, 229, 0.3));
+  border-left: 3px solid #6366f1;
+  border-right: none;
+}
+
+/* Menu icons */
+.menu-icon, .submenu-icon {
+  font-size: 18px;
+  min-width: 18px;
+  transition: all 0.3s;
+}
+
+html[dir="rtl"] .menu-icon, 
+html[dir="rtl"] .submenu-icon {
+  margin-left: 0;
+  margin-right: 10px;
+  order: 0; /* يضع الأيقونة قبل النص في الترتيب */
+}
+
+html[dir="ltr"] .menu-icon, 
+html[dir="ltr"] .submenu-icon {
+  margin-right: 10px;
+  margin-left: 0;
+  order: 0; /* يضع الأيقونة قبل النص في الترتيب */
+}
+
+/* Ensure menu items use flexbox for proper ordering */
+html[dir="rtl"] .ant-menu-item,
+html[dir="rtl"] .ant-menu-submenu-title {
+  display: flex;
+  flex-direction: row; /* نفس اتجاه اللغة الإنجليزية لوضع الأيقونة قبل النص */
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 24px !important;
+  padding-left: 16px !important;
+  text-align: right;
+}
+
+html[dir="ltr"] .ant-menu-item,
+html[dir="ltr"] .ant-menu-submenu-title {
+  display: flex;
+  flex-direction: row; /* الترتيب الطبيعي في اللغة الإنجليزية */
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Menu title content positioning */
+html[dir="rtl"] .ant-menu-title-content {
+  margin-right: 10px;
+  margin-left: 0;
+  text-align: right;
+}
+
+html[dir="ltr"] .ant-menu-title-content {
+  margin-left: 10px;
+  margin-right: 0;
+  text-align: left;
+}
+
+/* Submenu styling */
+.sidebar-menu .ant-menu-submenu {
+  margin: 4px 0;
+}
+
+html[dir="rtl"] .sidebar-menu .ant-menu-submenu-title {
+  padding-right: 24px !important;
+  padding-left: 16px !important;
+  text-align: right;
+}
+
+html[dir="ltr"] .sidebar-menu .ant-menu-submenu-title {
+  padding-left: 24px !important;
+  padding-right: 16px !important;
+  text-align: left;
+}
+
+/* Submenu arrow */
+html[dir="rtl"] .ant-menu-submenu-arrow {
+  right: auto !important;
+  left: 16px !important;
+}
+
+html[dir="ltr"] .ant-menu-submenu-arrow {
+  left: auto !important;
+  right: 16px !important;
+}
+
+/* Submenu popup for collapsed sidebar */
+.rtl-submenu-popup {
+  position: fixed;
+}
+
+html[dir="rtl"] .rtl-submenu-popup {
+  margin-right: 80px !important;
+  margin-left: 0 !important;
+}
+
+html[dir="ltr"] .rtl-submenu-popup {
+  margin-left: 80px !important;
+  margin-right: 0 !important;
+}
+
+/* Submenu items in popup */
+html[dir="rtl"] .rtl-submenu-popup .ant-menu-item {
+  display: flex;
+  flex-direction: row; /* نفس اتجاه اللغة الإنجليزية لوضع الأيقونة قبل النص */
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+html[dir="ltr"] .rtl-submenu-popup .ant-menu-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Fix submenu arrow position */
+html[dir="rtl"] .ant-menu-submenu-arrow {
+  position: absolute !important;
+  left: 16px !important;
+  right: auto !important;
+}
+
+html[dir="ltr"] .ant-menu-submenu-arrow {
+  position: absolute !important;
+  right: 16px !important;
+  left: auto !important;
+}
+
+/* Fix for collapsed sidebar menu items */
+.sidebar-collapsed .ant-menu-item,
+.sidebar-collapsed .ant-menu-submenu-title {
+  padding: 0 !important;
+  justify-content: center !important;
+}
+
+html[dir="rtl"] .sidebar-collapsed .menu-icon,
+html[dir="rtl"] .sidebar-collapsed .submenu-icon,
+html[dir="ltr"] .sidebar-collapsed .menu-icon,
+html[dir="ltr"] .sidebar-collapsed .submenu-icon {
+  margin: 0 !important;
+  font-size: 20px;
+}
+
+/* Hide text in collapsed sidebar */
+.sidebar-collapsed .ant-menu-title-content {
+  opacity: 0;
+  display: none;
+}
+
+/* Logo Container RTL/LTR */
+.logo-container-rtl {
+  justify-content: center; /* Center alignment for RTL */
+  flex-direction: row-reverse;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.logo-container-ltr {
+  justify-content: center; /* Center alignment for LTR */
+  flex-direction: row;
+  padding: 0 16px;
+  text-align: center;
+}
+
+/* Sidebar Content RTL/LTR */
+.sidebar-content-rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.sidebar-content-ltr {
+  direction: ltr;
+  text-align: left;
+}

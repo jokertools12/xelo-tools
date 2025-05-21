@@ -1,0 +1,292 @@
+/* PageMessageManagement - Completely redesigned with modern UI */
+
+/* Main container */
+.page-message-management-container {
+  width: 100%;
+  padding: 24px;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 64px);
+}
+
+/* Page header */
+.page-message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-title h2 {
+  margin: 0;
+  color: #1a3353;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.page-title-icon {
+  margin-right: 12px;
+  color: #1890ff;
+  font-size: 24px;
+}
+
+.page-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.active-page-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Setup wizard */
+.setup-wizard {
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.setup-wizard-card {
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  overflow: hidden;
+}
+
+.setup-wizard-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setup-steps {
+  margin: 16px 0 24px;
+}
+
+.setup-divider {
+  margin: 24px 0;
+}
+
+.step-content {
+  min-height: 300px;
+  padding: 16px 0;
+}
+
+.setup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.setup-complete-action {
+  margin-top: 24px;
+  text-align: center;
+}
+
+/* Messaging and campaign containers */
+.messaging-container,
+.campaigns-container {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Alert */
+.page-alert {
+  margin-bottom: 24px;
+  border-radius: 8px;
+}
+
+/* Help drawer */
+.help-content {
+  padding: 16px 0;
+}
+
+.help-section {
+  margin-bottom: 24px;
+}
+
+.help-section h4 {
+  color: #1890ff;
+  margin-bottom: 16px;
+}
+
+.help-section ul,
+.help-section ol {
+  padding-left: 24px;
+}
+
+.help-section li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* Enhanced styling for existing components */
+
+/* Page extractor */
+.page-extractor {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-extractor:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.page-extractor .ant-card {
+  height: 100%;
+}
+
+.page-item {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.page-item:hover {
+  background-color: rgba(24, 144, 255, 0.05);
+}
+
+.page-item.selected {
+  background-color: rgba(24, 144, 255, 0.1);
+  border-left: 3px solid #1890ff;
+}
+
+/* Page Senders List */
+.page-senders-list {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-senders-list:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.page-senders-list .ant-card {
+  height: 100%;
+}
+
+.sender-item {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.sender-item:hover {
+  background-color: rgba(24, 144, 255, 0.05);
+}
+
+.sender-item.selected {
+  background-color: rgba(24, 144, 255, 0.1);
+  border-left: 3px solid #1890ff;
+}
+
+/* Message and campaign sections */
+.message-composer {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  background: white;
+  margin-bottom: 24px;
+}
+
+.campaign-manager {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  background: white;
+  margin-bottom: 24px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .page-message-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .page-actions {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  
+  .page-message-management-container {
+    padding: 16px;
+  }
+  
+  .setup-steps {
+    flex-direction: column;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .page-title-icon {
+  margin-right: 0;
+  margin-left: 12px;
+}
+
+[dir="rtl"] .page-item.selected {
+  border-left: none;
+  border-right: 3px solid #1890ff;
+}
+
+[dir="rtl"] .sender-item.selected {
+  border-left: none;
+  border-right: 3px solid #1890ff;
+}
+
+[dir="rtl"] .help-section ul,
+[dir="rtl"] .help-section ol {
+  padding-left: 0;
+  padding-right: 24px;
+}
+
+/* Dark mode support - will activate when .dark-theme class is present */
+.dark-theme .page-message-management-container {
+  background-color: #1f1f1f;
+}
+
+.dark-theme .page-title h2 {
+  color: #e6e6e6;
+}
+
+.dark-theme .setup-wizard-card,
+.dark-theme .message-composer,
+.dark-theme .campaign-manager {
+  background: #2d2d2d;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.dark-theme .page-item:hover {
+  background-color: rgba(24, 144, 255, 0.15);
+}
+
+.dark-theme .page-item.selected {
+  background-color: rgba(24, 144, 255, 0.2);
+}

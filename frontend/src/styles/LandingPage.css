@@ -1,0 +1,404 @@
+/* LandingPage.css - Modern styles with animations and gradients */
+
+/* Main layout styles */
+.landing-layout {
+  min-height: 100vh;
+  direction: rtl;
+  background-color: #0c1726;
+  overflow-x: hidden;
+}
+
+.landing-content-layout {
+  transition: margin-right 0.3s ease;
+  background: linear-gradient(135deg, #0c1726 0%, #1a1f38 100%);
+}
+
+.landing-content-layout.content-collapsed {
+  margin-right: 80px;
+}
+
+.landing-content {
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Hero section styles */
+.landing-hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #0c1726 0%, #1a1f38 70%, #1e2747 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.05) 0%, transparent 15%),
+    radial-gradient(circle at 80% 40%, rgba(79, 70, 229, 0.07) 0%, transparent 18%),
+    radial-gradient(circle at 40% 70%, rgba(99, 102, 241, 0.03) 0%, transparent 12%),
+    radial-gradient(circle at 70% 90%, rgba(79, 70, 229, 0.05) 0%, transparent 15%);
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.landing-hero.animate-in::before {
+  opacity: 1;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
+}
+
+.landing-hero.animate-in .hero-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-text {
+  width: 60%;
+  color: white;
+}
+
+.hero-illustration {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Animated text gradient */
+.gradient-text {
+  color: white !important;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef, #6366f1);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradient 8s ease infinite;
+  margin-bottom: 1.5rem !important;
+  line-height: 1.2 !important;
+  font-size: 3.5rem !important;
+  text-align: right;
+  font-weight: 700 !important;
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-description {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 1.2rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 2rem !important;
+  max-width: 90%;
+  text-align: right;
+}
+
+/* Features section */
+.features-section {
+  margin-bottom: 3rem;
+}
+
+.feature-card {
+  background: rgba(33, 44, 85, 0.5);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  height: 100%;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  color: #6366f1;
+  margin-bottom: 1rem;
+}
+
+/* CTA section */
+.cta-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  height: 50px !important;
+  font-size: 1.1rem !important;
+  padding: 0 2rem !important;
+  background: linear-gradient(90deg, #4f46e5, #6366f1) !important;
+  border: none !important;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  transition: all 0.3s ease !important;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6) !important;
+}
+
+.cta-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  transform: rotate(30deg);
+  animation: shimmerButton 3s infinite;
+  z-index: -1;
+}
+
+@keyframes shimmerButton {
+  0% {
+    transform: rotate(30deg) translateX(-300%);
+  }
+  100% {
+    transform: rotate(30deg) translateX(300%);
+  }
+}
+
+.register-button {
+  height: 50px !important;
+  font-size: 1.1rem !important;
+  padding: 0 2rem !important;
+  background: transparent !important;
+  border: 2px solid rgba(99, 102, 241, 0.6) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.register-button:hover {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-color: rgba(99, 102, 241, 0.8) !important;
+}
+
+/* Benefits section */
+.landing-benefits {
+  min-height: 100vh;
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #0f1729 0%, #1e2747 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.landing-benefits.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  color: white !important;
+  margin-bottom: 3rem !important;
+  position: relative;
+  display: inline-block;
+  font-size: 2.5rem !important;
+  text-align: center;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 2px;
+}
+
+.benefits-row {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.benefit-card {
+  background: rgba(30, 39, 71, 0.6);
+  border-radius: 16px;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.benefit-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.benefit-card h3 {
+  color: white !important;
+  margin-bottom: 1rem !important;
+}
+
+.benefit-card p {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 1rem !important;
+}
+
+/* Glowing orb animation for illustration */
+.illustration-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glowing-orb {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #6366f1 0%, #4338ca 40%, transparent 70%);
+  box-shadow: 0 0 60px rgba(99, 102, 241, 0.6);
+  animation: glowPulse 4s infinite alternate;
+  position: relative;
+  overflow: hidden;
+}
+
+.glowing-orb::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+  animation: orbRotate 8s infinite linear;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+    transform: scale(0.9);
+  }
+  100% {
+    box-shadow: 0 0 70px rgba(99, 102, 241, 0.7);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes orbRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .hero-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .hero-text, .hero-illustration {
+    width: 100%;
+  }
+  
+  .gradient-text {
+    font-size: 2.5rem !important;
+    text-align: center;
+  }
+  
+  .hero-description {
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .cta-container {
+    justify-content: center;
+  }
+  
+  .landing-hero {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .gradient-text {
+    font-size: 2rem !important;
+  }
+  
+  .hero-description {
+    font-size: 1rem !important;
+  }
+  
+  .cta-button, .register-button {
+    width: 100%;
+  }
+  
+  .section-title {
+    font-size: 2rem !important;
+  }
+  
+  .benefit-card {
+    padding: 1.5rem;
+  }
+}

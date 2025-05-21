@@ -1,0 +1,564 @@
+/* Dashboard.css - Enhanced styling with decorative effects */
+
+.dashboard-container {
+  background: #f0f5ff; /* خلفية زرقاء فاتحة كقاعدة */
+  position: relative;
+  overflow: hidden;
+  z-index: 0; /* تعيين قاعدة للتنسيق العمودي */
+}
+
+.dashboard-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: 
+    linear-gradient(120deg, rgba(24, 144, 255, 0.03) 0%, transparent 70%),
+    linear-gradient(240deg, rgba(82, 196, 26, 0.03) 0%, transparent 70%);
+  z-index: -1; /* جعلها خلف جميع العناصر */
+}
+
+.dashboard-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='rgba(24, 144, 255, 0.05)' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,208C672,213,768,203,864,181.3C960,160,1056,128,1152,128C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* جعلها خلف جميع العناصر */
+  pointer-events: none; /* منع تعارضها مع تفاعل المستخدم */
+}
+
+/* Enhance dashboard stats cards */
+.stats-row .main-card {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.03),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+}
+
+.stats-row .main-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+html[dir="rtl"] .stats-row .main-card .ant-card-head-title {
+  text-align: right;
+}
+
+html[dir="rtl"] .stats-row .main-card .ant-card-head-title .anticon {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+html[dir="ltr"] .stats-row .main-card .ant-card-head-title {
+  text-align: left;
+}
+
+html[dir="ltr"] .stats-row .main-card .ant-card-head-title .anticon {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+/* Enhance activity items */
+.activity-item {
+  display: flex;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.activity-item:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateX(3px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* RTL Support for Dashboard */
+html[dir="rtl"] .activity-item:hover {
+  transform: translateX(-3px);
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-content {
+  direction: ltr;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-content-suffix {
+  margin-right: 4px;
+  margin-left: 0;
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-content-prefix {
+  margin-left: 4px;
+  margin-right: 0;
+}
+
+html[dir="rtl"] .level-progress-text {
+  flex-direction: row-reverse;
+}
+
+/* Ensure card titles are properly aligned in RTL */
+html[dir="rtl"] .main-card .ant-card-head-title {
+  text-align: right;
+}
+
+html[dir="rtl"] .main-card .ant-card-head-title .anticon {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* تفعيل خاصية لعرض Flex للصف لضمان مرونة التنسيق */
+.stats-items-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* صف مخصص لعناصر الإحصائيات لضمان عرضها بشكل صحيح */
+.stats-item {
+  transition: all 0.3s ease;
+}
+
+/* Fix activity items in RTL */
+html[dir="rtl"] .activity-item {
+  flex-direction: row; /* Keep avatar on left, content on right */
+  text-align: right;
+}
+
+html[dir="rtl"] .activity-item .activity-avatar {
+  margin-left: 16px; /* Space between avatar (left) and content (right) */
+  margin-right: 0;
+}
+
+html[dir="rtl"] .activity-item .activity-content {
+  text-align: right;
+  direction: rtl;
+  flex: 1; /* Allow content to fill space */
+}
+
+html[dir="rtl"] .activity-item .activity-time {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* Fix activity items in LTR */
+html[dir="ltr"] .activity-item {
+  flex-direction: row; /* Avatar on left, content on right */
+  text-align: left;
+}
+
+html[dir="ltr"] .activity-item .activity-avatar {
+  margin-right: 16px; /* Space between avatar (left) and content (right) */
+  margin-left: 0;
+}
+
+html[dir="ltr"] .activity-item .activity-content {
+  text-align: left;
+  direction: ltr;
+  flex: 1; /* Allow content to fill space */
+}
+
+html[dir="ltr"] .activity-item .activity-time {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* Fix progress bar direction in RTL */
+/* تصحيح اتجاه شريط التقدم في RTL - تعبئة من اليمين إلى اليسار */
+html[dir="rtl"] .rtl-progress .ant-progress-outer {
+  direction: rtl;
+}
+
+html[dir="rtl"] .rtl-progress .ant-progress-inner {
+  direction: rtl;
+}
+
+html[dir="rtl"] .rtl-progress .ant-progress-bg {
+  float: right;
+  border-radius: 100px 0 0 100px;
+}
+
+html[dir="rtl"] .ant-progress-status-success .ant-progress-bg {
+  border-radius: 100px 0 0 100px;
+}
+
+html[dir="rtl"] .rtl-progress .ant-progress-text {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+/* Fix statistics display in RTL */
+html[dir="rtl"] .rtl-statistic {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-title {
+  direction: rtl;
+  text-align: right;
+  margin-bottom: 8px; /* Added margin for better spacing */
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-content {
+  direction: rtl;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+/* ضمان عرض الأرقام بشكل صحيح مع الحفاظ على اتجاه RTL */
+html[dir="rtl"] .rtl-statistic .ant-statistic-content-value {
+  direction: ltr;
+  margin: 0 4px;
+}
+
+/* تعديل ترتيب عناصر الإحصائيات في العربية */
+html[dir="rtl"] .rtl-statistic .ant-statistic-content-prefix {
+  order: 2;
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-content-value {
+  order: 1;
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-content-suffix {
+  order: 0;
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-content-prefix {
+  margin-left: 4px;
+  margin-right: 0;
+  order: 0; /* Prefix first */
+}
+
+html[dir="rtl"] .rtl-statistic .ant-statistic-content-suffix {
+  margin-right: 4px;
+  margin-left: 0;
+  order: 2; /* Suffix last */
+}
+
+html[dir="rtl"] .level-progress-text {
+  flex-direction: row-reverse;
+}
+
+/* Fix statistics display in LTR */
+html[dir="ltr"] .ant-statistic {
+  text-align: left;
+  direction: ltr;
+}
+
+html[dir="ltr"] .ant-statistic-title {
+  text-align: left;
+  direction: ltr;
+  margin-bottom: 8px; /* Added margin for better spacing */
+}
+
+html[dir="ltr"] .ant-statistic-content {
+  direction: ltr;
+  display: flex; /* Use flex for better alignment */
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+html[dir="ltr"] .ant-statistic-content-value {
+  direction: ltr;
+  margin: 0 4px; /* Add spacing around the value */
+  order: 1;
+}
+
+html[dir="ltr"] .ant-statistic-content-prefix {
+  margin-right: 4px;
+  margin-left: 0;
+  order: 0; /* Prefix first */
+}
+
+html[dir="ltr"] .ant-statistic-content-suffix {
+  margin-left: 4px;
+  margin-right: 0;
+  order: 2; /* Suffix last */
+}
+
+/* Fix level indicators in RTL */
+html[dir="rtl"] .level-progress-text {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  text-align: right;
+}
+
+/* Fix level indicators in LTR */
+html[dir="ltr"] .level-progress-text {
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+/* Fix icon alignment */
+html[dir="rtl"] .ant-statistic-title .anticon {
+  margin-left: 4px;
+  margin-right: 0;
+}
+
+html[dir="ltr"] .ant-statistic-title .anticon {
+  margin-right: 4px;
+  margin-left: 0;
+}
+
+/* Fix card titles alignment */
+html[dir="rtl"] .main-card .ant-card-head-title {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="ltr"] .main-card .ant-card-head-title {
+  text-align: left;
+  direction: ltr;
+}
+
+html[dir="rtl"] .main-card .ant-card-head-title .anticon {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+html[dir="ltr"] .main-card .ant-card-head-title .anticon {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+/* Fix card content alignment */
+html[dir="rtl"] .main-card .ant-card-body {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="ltr"] .main-card .ant-card-body {
+  text-align: left;
+  direction: ltr;
+}
+
+/* Fix hover effects */
+html[dir="rtl"] .activity-item:hover {
+  transform: translateX(-3px);
+}
+
+html[dir="ltr"] .activity-item:hover {
+  transform: translateX(3px);
+}
+
+/* Fix dashboard stats display */
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+html[dir="rtl"] .stats-row > div {
+  text-align: right;
+}
+
+html[dir="ltr"] .stats-row > div {
+  text-align: left;
+}
+
+/* Fix numbers display in statistics */
+.rtl-statistic .ant-statistic-content-value {
+  display: inline-block;
+  direction: ltr;
+}
+
+/* Shimmer loading effect for dashboard content */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer-effect {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, #f0f0f0 8%, #f8f8f8 18%, #f0f0f0 33%);
+  background-size: 1000px 100%;
+}
+
+/* Dashboard styles */
+.stats-row {
+  margin-bottom: 24px;
+}
+
+.main-card {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rtl-statistic {
+  text-align: center;
+}
+
+.level-progress-text {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* RTL specific styles */
+html[dir="rtl"] .ant-statistic-title {
+  text-align: right;
+}
+
+html[dir="rtl"] .ant-statistic-content {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="rtl"] .ant-card-head-title {
+  text-align: right;
+}
+
+html[dir="rtl"] .ant-card-extra {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[dir="rtl"] .ant-progress-text {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+html[dir="rtl"] .level-progress-text {
+  flex-direction: row;
+}
+
+html[dir="rtl"] .ant-statistic-content-value {
+  direction: ltr;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+html[dir="rtl"] .ant-statistic-content-suffix {
+  margin-right: 5px;
+  margin-left: 0;
+}
+
+html[dir="rtl"] .ant-statistic-content-prefix {
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+/* Reverse the order of columns in RTL mode */
+html[dir="rtl"] .stats-row .ant-row {
+  flex-direction: row-reverse;
+}
+
+/* LTR specific styles */
+html[dir="ltr"] .ant-statistic-title {
+  text-align: left;
+}
+
+html[dir="ltr"] .ant-statistic-content {
+  text-align: left;
+  direction: ltr;
+}
+
+html[dir="ltr"] .ant-card-head-title {
+  text-align: left;
+}
+
+html[dir="ltr"] .ant-card-extra {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+html[dir="ltr"] .ant-progress-text {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+html[dir="ltr"] .level-progress-text {
+  flex-direction: row;
+}
+
+html[dir="ltr"] .ant-statistic-content-value {
+  direction: ltr;
+  display: inline-flex;
+  justify-content: flex-start;
+}
+
+html[dir="ltr"] .ant-statistic-content-suffix {
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+html[dir="ltr"] .ant-statistic-content-prefix {
+  margin-right: 5px;
+  margin-left: 0;
+}
+
+/* Fix for the activity items */
+html[dir="rtl"] .ant-list-item-meta {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .ant-list-item-meta-avatar {
+  margin-right: 0;
+  margin-left: 16px;
+}
+
+html[dir="rtl"] .ant-list-item-meta-content {
+  text-align: right;
+}
+
+html[dir="rtl"] .ant-list-item-action {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+html[dir="ltr"] .ant-list-item-meta {
+  flex-direction: row;
+}
+
+html[dir="ltr"] .ant-list-item-meta-avatar {
+  margin-left: 0;
+  margin-right: 16px;
+}
+
+html[dir="ltr"] .ant-list-item-meta-content {
+  text-align: left;
+}
+
+html[dir="ltr"] .ant-list-item-action {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.dashboard-global-spin-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}

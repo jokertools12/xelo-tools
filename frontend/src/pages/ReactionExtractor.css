@@ -1,0 +1,334 @@
+/* ReactionExtractor.css - Enhanced styling with decorative effects */
+
+.reaction-extractor-layout {
+  min-height: 100vh;
+  background: #f0f5ff; /* خلفية زرقاء فاتحة كقاعدة */
+  position: relative;
+  overflow: hidden;
+  z-index: 0; /* تعيين قاعدة للتنسيق العمودي */
+}
+
+.reaction-extractor-layout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: 
+    linear-gradient(120deg, rgba(24, 144, 255, 0.03) 0%, transparent 70%),
+    linear-gradient(240deg, rgba(82, 196, 26, 0.03) 0%, transparent 70%);
+  z-index: -1; /* جعلها خلف جميع العناصر */
+}
+
+.reaction-extractor-layout::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='rgba(24, 144, 255, 0.05)' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,208C672,213,768,203,864,181.3C960,160,1056,128,1152,128C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* جعلها خلف جميع العناصر */
+  pointer-events: none; /* منع تعارضها مع تفاعل المستخدم */
+}
+
+.content-container {
+  padding: 24px;
+  margin: 0 auto;
+}
+
+/* Main tab container with shared tab styling */
+.reaction-extractor-container .tabs-container {
+  margin-bottom: 16px;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Tab styling is now handled by shared tabs.css */
+
+/* Input section - Using antd default form components */
+.input-container {
+  display: flex;
+  margin-bottom: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Removed custom input styling to use antd defaults */
+.flex-grow {
+  flex-grow: 1;
+}
+
+/* Preserve only layout properties for buttons */
+.extract-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.secondary-button {
+  margin-left: 8px;
+}
+
+/* Progress indicator */
+.progress-container {
+  margin-bottom: 16px;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.progress-count {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+/* Error alert */
+.error-alert {
+  margin-bottom: 16px;
+}
+
+/* Stats cards */
+.stats-cards-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.stats-card {
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.stats-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stats-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.stats-title {
+  color: #8c8c8c;
+  margin: 0;
+}
+
+.stats-value {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Filter section */
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.filter-search-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-export {
+  display: flex;
+  gap: 8px;
+}
+
+/* Table container */
+.table-container {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.selection-info {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.selected-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.success-icon {
+  color: #52c41a;
+}
+
+.primary-icon {
+  color: #1890ff;
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.reactions-table {
+  width: 100%;
+}
+
+.reactions-table .ant-table-thead > tr > th {
+  background-color: #fafafa;
+  color: #1f1f1f;
+  font-weight: 600;
+}
+
+.extract-button-disabled,
+.deselect-button-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.deselect-button {
+  background-color: #ff4d4f;
+  color: white;
+  border-color: #ff4d4f;
+}
+
+.deselect-button:hover:not(.deselect-button-disabled) {
+  background-color: #ff7875;
+  border-color: #ff7875;
+  color: white;
+}
+
+/* Reaction type badges styling */
+.ant-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+/* Shimmer effect for loading state */
+.shimmer-table {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.shimmer-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shimmer-header {
+  padding: 16px 8px;
+  text-align: left;
+  background-color: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.shimmer-cell {
+  padding: 16px 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Modal styling */
+.data-secret-modal .ant-modal-content {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.data-secret-modal .ant-modal-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.data-secret-modal .ant-modal-body {
+  padding: 24px;
+}
+
+.data-secret-modal .ant-modal-footer {
+  padding: 10px 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content-container {
+    padding: 16px;
+  }
+  
+  .input-container {
+    flex-direction: column;
+  }
+  
+  .stats-cards-container {
+    flex-direction: column;
+  }
+  
+  .stats-card {
+    width: 100%;
+  }
+  
+  .filter-container,
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter-export,
+  .table-actions {
+    margin-top: 8px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+.pagination {
+  margin-top: 16px;
+  text-align: right;
+}

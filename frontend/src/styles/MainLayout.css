@@ -1,0 +1,640 @@
+/* Main Layout Styles - Modern & Professional */
+
+/* Overall Layout */
+.ant-layout {
+  background: #f0f2f5;
+}
+
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+.app-layout {
+  min-height: 100vh;
+  overflow-x: hidden; /* منع التمرير الأفقي */
+}
+
+/* Site Layout - RTL/LTR Support */
+html[dir="rtl"] .site-layout {
+  width: 100%;
+  transition: all 0.2s ease;
+  margin-right: 250px;
+  margin-left: 0;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+html[dir="ltr"] .site-layout {
+  width: 100%;
+  transition: all 0.2s ease;
+  margin-left: 250px;
+  margin-right: 0;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  padding-right: 0; /* إزالة الهامش الإضافي في اللغة الإنجليزية */
+}
+
+html[dir="rtl"] .site-layout-collapsed {
+  margin-right: 80px;
+  margin-left: 0;
+}
+
+html[dir="ltr"] .site-layout-collapsed {
+  margin-left: 80px;
+  margin-right: 0;
+  padding-right: 0; /* إزالة الهامش الإضافي في اللغة الإنجليزية */
+}
+
+/* RTL/LTR Layout Classes */
+.rtl-layout {
+  margin-right: 250px !important;
+  margin-left: 0 !important;
+}
+
+.rtl-layout.site-layout-collapsed {
+  margin-right: 80px !important;
+  margin-left: 0 !important;
+}
+
+.ltr-layout {
+  margin-left: 250px !important;
+  margin-right: 0 !important;
+}
+
+.ltr-layout.site-layout-collapsed {
+  margin-left: 80px !important;
+  margin-right: 0 !important;
+}
+
+/* Content area */
+.site-content {
+  background: #fff;
+  min-height: calc(100vh - 154px); /* account for header and footer */
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: initial;
+}
+
+/* Fix for header to ensure it spans full width */
+.app-header {
+  width: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+/* Toggle sidebar button */
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+/* Scrollbar Styles - Hide in English, Show in Arabic */
+html[dir="ltr"] {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html[dir="ltr"]::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Make sure the content fills the available space */
+html[dir="ltr"] .site-layout {
+  width: calc(100% - 250px); /* Adjust width to account for sidebar */
+}
+
+html[dir="ltr"] .site-layout-collapsed {
+  width: calc(100% - 80px); /* Adjust width when sidebar is collapsed */
+}
+
+/* Page Title - RTL/LTR Support */
+html[dir="rtl"] .page-title {
+  margin-bottom: 24px;
+  margin-left: 0 !important;
+  color: #001529;
+  font-weight: 600;
+}
+
+html[dir="ltr"] .page-title {
+  margin-bottom: 24px;
+  margin-right: 0 !important;
+  color: #001529;
+  font-weight: 600;
+}
+
+/* Mobile Sidebar Toggle - RTL/LTR Support */
+html[dir="rtl"] .mobile-sidebar-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+html[dir="ltr"] .mobile-sidebar-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: auto;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+/* Media Queries - RTL/LTR Support */
+@media (max-width: 768px) {
+  html[dir="rtl"] .site-layout,
+  html[dir="rtl"] .site-layout-collapsed {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  html[dir="ltr"] .site-layout,
+  html[dir="ltr"] .site-layout-collapsed {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .mobile-sidebar-toggle {
+    display: flex !important;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .site-layout,
+  .site-layout-collapsed {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .site-content {
+    margin: 6px 4px !important;
+    padding: 8px !important;
+    border-radius: 8px;
+    width: calc(100% - 8px) !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .sidebar {
+    display: none;
+  }
+  
+  .sidebar-mobile-visible {
+    display: block;
+    position: fixed;
+    z-index: 999;
+    height: 100vh !important;
+    width: 250px !important;
+  }
+
+  /* Fix for mobile sidebar */
+  .ant-layout-sider {
+    position: fixed !important;
+    z-index: 999;
+    height: 100vh;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Improved mobile sidebar toggle - Updated for RTL */
+  .mobile-sidebar-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* Changed from left to right for RTL */
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #2563eb, #1e40af);
+    color: white;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    z-index: 1500; /* Higher z-index to always stay on top */
+    border: none;
+    overflow: hidden;
+  }
+
+  /* Optimize grid layouts for mobile */
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100% !important;
+  }
+  
+  /* Optimize tables for mobile */
+  .responsive-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    border-radius: 8px;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  .data-table {
+    min-width: 100%;
+    width: 100%;
+  }
+  
+  /* Improved breadcrumb for mobile */
+  .site-breadcrumb {
+    white-space: nowrap;
+    overflow-x: auto;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .site-breadcrumb::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  /* Optimize form elements for mobile */
+  .main-form {
+    padding: 0;
+  }
+  
+  .main-form .ant-form-item {
+    margin-bottom: 12px;
+  }
+  
+  .main-form .ant-input,
+  .main-form .ant-select-selector,
+  .main-form .ant-picker {
+    font-size: 16px !important; /* Prevent iOS zoom */
+  }
+  
+  /* Improved mobile overlay */
+  .mobile-sidebar-overlay {
+    backdrop-filter: blur(3px);
+  }
+
+  /* Fix container widths for mobile */
+  .page-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* Remove any extra container padding that creates empty space */
+  .ant-layout-content {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .site-layout {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  .site-content {
+    margin: 16px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .site-content {
+    margin: 4px 2px !important;
+    padding: 6px !important;
+    border-radius: 6px;
+  }
+  
+  .page-title {
+    font-size: 16px !important;
+    margin-bottom: 12px;
+  }
+  
+  /* Improve button touch targets */
+  .ant-btn {
+    min-height: 44px;
+  }
+  
+  /* Adjust spacing for small mobile */
+  .card-grid {
+    gap: 10px;
+  }
+  
+  /* Improve footer on mobile */
+  .site-footer {
+    padding: 16px;
+    font-size: 12px;
+  }
+
+  /* Adjust all containers to use full width */
+  .site-layout .container,
+  .site-layout [class*="container"],
+  .site-layout [class*="col-"] {
+    max-width: 100% !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+  
+  /* Ensure cards don't have extra margins */
+  .ant-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* Card Styles */
+.main-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.main-card .ant-card-head {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Stats Card Styles */
+.stats-card {
+  border-radius: 6px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.stats-card .ant-card-body {
+  padding: 20px;
+}
+
+.stats-icon {
+  font-size: 24px;
+  background: rgba(24, 144, 255, 0.1);
+  padding: 12px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Layout adjustments when sidebar is collapsed - Updated for RTL */
+html[dir="rtl"] .ant-layout-sider-collapsed + .site-layout {
+  margin-right: 80px;
+  margin-left: 0;
+}
+
+html[dir="ltr"] .ant-layout-sider-collapsed + .site-layout {
+  margin-left: 80px;
+  margin-right: 0;
+}
+
+html[dir="rtl"] .ant-layout-sider-collapsed ~ .site-layout {
+  margin-right: 80px;
+  margin-left: 0;
+}
+
+html[dir="ltr"] .ant-layout-sider-collapsed ~ .site-layout {
+  margin-left: 80px;
+  margin-right: 0;
+}
+
+/* Container for page content with better spacing */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Breadcrumb styling */
+.site-breadcrumb {
+  margin-bottom: 16px;
+}
+
+/* Card grid styling for dashboard */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* For tables */
+.data-table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.data-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+/* For forms */
+.main-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Footer styling if needed */
+.site-footer {
+  text-align: center;
+  padding: 24px;
+  background: white;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+/* Mobile Sidebar Toggle Button - Enhanced and updated for RTL */
+html[dir="rtl"] .mobile-sidebar-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2563eb, #1e40af); /* Gradient background for more professional look */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1100; /* Higher z-index to ensure it's above everything */
+  transition: all 0.3s;
+  border: none;
+  overflow: hidden; /* Keep the circular shape */
+}
+
+html[dir="ltr"] .mobile-sidebar-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2563eb, #1e40af); /* Gradient background for more professional look */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1100; /* Higher z-index to ensure it's above everything */
+  transition: all 0.3s;
+  border: none;
+  overflow: hidden; /* Keep the circular shape */
+}
+
+.mobile-sidebar-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+/* Toggle icon container and animations */
+.toggle-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.toggle-icon-open {
+  animation: rotateIn 0.3s ease forwards;
+}
+
+.toggle-icon-close {
+  animation: rotateOut 0.3s ease forwards;
+}
+
+@keyframes rotateIn {
+  from {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateOut {
+  from {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+.mobile-sidebar-toggle:hover {
+  background: linear-gradient(145deg, #3b82f6, #2563eb);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.mobile-sidebar-toggle:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Refined animation for the button */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+.mobile-sidebar-toggle {
+  animation: pulse 2s infinite;
+}
+
+@media (max-width: 375px) {
+  .site-content {
+    margin: 2px !important;
+    padding: 4px !important;
+    border-radius: 4px;
+  }
+  
+  /* Reduce all unnecessary padding and margins */
+  .ant-card-body {
+    padding: 8px 6px !important;
+  }
+  
+  .ant-form-item {
+    margin-bottom: 8px !important;
+  }
+  
+  /* Disable any shadows or decorative effects that take space */
+  .site-content {
+    box-shadow: none !important;
+  }
+}

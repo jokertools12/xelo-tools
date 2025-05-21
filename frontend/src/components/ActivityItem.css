@@ -1,0 +1,232 @@
+/* ActivityItem styling */
+.activity-item {
+  display: flex;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.activity-avatar {
+  margin-left: 16px;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-message {
+  margin-bottom: 6px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px; /* Add small gap between elements */
+}
+
+.activity-time {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+/* Activity icons styling */
+.activity-avatar-login .ant-avatar,
+.activity-avatar-profile .ant-avatar,
+.activity-avatar-security .ant-avatar,
+.activity-avatar-points .ant-avatar,
+.activity-avatar-settings .ant-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Activity type specific styling */
+.activity-login {
+  border-right: 3px solid #1890ff;
+}
+
+.activity-profile {
+  border-right: 3px solid #52c41a;
+}
+
+.activity-security {
+  border-right: 3px solid #722ed1;
+}
+
+.activity-settings {
+  border-right: 3px solid #13c2c2;
+}
+
+/* Enhanced points activities styling */
+.activity-points-add {
+  border-right: 3px solid #faad14;
+  background-color: #fffbe6;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a subtle gradient effect to points activities */
+.activity-points-add::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(250, 173, 20, 0.1), transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Special styling for membership points activities */
+.activity-points-add.membership-points {
+  border-right: 3px solid #fa8c16;
+  background-color: #fff7e6;
+}
+
+.activity-points-add.membership-points::before {
+  background: linear-gradient(135deg, rgba(250, 140, 22, 0.15), transparent 70%);
+}
+
+.activity-points-deduct {
+  border-right: 3px solid #f5222d;
+  background-color: #fff2f0;
+}
+
+.activity-payment {
+  border-right: 3px solid #722ed1;
+  background-color: #f9f0ff;
+}
+
+.activity-subscription-new {
+  border-right: 3px solid #1890ff;
+  background-color: #e6f7ff;
+}
+
+.activity-subscription-cancel {
+  border-right: 3px solid #f5222d;
+  background-color: #fff2f0;
+}
+
+.activity-achievement {
+  border-right: 3px solid #eb2f96;
+  background-color: #fff0f6;
+}
+
+/* Text styling */
+.positive-points {
+  color: #d4b106;
+  font-weight: 500;
+}
+
+.negative-points {
+  color: #f5222d;
+  font-weight: 500;
+}
+
+.activity-money-payment {
+  color: #722ed1;
+  font-weight: 500;
+}
+
+.activity-subscription-cancel {
+  color: #f5222d;
+  font-weight: 500;
+}
+
+.activity-subscription-autorenew {
+  color: #52c41a;
+  font-weight: 500;
+}
+
+/* Enhanced amount displays */
+.points-amount {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin: 0 4px;
+  font-weight: 700;
+  font-size: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.points-amount.positive {
+  background-color: #fffbe6;
+  color: #fa8c16;
+  border: 1px dashed #faad14;
+  box-shadow: 0 1px 2px rgba(250, 173, 20, 0.2);
+}
+
+/* Special styling for membership points */
+.membership-points .points-amount.positive {
+  background-color: #fff7e6;
+  color: #fa541c;
+  border: 1px dashed #fa8c16;
+  box-shadow: 0 2px 4px rgba(250, 140, 22, 0.2);
+}
+
+.points-amount.negative {
+  background-color: #fff2f0;
+  color: #f5222d;
+  border: 1px solid #ffccc7;
+}
+
+.money-amount {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: 0 4px;
+  font-weight: 600;
+}
+
+.money-amount.positive {
+  background-color: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.money-amount.negative {
+  background-color: #fff2f0;
+  color: #f5222d;
+  border: 1px solid #ffccc7;
+}
+
+/* Animations for points */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.activity-points-add:hover .points-amount.positive {
+  animation: pulse 2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .activity-item {
+    padding: 12px;
+  }
+  
+  .activity-avatar {
+    margin-left: 10px;
+  }
+  
+  .activity-time {
+    font-size: 10px;
+  }
+  
+  .points-amount,
+  .money-amount {
+    padding: 1px 4px;
+    font-size: 12px;
+  }
+}

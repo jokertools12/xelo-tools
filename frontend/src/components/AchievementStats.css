@@ -1,0 +1,244 @@
+/* Styles for Achievement Stats Component */
+
+/* Main container for achievement stats */
+.achievement-stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Card styling for achievement statistics */
+.achievement-stats-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Main stats card with primary achievement completion */
+.achievement-stats-card.main-stats {
+  background: linear-gradient(to right bottom, #ffffff, #f9f9f9);
+  border-top: 3px solid #1890ff;
+}
+
+/* Categories stats card */
+.achievement-stats-card.categories-stats {
+  background: linear-gradient(to right bottom, #ffffff, #f9f9f9);
+  border-top: 3px solid #faad14;
+}
+
+/* Card title with icon */
+.card-title-with-icon {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #262626;
+}
+
+/* Icon in card title */
+.title-icon {
+  margin-left: 8px;
+  color: #1890ff;
+  font-size: 18px;
+}
+
+/* Categories cards have gold icon */
+.categories-stats .title-icon {
+  color: #faad14;
+}
+
+/* Row containing statistics */
+.stats-row {
+  padding: 8px 0;
+}
+
+/* Custom styling for ant design Statistic component */
+.achievement-statistic {
+  text-align: center;
+}
+
+.achievement-statistic .ant-statistic-title {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-bottom: 8px;
+}
+
+.achievement-statistic .ant-statistic-content {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.achievement-statistic .ant-statistic-content-prefix {
+  margin-left: 8px;
+}
+
+/* Container for main progress bar */
+.achievement-progress-container {
+  margin-top: 16px;
+  padding: 0 8px;
+}
+
+/* Categories section */
+.stats-categories {
+  padding: 8px;
+}
+
+/* Individual category stat item */
+.category-stats-item {
+  display: flex;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.category-stats-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Category icon */
+.category-icon {
+  margin-left: 12px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Category information section */
+.category-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Category name */
+.category-name {
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Category progress bar container */
+.category-progress {
+  margin-bottom: 4px;
+}
+
+/* Category completion ratio */
+.category-ratio {
+  font-size: 12px;
+  color: #8c8c8c;
+  text-align: left;
+}
+
+/* Compact stats card for dashboard/sidebar */
+.achievement-stats-compact {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
+}
+
+/* Compact stats header */
+.achievement-stats-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Compact stats icon */
+.achievement-stats-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #faad14, #fa8c16);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+  color: white;
+  font-size: 16px;
+}
+
+/* Compact stats title */
+.achievement-stats-title {
+  font-size: 14px;
+}
+
+/* Compact stats content */
+.achievement-stats-content {
+  padding: 0 4px;
+}
+
+/* Summary of achievements in compact view */
+.achievement-stats-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+/* Individual stat in compact summary */
+.achievement-stat-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #595959;
+}
+
+.achievement-stat-item .stat-icon {
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+/* Color classes for icons */
+.stat-icon.success {
+  color: #52c41a;
+}
+
+.stat-icon.primary {
+  color: #1890ff;
+}
+
+.stat-icon.secondary {
+  color: #8c8c8c;
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+  .achievement-statistic .ant-statistic-content {
+    font-size: 20px;
+  }
+  
+  .category-stats-item {
+    padding: 8px;
+  }
+  
+  .category-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    margin-left: 8px;
+  }
+  
+  .category-name {
+    font-size: 12px;
+  }
+  
+  .category-ratio {
+    font-size: 10px;
+  }
+  
+  .achievement-stats-compact {
+    padding: 12px;
+  }
+}

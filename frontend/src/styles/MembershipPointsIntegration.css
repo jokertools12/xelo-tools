@@ -1,0 +1,167 @@
+/* Styles for the membership points integration component */
+.points-integration-card {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.points-integration-card .ant-card-head {
+  background-color: #f9f0ff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.points-integration-card .ant-card-head-title {
+  color: #722ed1;
+  font-weight: 600;
+}
+
+/* Preview section */
+.points-preview {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.points-preview h4 {
+  margin-bottom: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Plan card preview */
+.plan-card-preview {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 16px;
+  width: 280px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.plan-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1890ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plan-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.plan-points {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #52c41a;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 10px;
+  background-color: #f6ffed;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+.subscribe-preview {
+  margin-top: auto;
+  align-self: center;
+}
+
+/* Transaction preview */
+.transaction-preview {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 16px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.transaction-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.transaction-date {
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+.transaction-type {
+  font-weight: 500;
+  color: #333;
+}
+
+.transaction-amount {
+  font-weight: 600;
+}
+
+.transaction-positive {
+  color: #52c41a;
+}
+
+.transaction-negative {
+  color: #f5222d;
+}
+
+/* Integration notes section */
+.integration-notes {
+  background-color: #f0f7ff;
+  padding: 16px;
+  border-radius: 8px;
+  border-right: 4px solid #1890ff;
+}
+
+.integration-notes h4 {
+  color: #1890ff;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.integration-notes ol {
+  margin-bottom: 0;
+  padding-right: 20px;
+}
+
+.integration-notes li {
+  margin-bottom: 8px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .plan-card-preview, .transaction-preview {
+    width: 100%;
+  }
+  
+  .preview-container {
+    flex-direction: column;
+  }
+}

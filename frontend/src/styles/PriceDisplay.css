@@ -1,0 +1,180 @@
+/* 
+ * PriceDisplay Component Styles
+ * Enhanced with RTL support for bilingual display
+ * تنسيقات مكون عرض الأسعار مع دعم كامل للغة العربية
+ */
+
+:root {
+  --price-primary: #1890ff;      /* Blue for USD - أزرق للدولار */
+  --price-secondary: #52c41a;    /* Green for EGP - أخضر للجنيه المصري */
+  --price-text-light: #595959;   /* Grey for secondary text - رمادي للنصوص الثانوية */
+  --price-info: #faad14;         /* Gold for info icon - ذهبي لأيقونة المعلومات */
+  --price-spacing: 8px;          /* Default spacing - التباعد الافتراضي */
+}
+
+/* ==================
+   Base Styles - التنسيقات الأساسية
+   ================== */
+
+.price-display {
+  display: flex;
+  align-items: center;
+  gap: var(--price-spacing);
+  margin: 6px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.price-display-inline {
+  display: inline-flex;
+  margin: 0 6px;
+}
+
+/* Left-to-right styles */
+.price-display .currency-icon {
+  color: var(--price-primary);
+  margin-right: 2px;
+}
+
+.price-display .usd-price {
+  font-weight: 500;
+  color: var(--price-primary);
+}
+
+.price-display .currency-label {
+  color: var(--price-text-light);
+  font-size: 0.9em;
+  margin-left: 2px;
+}
+
+.price-display-bold .usd-price {
+  font-weight: 700;
+}
+
+.price-display .egp-price {
+  color: var(--price-text-light);
+  margin-left: 4px;
+}
+
+.price-display .egp-amount {
+  color: var(--price-secondary);
+  font-weight: 500;
+}
+
+.price-display .info-icon {
+  color: var(--price-info);
+  font-size: 14px;
+  margin-left: 5px;
+  cursor: help;
+}
+
+/* ==================
+   Right-to-left (RTL) Styles - تنسيقات من اليمين إلى اليسار
+   ================== */
+
+.price-display-rtl {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* Override for RTL mode */
+.price-display-rtl .currency-icon {
+  margin-left: 2px;
+  margin-right: 0;
+}
+
+.price-display-rtl .currency-label {
+  margin-right: 2px;
+  margin-left: 0;
+}
+
+.price-display-rtl .egp-price {
+  margin-right: 4px;
+  margin-left: 0;
+}
+
+.price-display-rtl .info-icon {
+  margin-right: 5px;
+  margin-left: 0;
+}
+
+/* General RTL support using dir attribute */
+[dir="rtl"] .price-display:not(.price-display-rtl) .currency-icon {
+  margin-left: 2px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .price-display:not(.price-display-rtl) .currency-label {
+  margin-right: 2px;
+  margin-left: 0;
+}
+
+[dir="rtl"] .price-display:not(.price-display-rtl) .egp-price {
+  margin-right: 4px;
+  margin-left: 0;
+}
+
+[dir="rtl"] .price-display:not(.price-display-rtl) .info-icon {
+  margin-right: 5px;
+  margin-left: 0;
+}
+
+/* ==================
+   Size Variants - أحجام مختلفة
+   ================== */
+
+.price-display-small {
+  font-size: 12px;
+}
+
+.price-display-small .currency-icon {
+  font-size: 10px;
+}
+
+.price-display-small .info-icon {
+  font-size: 12px;
+}
+
+.price-display-large {
+  font-size: 18px;
+}
+
+.price-display-large .currency-icon {
+  font-size: 16px;
+}
+
+.price-display-large .info-icon {
+  font-size: 16px;
+}
+
+.price-display-large .usd-price {
+  font-weight: 600;
+}
+
+/* ==================
+   Responsive Adjustments - تعديلات متوافقة
+   ================== */
+
+@media (max-width: 768px) {
+  .price-display {
+    gap: 4px;
+  }
+  
+  .price-display:not(.price-display-inline) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .price-display-rtl:not(.price-display-inline) {
+    align-items: flex-end;
+  }
+  
+  .price-display:not(.price-display-inline) .egp-price {
+    margin-left: 0;
+    margin-top: 2px;
+  }
+  
+  .price-display-rtl:not(.price-display-inline) .egp-price {
+    margin-right: 0;
+    margin-top: 2px;
+  }
+}

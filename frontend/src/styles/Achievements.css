@@ -1,0 +1,322 @@
+/* Main achievements page styling */
+.achievements-page {
+  position: relative;
+  padding: 16px;
+  background: linear-gradient(135deg, #ffffff, #f9fafb);
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+/* Page header styling */
+.page-header {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 16px;
+}
+
+.page-title {
+  display: flex !important;
+  align-items: center !important;
+  font-weight: 600 !important;
+  margin-bottom: 0 !important;
+  color: #262626 !important;
+}
+
+.page-title-icon {
+  margin-left: 12px;
+  font-size: 24px;
+  color: #faad14;
+}
+
+/* Stats section */
+.achievements-stats-section {
+  margin-bottom: 32px;
+  background: linear-gradient(to right, #ffffff, #f9fcff);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Filter card styling */
+.achievements-filter-card {
+  margin-bottom: 28px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff, #fffdf7);
+  box-shadow: 0 4px 20px rgba(250, 173, 20, 0.08);
+  border-left: 3px solid #faad14;
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #595959;
+}
+
+.filter-select {
+  width: 100%;
+}
+
+.status-radio {
+  width: 100%;
+  display: flex;
+}
+
+.status-radio .ant-radio-button-wrapper {
+  flex: 1;
+  text-align: center;
+}
+
+/* Achievements list container */
+.achievements-list-container {
+  margin-bottom: 24px;
+  min-height: 300px;
+}
+
+/* Loading state */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 100%;
+}
+
+.loading-container p {
+  margin-top: 16px;
+  color: #8c8c8c;
+}
+
+/* Error message */
+.error-alert {
+  margin-bottom: 16px;
+}
+
+/* Grid layout */
+.achievements-grid {
+  width: 100%;
+}
+
+/* Achievement summary card */
+.achievements-summary-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff, #fffcf0);
+  border-top: 3px solid #faad14;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Summary items */
+.summary-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.summary-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+  color: white;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-icon::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+.summary-icon.special {
+  background: linear-gradient(45deg, #faad14, #fa8c16);
+  box-shadow: 0 4px 12px rgba(250, 173, 20, 0.25);
+}
+
+.summary-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  color: #262626;
+}
+
+/* Gold highlight effect for unlocked achievements */
+@keyframes gold-highlight {
+  0% {
+    box-shadow: 0 0 0 0 rgba(250, 173, 20, 0.8);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(250, 173, 20, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(250, 173, 20, 0);
+  }
+}
+
+.highlight-achievement {
+  animation: gold-highlight 2.5s infinite;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .page-title {
+    margin-bottom: 16px !important;
+  }
+  
+  .summary-item {
+    margin-bottom: 12px;
+  }
+  
+  .summary-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    margin-left: 12px;
+  }
+  
+  .summary-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .achievements-page {
+    padding: 0 8px;
+  }
+  
+  .page-title {
+    font-size: 20px !important;
+  }
+  
+  .page-title-icon {
+    font-size: 20px;
+    margin-left: 8px;
+  }
+  
+  .filter-label {
+    margin-bottom: 8px;
+  }
+  
+  .achievements-filter-card .ant-card-body {
+    padding: 16px 12px;
+  }
+  
+  .achievements-summary-card .ant-card-body {
+    padding: 16px 12px;
+  }
+}
+
+/* Animation for achievement badges */
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.badge-shiny {
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.8), 
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shine 3s infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Achievement grid container */
+.achievements-grid {
+  margin-top: 20px;
+}
+
+/* Empty state styling */
+.ant-empty {
+  margin: 40px 0;
+  background: rgba(250, 250, 250, 0.5);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px dashed rgba(0, 0, 0, 0.09);
+}
+
+/* Loading state styling */
+.loading-container {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  margin: 30px 0;
+}
+
+/* Filter styles */
+.filter-label {
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.filter-select .ant-select-selector {
+  border-radius: 8px !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.status-radio .ant-radio-button-wrapper {
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.status-radio .ant-radio-button-wrapper:first-child {
+  border-radius: 8px 0 0 8px !important;
+}
+
+.status-radio .ant-radio-button-wrapper:last-child {
+  border-radius: 0 8px 8px 0 !important;
+}
+
+/* Scrollbar styling */
+.achievements-page::-webkit-scrollbar {
+  width: 8px;
+}
+
+.achievements-page::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+.achievements-page::-webkit-scrollbar-thumb {
+  background-color: #faad14;
+  border-radius: 4px;
+}
+
+.achievements-page::-webkit-scrollbar-thumb:hover {
+  background-color: #d48806;
+}

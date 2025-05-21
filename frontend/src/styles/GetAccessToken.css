@@ -1,0 +1,608 @@
+/* تنسيقات الصفحة الرئيسية مع خلفية محسنة */
+.token-page-layout {
+  background: #f0f5ff; /* خلفية زرقاء فاتحة كقاعدة */
+  position: relative;
+  overflow: hidden;
+  z-index: 0; /* تعيين قاعدة للتنسيق العمودي */
+}
+
+.token-page-layout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: 
+    linear-gradient(120deg, rgba(24, 144, 255, 0.03) 0%, transparent 70%),
+    linear-gradient(240deg, rgba(82, 196, 26, 0.03) 0%, transparent 70%);
+  z-index: -1; /* جعلها خلف جميع العناصر */
+}
+
+.token-page-layout::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='rgba(24, 144, 255, 0.05)' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,208C672,213,768,203,864,181.3C960,160,1056,128,1152,128C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* جعلها خلف جميع العناصر */
+  pointer-events: none; /* منع تعارضها مع تفاعل المستخدم */
+}
+
+.token-page-content {
+  padding: 32px 24px;
+  position: relative;
+  z-index: 2; /* جعلها فوق الخلفية */
+}
+
+.token-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3; /* جعلها أعلى من المحتوى العام */
+}
+
+.token-container::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  right: -150px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1; /* جعلها خلف محتوى الحاوية */
+  pointer-events: none; /* منع تعارضها مع تفاعل المستخدم */
+}
+
+.token-container::after {
+  content: "";
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(82, 196, 26, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1; /* جعلها خلف محتوى الحاوية */
+  pointer-events: none; /* منع تعارضها مع تفاعل المستخدم */
+}
+
+/* تنسيقات العنوان */
+.token-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.05),
+    0 1px 4px rgba(0, 0, 0, 0.03),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 10; /* جعلها في أعلى مستوى دائمًا */
+}
+
+.main-title {
+  color: #1a3353;
+  margin-bottom: 12px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.title-icon {
+  color: #1890ff;
+  margin-left: 8px;
+  font-size: 1.5em;
+}
+
+.title-description {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 24px;
+}
+
+/* تنسيقات البطاقات */
+.token-selection-card,
+.token-extraction-card,
+.info-card {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 28px;
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.03),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 5; /* أعلى من الحاوية لكن أقل من العنوان */
+}
+
+.token-selection-card:hover,
+.token-extraction-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.token-extraction-card {
+  border-top: 4px solid #1890ff;
+  background-image: 
+    linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85)),
+    linear-gradient(to bottom right, #ffffff, #f0f7ff);
+  position: relative;
+  overflow: hidden;
+}
+
+.token-extraction-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.03) 0%, rgba(24, 144, 255, 0) 70%);
+  z-index: 0;
+}
+
+.token-selection-card {
+  border-top: 4px solid #52c41a;
+  background-image: 
+    linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85)),
+    linear-gradient(to bottom right, #ffffff, #f9fff5);
+}
+
+.card-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.card-title-icon {
+  margin-left: 8px;
+  color: #1890ff;
+  font-size: 1.2em;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+}
+
+.token-selection-card .card-title-icon {
+  color: #52c41a;
+}
+
+/* Token select - using antd default styling */
+.token-select {
+  width: 100%;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Removed custom dropdown item styling to use antd defaults */
+
+/* زر الحذف */
+.delete-button {
+  opacity: 0.6;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 77, 79, 0.08);
+  border: 1px solid rgba(255, 77, 79, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* تنسيق زر الحذف عند التحويم */
+.delete-button:hover {
+  opacity: 1;
+  background-color: rgba(255, 77, 79, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(255, 77, 79, 0.25);
+  border-color: rgba(255, 77, 79, 0.35);
+}
+
+/* تنسيق زر الحذف عند الضغط */
+.delete-button:active {
+  transform: translateY(0px);
+  box-shadow: 0 1px 2px rgba(255, 77, 79, 0.2);
+}
+
+/* تأثير الرسوم المتحركة عند الحوم */
+.delete-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.delete-button:hover::after {
+  opacity: 1;
+}
+
+/* أيقونة الحذف */
+.delete-icon {
+  font-size: 14px;
+  color: #ff4d4f;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+  transition: all 0.25s ease;
+}
+
+.delete-button:hover .delete-icon {
+  transform: scale(1.1);
+  color: #ff7875;
+}
+
+/* تنسيق النموذج */
+.token-form {
+  padding: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-item {
+  flex: 0 0 50%;
+  padding: 0 8px;
+}
+
+@media (max-width: 768px) {
+  .form-item {
+    flex: 0 0 100%;
+  }
+}
+
+.form-item-full {
+  flex: 0 0 100%;
+  padding: 0 8px;
+}
+
+.form-label {
+  color: #5a6a85;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.input-icon {
+  color: #1890ff;
+  margin-left: 8px;
+  font-size: 16px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+}
+
+/* Removed custom input styling to use antd defaults */
+
+/* تنسيقات مؤشر التقدم */
+.progress-container {
+  margin: 24px 0;
+  padding: 16px;
+  border-radius: 8px;
+  background: linear-gradient(to right, #f0f7ff, #f5faff);
+  border: 1px solid rgba(24, 144, 255, 0.2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.styled-progress {
+  margin-bottom: 12px;
+}
+
+.progress-text {
+  text-align: center;
+  color: #1890ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+/* Submit container layout only */
+.submit-container {
+  margin-top: 24px;
+}
+
+/* Removed custom submit button styling to use antd defaults */
+
+/* تنسيقات حقول البحث المخصصة */
+
+/* Remove the search component styles since they're now in main.css */
+/* 
+.custom-search-wrapper, .search-icon-container, .search-icon, 
+.custom-search-input, .clear-icon styles removed to prevent duplication 
+*/
+
+/* تنسيقات بطاقة المعلومات */
+.info-card {
+  background: linear-gradient(to right, rgba(246, 255, 237, 0.7), rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(10px);
+  border-right: 4px solid #52c41a;
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.05),
+    -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+.info-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+.info-icon {
+  font-size: 22px;
+  color: #52c41a;
+  margin-left: 16px;
+  margin-top: 2px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+}
+
+.info-title {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.info-text {
+  color: #5a6a85;
+}
+
+/* تنسيقات رسائل فارغة */
+.empty-text {
+  color: #8c8c8c;
+}
+
+/* أيقونات تحديث */
+.refresh-icon {
+  font-size: 16px;
+  margin-left: 6px;
+}
+
+.refresh-button {
+  display: flex;
+  align-items: center;
+}
+
+/* تعديل حجم الخط والاتجاه للغة العربية */
+.token-page-layout {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* تأثيرات إضافية */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(82, 196, 26, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(82, 196, 26, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(82, 196, 26, 0);
+  }
+}
+
+@keyframes enhancedPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(82, 196, 26, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(82, 196, 26, 0);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(82, 196, 26, 0);
+    transform: scale(1);
+  }
+}
+
+.token-avatar.active {
+  animation: enhancedPulse 2s infinite;
+}
+
+/* تأثيرات الحوم على الاختيارات */
+.token-option:hover {
+  background-color: #f6f9fc;
+}
+
+/* تأثير "نيومورفيزم" للبطاقات */
+.token-selection-card,
+.token-extraction-card,
+.info-card,
+.token-header {
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.05),
+    -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+/* تحسين مظهر الأيقونات */
+.title-icon,
+.card-title-icon,
+.input-icon,
+.info-icon {
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+}
+
+/* بقية التنسيقات الموجودة تبقى كما هي */
+
+/* إضافة تنسيق لمنع الاقتراح التلقائي */
+
+/* منع الاقتراح التلقائي في Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+/* منع تطبيق الألوان التلقائية لحقول AutoFill في Chrome */
+.styled-input:-webkit-autofill {
+  -webkit-text-fill-color: inherit !important;
+}
+
+/* تنسيق إضافي لحقول الإدخال الخام */
+.raw-input.styled-input {
+  background: white !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-width: 1px;
+}
+
+/* تأثير توهج للتوكن النشط */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(82, 196, 26, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(82, 196, 26, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(82, 196, 26, 0.6);
+  }
+}
+
+/* تحسين مظهر الشارة */
+.ant-badge-status-dot {
+  width: 8px;
+  height: 8px;
+}
+
+.ant-badge-status-text {
+  margin-right: 8px !important;
+  font-size: 12px !important;
+  background-color: rgba(82, 196, 26, 0.1);
+  color: #52c41a;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* تحسين عرض الاختيار في القائمة المنسدلة */
+.token-select .ant-select-selector {
+  height: auto !important;
+  padding: 8px 12px !important;
+  min-height: 50px; /* ضمان ارتفاع كافٍ */
+}
+
+/* Removed custom dropdown styling to use antd defaults */
+
+/* نمط بطاقة للخيارات */
+.token-option-content {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* تحسينات إضافية لمظهر الأيقونات */
+
+/* أيقونة التوكن النشط */
+.token-avatar.active {
+  background: linear-gradient(135deg, #52c41a, #73d13d);
+  border-color: #fff;
+  color: white;
+  box-shadow: 
+    0 2px 8px rgba(82, 196, 26, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  animation: glow 2s infinite;
+  transform: scale(1.05);
+}
+
+/* تحسين تأثير توهج للتوكن النشط */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(82, 196, 26, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(82, 196, 26, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(82, 196, 26, 0.6);
+  }
+}
+
+/* تنسيقات متقدمة لنافذة تأكيد الحذف */
+
+/* تنسيق نافذة Popconfirm نفسها */
+.delete-popconfirm .ant-popover-inner {
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.delete-popconfirm .ant-popover-arrow {
+  display: none; /* إخفاء سهم الفقاعة */
+}
+
+.delete-popconfirm .ant-popover-inner-content {
+  padding: 16px;
+}
+
+.delete-popconfirm .ant-popover-message {
+  margin-bottom: 16px;
+}
+
+/* تنسيق أزرار Popconfirm */
+.delete-popconfirm .ant-popover-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.delete-popconfirm .ant-btn {
+  border-radius: 6px;
+  padding: 4px 16px;
+  font-weight: 500;
+  height: 32px;
+}
+
+.delete-popconfirm .ant-btn-primary {
+  background: linear-gradient(to right, #ff4d4f, #ff7875);
+  border: none;
+  box-shadow: 0 2px 6px rgba(255, 77, 79, 0.3);
+}
+
+.delete-popconfirm .ant-btn-primary:hover {
+  background: linear-gradient(to right, #ff7875, #ff9c9c);
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.4);
+}
+
+/* أيقونة تحذير Popconfirm */
+.delete-popconfirm .ant-popover-message-icon {
+  color: #ff4d4f;
+  margin-left: 12px;
+  font-size: 16px;
+}
+
+/* Removed additional custom dropdown styling to use antd defaults */
+
+/* Removed custom avatar styling to use antd defaults */

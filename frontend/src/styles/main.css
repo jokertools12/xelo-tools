@@ -1,0 +1,1648 @@
+/* Main CSS File - Enhanced with Modern Effects and Animations */
+
+/* Import Ant Design styles */
+@import '~antd/dist/reset.css';
+
+/* ===== GENERAL STYLES ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+  scroll-behavior: smooth; /* Enable smooth scrolling behavior */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+/* ===== LAYOUT STYLES ===== */
+
+/* RTL/LTR Support */
+html[dir="rtl"] .site-layout {
+  margin-right: 250px;
+  margin-left: 0;
+}
+
+html[dir="rtl"] .site-layout-collapsed {
+  margin-right: 80px;
+  margin-left: 0;
+}
+
+html[dir="ltr"] .site-layout {
+  margin-left: 250px;
+  margin-right: 0;
+}
+
+html[dir="ltr"] .site-layout-collapsed {
+  margin-left: 80px;
+  margin-right: 0;
+}
+
+/* Sticky Header implementation */
+.sticky-header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.sticky-header-wrapper .app-header {
+  width: 100%;
+  z-index: 1000;
+}
+
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+.app-layout {
+  min-height: 100vh;
+}
+
+/* Site Layout (right side of sidebar) with improved alignment */
+.site-layout {
+  width: 100%;
+  transition: all 0.2s ease;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.site-layout-collapsed {
+  margin-left: 80px; /* same as collapsed sidebar width */
+}
+
+/* Content area - improved with better gradient and animation */
+.site-content {
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  min-height: calc(100vh - 160px); /* account for header and footer */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+  overflow: initial;
+  animation: fadeIn 0.4s ease-out;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  position: relative;
+  z-index: 1;
+}
+
+.site-content:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-layout-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 280px;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow: auto;
+  height: calc(100vh - 128px); /* Adjust for header and footer */
+}
+
+.content-wrapper {
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+  flex: 1;
+  overflow: auto;
+  min-height: 280px;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.content-wrapper:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Layout adjustments when sidebar is collapsed */
+.ant-layout-sider-collapsed + .site-layout {
+  margin-left: 80px;
+}
+
+.ant-layout-sider-collapsed ~ .site-layout {
+  margin-left: 80px;
+}
+
+/* Ensure proper alignment between sidebar and content */
+.sidebar:not(.ant-layout-sider-collapsed) + .site-layout,
+.sidebar:not(.ant-layout-sider-collapsed) ~ .site-layout {
+  margin-left: 250px;
+}
+
+/* Container for page content with better spacing */
+.page-container {
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+}
+
+/* Enhanced Breadcrumb styling */
+.site-breadcrumb {
+  margin-bottom: 20px;
+  font-weight: 500;
+  position: relative;
+}
+
+.site-breadcrumb .ant-breadcrumb-link {
+  transition: all 0.2s ease;
+}
+
+.site-breadcrumb .ant-breadcrumb-link:hover {
+  color: #2563eb;
+  transform: translateX(2px);
+}
+
+/* ===== SIDEBAR STYLES ===== */
+.ant-layout-sider {
+  position: fixed;
+  height: 100%;
+  left: 0;
+  z-index: 1000; /* Ensure consistent z-index hierarchy */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhanced Logo styling */
+.logo {
+  height: 32px;
+  margin: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Removed infinite animation for better performance */
+
+.ant-layout-sider-collapsed .logo {
+  padding: 8px;
+}
+
+.ant-row-rtl .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+/* Enhanced Sidebar styles */
+.sidebar {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Enhanced Trigger button */
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trigger:hover {
+  color: #2563eb;
+  transform: scale(1.05);
+}
+
+/* Enhanced Sidebar Toggle Button with animation */
+.toggle-sidebar {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  display: none; /* Hide by default, only show on mobile */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+  z-index: 1002; /* Increased z-index to ensure it's above other elements */
+  transition: all 0.2s ease;
+  /* Removed infinite animation for better performance */
+}
+
+.toggle-sidebar:hover {
+  background: #3b82f6;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
+
+/* Removed pulsing animation for better performance */
+
+.toggle-sidebar .trigger {
+  font-size: 18px;
+  color: white;
+}
+
+/* Mobile sidebar overlay with improved animation */
+.mobile-sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+  display: none;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.mobile-sidebar-overlay-visible {
+  display: block;
+  opacity: 1;
+  z-index: 998; /* Adjusted to be below sidebar but above content */
+}
+
+/* Mobile menu trigger button */
+.mobile-menu-trigger {
+  display: none;
+  padding: 0 16px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-trigger:hover {
+  color: #2563eb;
+  transform: scale(1.05);
+}
+
+/* ===== AUTH PAGES ===== */
+/* Enhanced Login & Register Pages */
+.login-container,
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f8fafc, #eff6ff);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-container::before,
+.register-container::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(30, 64, 175, 0.1));
+  border-radius: 50%;
+  top: -150px;
+  right: -150px;
+  z-index: 0;
+  /* Removed animation for better performance */
+}
+
+.login-container::after,
+.register-container::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.2), rgba(16, 185, 129, 0.1));
+  border-radius: 50%;
+  bottom: -100px;
+  left: -100px;
+  z-index: 0;
+  /* Removed animation for better performance */
+}
+
+/* Removed float animation for better performance */
+
+.login-card,
+.register-card {
+  width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.95);
+  /* Removed backdrop-filter for better performance */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.login-card:hover,
+.register-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.login-button,
+.register-button {
+  width: 100%;
+  height: 44px;
+  background: #2563eb;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+  transition: all 0.2s ease;
+}
+
+.login-button:hover,
+.register-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.25);
+  background: #3b82f6;
+}
+
+/* ===== TABLE STYLES ===== */
+.ant-table {
+  font-size: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ant-table-thead > tr > th {
+  background: linear-gradient(to right, #fafafa, #f5f5f5);
+  font-weight: 600;
+  color: #262626;
+  padding: 16px;
+  position: relative;
+}
+
+.ant-table-thead > tr > th::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, rgba(37, 99, 235, 0.1), rgba(30, 64, 175, 0.3));
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.ant-table:hover .ant-table-thead > tr > th::after {
+  transform: scaleX(1);
+}
+
+.ant-table-tbody > tr > td {
+  padding: 14px 16px;
+  transition: all 0.2s ease;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: rgba(37, 99, 235, 0.05) !important;
+}
+
+/* Make tables responsive with enhanced styling */
+.responsive-table-container {
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  margin: 0 auto 24px auto;
+  max-width: 100%;
+}
+
+.responsive-table-container:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.responsive-table-container .ant-table-wrapper {
+  min-width: 100%;
+}
+
+/* Enhanced Data table styles */
+.data-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.data-table:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.data-table .ant-table-thead > tr > th {
+  background: linear-gradient(to right, #fafafa, #f5f5f5);
+  font-weight: 700;
+  padding: 16px;
+  font-size: 14px;
+  position: relative;
+}
+
+.data-table .ant-table-thead > tr > th::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, rgba(37, 99, 235, 0.1), rgba(30, 64, 175, 0.3));
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.data-table:hover .ant-table-thead > tr > th::after {
+  transform: scaleX(1);
+}
+
+.data-table .ant-table-tbody > tr {
+  transition: all 0.2s ease;
+}
+
+.data-table .ant-table-tbody > tr:hover {
+  background-color: rgba(37, 99, 235, 0.02);
+  transform: translateX(5px);
+}
+
+/* Enhanced Card grid styling for dashboard */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  margin-bottom: 28px;
+}
+
+/* Enhanced Card Styles with modern effects */
+.main-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  background: #ffffff;
+}
+
+.main-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.main-card .ant-card-head {
+  background: linear-gradient(to right, #fafafa, #f5f5f5);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Enhanced Stats Card Styles with improved animations and gradients */
+.stats-card {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  position: relative;
+}
+
+.stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 4px;
+  border-radius: 0 16px 16px 0;
+  background: linear-gradient(to bottom, #2563eb, #1e40af);
+  opacity: 0.7;
+}
+
+.stats-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.stats-card .ant-card-body {
+  padding: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.stats-card .ant-card-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  z-index: -1;
+}
+
+/* Enhanced icon with improved gradient and animation effects */
+.stats-icon {
+  font-size: 28px;
+  background: rgba(37, 99, 235, 0.1);
+  padding: 20px;
+  border-radius: 50%;
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Removed shimmer animation for better performance */
+
+.stats-card:hover .stats-icon {
+  transform: scale(1.05);
+  background: rgba(37, 99, 235, 0.15);
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+}
+
+/* Enhanced dynamic number animation for stats with optimized effects */
+.stats-value,
+.ant-statistic-content-value,
+.ant-statistic-content-value-int {
+  font-size: 28px;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+  animation: countUp 1s ease-out forwards;
+  background-image: linear-gradient(135deg, #2563eb, #1e40af);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes countUp {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Removed animations on hover for better performance */
+
+/* Removed incremental loading effect for better performance */
+
+
+/* Enhanced Form Styling */
+.main-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ant-form-item {
+  transition: all 0.2s ease;
+}
+
+.ant-form-item:hover {
+  transform: translateX(2px);
+}
+
+.ant-input, 
+.ant-select-selector,
+.ant-input-number,
+.ant-picker {
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+  border-radius: 8px !important;
+}
+
+.ant-input:hover, 
+.ant-select-selector:hover,
+.ant-input-number:hover,
+.ant-picker:hover {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
+}
+
+.ant-input:focus, 
+.ant-select-selector:focus,
+.ant-input-number:focus,
+.ant-picker:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
+}
+
+.ant-btn {
+  border-radius: 8px;
+  transition: all 0.2s ease !important;
+}
+
+.ant-btn:hover {
+  transform: translateY(-1px);
+}
+
+.ant-btn-primary {
+  background: linear-gradient(90deg, #2563eb, #1e40af) !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+}
+
+.ant-btn-primary:hover {
+  background: linear-gradient(90deg, #3b82f6, #2563eb) !important;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3) !important;
+}
+
+/* Enhanced Page Title with gradient text and improved animation */
+.page-title {
+  margin-bottom: 24px;
+  margin-left: 16px !important;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(308deg, #07d607, #0af8e6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 6px;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 30%;
+  height: 2px;
+  background: linear-gradient(to right, #2563eb, #1e40af);
+  transform-origin: left;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+}
+
+.page-title:hover::after {
+  width: 70%;
+  /* Removed box-shadow for better performance */
+}
+
+/* Enhanced Footer styling */
+.site-footer {
+  text-align: center;
+  padding: 24px;
+  background: linear-gradient(to right, #ffffff, #fafafa);
+  color: rgba(0, 0, 0, 0.65);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+  position: relative;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #2563eb, #059669);
+  opacity: 0.2;
+}
+
+/* Enhanced notification positioning */
+.header-dropdown.notification-dropdown {
+  position: fixed !important;
+  top: 70px !important;
+  right: 24px !important;
+  width: 340px !important;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #ffffff;
+  /* Removed backdrop-filter for better performance */
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+  /* Animation removed to fix dropdown functionality */
+  border-radius: 16px !important;
+  padding: 16px !important;
+  z-index: 1001 !important;
+  transition: none !important; /* Explicitly disable transitions */
+}
+
+/* @keyframes dropdown-fade removed to fix dropdown functionality */
+
+/* ===== MODAL STYLES ===== */
+/* Global modal styles with enhanced design and overflow handling */
+.ant-modal-root {
+  z-index: 1050;
+}
+
+.ant-modal-mask {
+  z-index: 1050;
+  backdrop-filter: blur(5px);
+}
+
+.ant-modal-wrap {
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+/* Enhanced modals with improved positioning and overflow handling */
+.ant-modal {
+  position: relative;
+  margin: 0 auto;
+  top: 20px;
+  padding-bottom: 24px;
+  border-radius: 12px;
+  overflow: visible;
+  max-width: calc(100vw - 40px);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ant-modal-content {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  background: #ffffff;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.ant-modal-header {
+  background: linear-gradient(to right, #fafafa, #f5f5f5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.ant-modal-body {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  scrollbar-width: thin;
+  flex: 1;
+}
+
+.ant-modal-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ant-modal-title {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.ant-modal-close {
+  transition: all 0.2s ease;
+}
+
+.ant-modal-close:hover {
+  transform: rotate(45deg);
+}
+
+/* Scrollable containers for long content inside modals */
+.modal-scrollable-container {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background-color: #f8faff;
+  border: 1px solid #edf2f7;
+}
+
+/* Adjust modal position based on sidebar state */
+.site-layout:not(.site-layout-collapsed) ~ .ant-modal-root .ant-modal {
+  margin-left: 110px; /* Half of sidebar width to center modal in remaining space */
+}
+
+.site-layout-collapsed ~ .ant-modal-root .ant-modal {
+  margin-left: 40px; /* Half of collapsed sidebar width */
+}
+
+/* Ensure modal transitions smoothly with sidebar */
+.ant-modal-root .ant-modal {
+  transition: margin-left 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Fixed height for recipient containers in messaging modals */
+.recipients-list-container {
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: #f8faff;
+  border: 1px solid #edf2f7;
+  margin-bottom: 16px;
+}
+
+/* Fixed height for template lists in modals */
+.templates-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Confirmation dialog styling */
+.ant-modal.ant-modal-confirm {
+  max-width: 95vw;
+  margin: 0 auto;
+}
+
+.ant-modal-confirm-body-wrapper {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+/* Beautiful scrollbar for all modal content */
+.ant-modal-body::-webkit-scrollbar,
+.modal-scrollable-container::-webkit-scrollbar,
+.recipients-list-container::-webkit-scrollbar,
+.templates-list::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.ant-modal-body::-webkit-scrollbar-track,
+.modal-scrollable-container::-webkit-scrollbar-track,
+.recipients-list-container::-webkit-scrollbar-track,
+.templates-list::-webkit-scrollbar-track {
+  background: #f5f7fa;
+  border-radius: 10px;
+}
+
+.ant-modal-body::-webkit-scrollbar-thumb,
+.modal-scrollable-container::-webkit-scrollbar-thumb,
+.recipients-list-container::-webkit-scrollbar-thumb,
+.templates-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #2563eb, #3b82f6);
+  border-radius: 10px;
+  border: 2px solid #f5f7fa;
+}
+
+.ant-modal-body::-webkit-scrollbar-thumb:hover,
+.modal-scrollable-container::-webkit-scrollbar-thumb:hover,
+.recipients-list-container::-webkit-scrollbar-thumb:hover,
+.templates-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #1e40af, #2563eb);
+}
+
+/* Add animations for notifications */
+.ant-notification {
+  z-index: 1010 !important;
+}
+
+.ant-notification-notice {
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+  /* Removed backdrop-filter for better performance */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  animation: notificationFadeIn 0.2s ease-out;
+}
+
+/* Drawer styling with proper overflow handling */
+.ant-drawer-body {
+  overflow-y: auto !important;
+  max-height: calc(100vh - 108px) !important; /* Account for header and footer */
+}
+
+.ant-drawer-content-wrapper {
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+}
+
+.ant-drawer-content {
+  max-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Popover positioning */
+.ant-popover {
+  z-index: 10000 !important;
+}
+
+@keyframes notificationFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== ENHANCED SEARCH COMPONENT ===== */
+.custom-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #f5f9ff, #ffffff);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-width: 280px;
+  flex: 1;
+  width: 100%;
+  height: 42px;
+}
+
+.custom-search-wrapper:hover {
+  border-color: #40a9ff;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1), inset 0 1px 3px rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+}
+
+.custom-search-wrapper:focus-within {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.search-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(30, 64, 175, 0.15));
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  margin-left: 8px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-search-wrapper:focus-within .search-icon-container {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(30, 64, 175, 0.3));
+  transform: scale(1.1);
+}
+
+.search-icon {
+  color: #2563eb;
+  font-size: 18px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-search-wrapper:focus-within .search-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.custom-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  box-shadow: none !important;
+  padding: 0 12px;
+  height: 42px;
+  font-size: 14px;
+  width: 100%;
+  background: transparent;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-search-input:focus {
+  transform: scale(1.01);
+}
+
+.custom-search-input .ant-input {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-search-input .ant-input:focus {
+  transform: scale(1.01);
+}
+
+.clear-icon-button {
+  border: none;
+  background: linear-gradient(135deg, #eff2f9, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  padding: 0;
+  margin-right: 10px;
+  opacity: 0.7;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.clear-icon-button:hover {
+  background: linear-gradient(135deg, #e6e9f0, #f5f7fa);
+  opacity: 1;
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.clear-icon {
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+.clear-icon:hover {
+  color: #ff4d4f;
+}
+
+/* Responsive adjustments for search component */
+@media (max-width: 768px) {
+  .custom-search-wrapper {
+    height: 40px;
+    min-width: auto;
+  }
+  
+  .custom-search-input {
+    height: 40px;
+    font-size: 13px;
+    padding: 0 8px;
+  }
+  
+  .search-icon-container {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .search-icon {
+    font-size: 16px;
+  }
+  
+  .clear-icon-button {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 992px) {
+  .site-layout {
+    margin-left: 0 !important;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .ant-layout-sider {
+    position: fixed !important;
+    z-index: 1001;
+    height: 100vh;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    left: 0;
+    top: 0;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .mobile-menu-trigger {
+    display: block;
+  }
+  
+  /* Ensure content doesn't overlap with sidebar */
+  .site-content {
+    margin: 16px;
+    margin-top: 80px !important;
+    padding: 20px;
+  }
+  
+  /* Adjust notification dropdown position */
+  .header-dropdown.notification-dropdown {
+    width: 320px !important;
+    right: 16px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-layout,
+  .site-layout-collapsed {
+    margin-left: 0 !important;
+    width: 100% !important;
+    transition: all 0.3s ease;
+  }
+
+  .site-content {
+    margin: 12px;
+    margin-top: 72px !important;
+    padding: 16px;
+    width: calc(100% - 24px);
+    overflow: auto;
+  }
+  
+  .sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .sidebar-mobile-visible {
+    left: 0 !important;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    display: block;
+    position: fixed;
+    z-index: 999;
+  }
+
+  /* Show the toggle button on mobile */
+  .toggle-sidebar {
+    display: flex;
+    left: 15px;
+    bottom: 15px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .login-card,
+  .register-card {
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .stats-value {
+    font-size: 24px;
+  }
+  
+  .stats-icon {
+    padding: 12px;
+    font-size: 22px;
+  }
+  
+  /* Adjust notification position on tablets */
+  .header-dropdown.notification-dropdown {
+    width: 280px !important;
+    right: 16px !important;
+  }
+  
+  .ant-modal {
+    margin: 0 auto !important;
+    max-width: 95vw;
+  }
+  
+  .site-layout ~ .ant-modal-root .ant-modal,
+  .site-layout-collapsed ~ .ant-modal-root .ant-modal {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .site-content {
+    border-radius: 12px;
+    margin: 10px;
+    margin-top: 64px !important; /* Adjusted for smaller header on mobile */
+    padding: 16px;
+  }
+  
+  .page-container {
+    padding: 0 8px;
+  }
+  
+  .main-card,
+  .stats-card,
+  .data-table {
+    border-radius: 12px;
+  }
+  
+  .stats-value {
+    font-size: 22px;
+  }
+  
+  .stats-icon {
+    padding: 12px;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  
+  /* Improved notification positioning on mobile */
+  .header-dropdown.notification-dropdown {
+    width: 280px !important;
+    right: 12px !important;
+    max-height: 60vh;
+    top: 60px !important;
+  }
+}
+
+/* Show mobile sidebar toggle only on mobile */
+@media (min-width: 769px) {
+  .mobile-sidebar-toggle {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .toggle-sidebar {
+    display: none; /* Hide the regular toggle on mobile */
+  }
+  
+  /* Ensure the mobile toggle is visible and above content */
+  .mobile-sidebar-toggle {
+    display: flex !important;
+  }
+}
+
+/* ===== RTL/LTR SUPPORT FOR CARDS AND CONTAINERS ===== */
+
+/* Global RTL/LTR Support */
+html[dir="rtl"] * {
+  text-align: right;
+}
+
+html[dir="ltr"] * {
+  text-align: left;
+}
+
+/* Override Ant Design default styles for RTL/LTR */
+html[dir="rtl"] .ant-layout,
+html[dir="rtl"] .ant-layout-header,
+html[dir="rtl"] .ant-layout-content,
+html[dir="rtl"] .ant-layout-footer {
+  direction: rtl;
+}
+
+html[dir="ltr"] .ant-layout,
+html[dir="ltr"] .ant-layout-header,
+html[dir="ltr"] .ant-layout-content,
+html[dir="ltr"] .ant-layout-footer {
+  direction: ltr;
+}
+
+/* Card RTL/LTR Support */
+html[dir="rtl"] .ant-card,
+html[dir="rtl"] .ant-card-head-title,
+html[dir="rtl"] .ant-card-head,
+html[dir="rtl"] .ant-card-body,
+html[dir="rtl"] .ant-card-extra {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="ltr"] .ant-card,
+html[dir="ltr"] .ant-card-head-title,
+html[dir="ltr"] .ant-card-head,
+html[dir="ltr"] .ant-card-body,
+html[dir="ltr"] .ant-card-extra {
+  text-align: left;
+  direction: ltr;
+}
+
+/* Fix card extra position */
+html[dir="rtl"] .ant-card-extra {
+  margin-left: 0;
+  margin-right: auto;
+  float: left;
+}
+
+html[dir="ltr"] .ant-card-extra {
+  margin-right: 0;
+  margin-left: auto;
+  float: right;
+}
+
+/* Table RTL/LTR Support */
+html[dir="rtl"] .ant-table,
+html[dir="rtl"] .ant-table-container,
+html[dir="rtl"] .ant-table-content,
+html[dir="rtl"] .ant-table-thead,
+html[dir="rtl"] .ant-table-tbody,
+html[dir="rtl"] .ant-table-cell {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] .ant-table,
+html[dir="ltr"] .ant-table-container,
+html[dir="ltr"] .ant-table-content,
+html[dir="ltr"] .ant-table-thead,
+html[dir="ltr"] .ant-table-tbody,
+html[dir="ltr"] .ant-table-cell {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Fix table action buttons alignment */
+html[dir="rtl"] .ant-table-cell .ant-space {
+  justify-content: flex-end;
+}
+
+html[dir="ltr"] .ant-table-cell .ant-space {
+  justify-content: flex-start;
+}
+
+/* Form RTL/LTR Support */
+html[dir="rtl"] .ant-form,
+html[dir="rtl"] .ant-form-item,
+html[dir="rtl"] .ant-form-item-label,
+html[dir="rtl"] .ant-form-item-control {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="ltr"] .ant-form,
+html[dir="ltr"] .ant-form-item,
+html[dir="ltr"] .ant-form-item-label,
+html[dir="ltr"] .ant-form-item-control {
+  text-align: left;
+  direction: ltr;
+}
+
+/* Modal RTL/LTR Support */
+html[dir="rtl"] .ant-modal,
+html[dir="rtl"] .ant-modal-content,
+html[dir="rtl"] .ant-modal-header,
+html[dir="rtl"] .ant-modal-title,
+html[dir="rtl"] .ant-modal-body,
+html[dir="rtl"] .ant-modal-footer {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="ltr"] .ant-modal,
+html[dir="ltr"] .ant-modal-content,
+html[dir="ltr"] .ant-modal-header,
+html[dir="ltr"] .ant-modal-title,
+html[dir="ltr"] .ant-modal-body,
+html[dir="ltr"] .ant-modal-footer {
+  text-align: left;
+  direction: ltr;
+}
+
+/* Menu RTL/LTR Support */
+html[dir="rtl"] .ant-menu,
+html[dir="rtl"] .ant-menu-item,
+html[dir="rtl"] .ant-menu-submenu,
+html[dir="rtl"] .ant-menu-submenu-title,
+html[dir="rtl"] .ant-menu-submenu-popup {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="ltr"] .ant-menu,
+html[dir="ltr"] .ant-menu-item,
+html[dir="ltr"] .ant-menu-submenu,
+html[dir="ltr"] .ant-menu-submenu-title,
+html[dir="ltr"] .ant-menu-submenu-popup {
+  text-align: left;
+  direction: ltr;
+}
+
+/* Fix menu icons alignment */
+html[dir="rtl"] .ant-menu-item .anticon,
+html[dir="rtl"] .ant-menu-submenu-title .anticon {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+html[dir="ltr"] .ant-menu-item .anticon,
+html[dir="ltr"] .ant-menu-submenu-title .anticon {
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+/* Dropdown RTL/LTR Support */
+html[dir="rtl"] .ant-dropdown,
+html[dir="rtl"] .ant-dropdown-menu,
+html[dir="rtl"] .ant-dropdown-menu-item {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="ltr"] .ant-dropdown,
+html[dir="ltr"] .ant-dropdown-menu,
+html[dir="ltr"] .ant-dropdown-menu-item {
+  text-align: left;
+  direction: ltr;
+}
+
+/* Tabs RTL/LTR Support */
+html[dir="rtl"] .ant-tabs,
+html[dir="rtl"] .ant-tabs-nav,
+html[dir="rtl"] .ant-tabs-tab {
+  direction: rtl;
+}
+
+html[dir="rtl"] .ant-tabs-tab {
+  margin-right: 0;
+  margin-left: 32px;
+}
+
+html[dir="ltr"] .ant-tabs,
+html[dir="ltr"] .ant-tabs-nav,
+html[dir="ltr"] .ant-tabs-tab {
+  direction: ltr;
+}
+
+html[dir="ltr"] .ant-tabs-tab {
+  margin-left: 0;
+}
+
+/* Button RTL/LTR Support */
+html[dir="rtl"] .ant-btn > .anticon + span,
+html[dir="rtl"] .ant-btn > span + .anticon {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+html[dir="ltr"] .ant-btn > .anticon + span,
+html[dir="ltr"] .ant-btn > span + .anticon {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* Page Title RTL/LTR Support */
+html[dir="rtl"] .page-title {
+  margin-left: 0 !important;
+  text-align: right;
+}
+
+html[dir="ltr"] .page-title {
+  margin-right: 0 !important;
+  text-align: left;
+}
+
+/* Adjust layout for mobile in RTL/LTR */
+@media (max-width: 768px) {
+  html[dir="rtl"] .site-layout {
+    margin-right: 0 !important;
+  }
+  
+  html[dir="ltr"] .site-layout {
+    margin-left: 0 !important;
+  }
+}
+
+/* Fix for Ant Design components with fixed positioning */
+html[dir="rtl"] .ant-message,
+html[dir="rtl"] .ant-notification {
+  right: auto;
+  left: 20px;
+}
+
+html[dir="ltr"] .ant-message,
+html[dir="ltr"] .ant-notification {
+  left: auto;
+  right: 20px;
+}
+
+/* Fix for Ant Design Popover and Tooltip */
+html[dir="rtl"] .ant-popover,
+html[dir="rtl"] .ant-tooltip {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] .ant-popover,
+html[dir="ltr"] .ant-tooltip {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Fix for Ant Design Select */
+html[dir="rtl"] .ant-select-dropdown,
+html[dir="rtl"] .ant-select-item {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] .ant-select-dropdown,
+html[dir="ltr"] .ant-select-item {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Fix for Ant Design Input */
+html[dir="rtl"] .ant-input-affix-wrapper .ant-input-suffix,
+html[dir="rtl"] .ant-input-affix-wrapper .ant-input-prefix {
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+html[dir="ltr"] .ant-input-affix-wrapper .ant-input-suffix,
+html[dir="ltr"] .ant-input-affix-wrapper .ant-input-prefix {
+  margin-right: 0;
+  margin-left: 4px;
+}
+
+/* Fix for Ant Design Pagination */
+html[dir="rtl"] .ant-pagination-prev {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+html[dir="rtl"] .ant-pagination-next {
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+html[dir="ltr"] .ant-pagination-prev {
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+html[dir="ltr"] .ant-pagination-next {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* Fix for Ant Design Collapse */
+html[dir="rtl"] .ant-collapse-header {
+  padding: 12px 16px 12px 40px !important;
+  text-align: right;
+}
+
+html[dir="ltr"] .ant-collapse-header {
+  padding: 12px 40px 12px 16px !important;
+  text-align: left;
+}
+
+html[dir="rtl"] .ant-collapse-arrow {
+  right: auto !important;
+  left: 16px !important;
+}
+
+html[dir="ltr"] .ant-collapse-arrow {
+  left: auto !important;
+  right: 16px !important;
+}

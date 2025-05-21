@@ -1,0 +1,267 @@
+/* MyGroupExtractor.css - Essential component styling only */
+
+/* Root container with tabs-container class for proper tab styling */
+.group-extractor-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Using the shared .tabs-container class for consistent tab styling */
+.group-extractor-container .tabs-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Component-specific tab overrides only when needed */
+.group-extractor-container .tabs-container .ant-tabs-tab {
+  /* Specific overrides can go here if needed */
+}
+
+/* Button styling without conflicting with global styles */
+.extract-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 20px;
+  height: 38px;
+  font-weight: 500;
+  border-radius: 6px;
+  background-color: #1890ff;
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.extract-button:hover {
+  background-color: #40a9ff;
+}
+
+.secondary-button {
+  height: 38px;
+  padding: 0 15px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  border: 1px solid #d9d9d9;
+  color: #595959;
+}
+
+.secondary-button:hover {
+  color: #1890ff;
+  border-color: #1890ff;
+}
+
+/* Progress styling */
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.progress-count {
+  font-weight: 600;
+  color: #1890ff;
+}
+
+/* Stats Cards - Minimal styling */
+.stats-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stats-card {
+  flex: 1 1 200px;
+  max-width: calc(25% - 15px);
+}
+
+.stats-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.stats-icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #1890ff;
+}
+
+.stats-title {
+  margin: 0;
+  color: #595959;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.stats-value {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1890ff;
+}
+
+/* Filter actions */
+.filter-actions {
+  flex: 1;
+}
+
+.filter-export {
+  display: flex;
+  gap: 10px;
+}
+
+/* Search Container Layout (Using antd default Input.Search component) */
+.custom-search-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Removed custom search styling to use antd defaults */
+
+.clear-icon {
+  color: #bfbfbf;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.clear-icon:hover {
+  color: #595959;
+}
+
+/* Table header elements */
+.selection-info {
+  font-weight: 500;
+  color: #262626;
+}
+
+.selected-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.success-icon {
+  color: #52c41a;
+}
+
+.primary-icon {
+  color: #1890ff;
+}
+
+.table-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.deselect-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+}
+
+.deselect-button-disabled {
+  opacity: 0.5;
+}
+
+/* Table Styling - Focus on text alignment */
+.groups-table,
+.posts-table,
+.members-table {
+  direction: rtl; /* Ensuring right-to-left layout for Arabic */
+}
+
+.groups-table .ant-table-thead > tr > th,
+.posts-table .ant-table-thead > tr > th,
+.members-table .ant-table-thead > tr > th {
+  color: #262626;
+  font-weight: 600;
+  text-align: right;
+  padding: 16px;
+}
+
+.groups-table .ant-table-tbody > tr > td,
+.posts-table .ant-table-tbody > tr > td,
+.members-table .ant-table-tbody > tr > td {
+  padding: 16px;
+  text-align: right;
+}
+
+/* Improve tag appearance */
+.groups-table .ant-tag,
+.posts-table .ant-tag,
+.members-table .ant-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 0;
+}
+
+/* Pagination text alignment */
+.pagination {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .input-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stats-card {
+    max-width: calc(50% - 15px);
+  }
+
+  .filter-container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .filter-export {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .custom-search-wrapper {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .stats-card {
+    max-width: 100%;
+  }
+
+  .table-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .table-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

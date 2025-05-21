@@ -1,0 +1,32 @@
+{
+  "short_name": "Xelo Tools",
+  "name": "Xelo Tools - منصة متكاملة لأدوات السوشيال ميديا",
+  "description": "منصة احترافية متكاملة لأدوات السوشيال ميديا واستخراج البيانات بدقة عالية وكفاءة متميزة",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "favicon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#4338ca",
+  "background_color": "#ffffff",
+  "categories": ["social", "tools", "utilities", "productivity"],
+  "lang": "ar-SA",
+  "dir": "rtl",
+  "prefer_related_applications": false
+}

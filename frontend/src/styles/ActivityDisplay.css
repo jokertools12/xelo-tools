@@ -1,0 +1,176 @@
+/* Activity display styles */
+.activity-item {
+  display: flex;
+  margin-bottom: 16px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s;
+}
+
+.activity-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.activity-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 16px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  font-size: 18px;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.activity-title {
+  font-weight: 600;
+  color: #262626;
+  font-size: 16px;
+}
+
+.activity-time {
+  color: #8c8c8c;
+  font-size: 12px;
+  direction: rtl;
+  text-align: left;
+}
+
+.activity-description {
+  color: #595959;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Specific activity types */
+.activity-points-add .activity-icon {
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.activity-points-add {
+  border-right: 3px solid #52c41a;
+}
+
+.activity-points-deduct .activity-icon {
+  background-color: #fff2f0;
+  color: #f5222d;
+}
+
+.activity-points-deduct {
+  border-right: 3px solid #f5222d;
+}
+
+.activity-login .activity-icon {
+  background-color: #e6f7ff;
+  color: #1890ff;
+}
+
+.activity-login {
+  border-right: 3px solid #1890ff;
+}
+
+.activity-profile .activity-icon {
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.activity-profile {
+  border-right: 3px solid #52c41a;
+}
+
+.activity-security .activity-icon {
+  background-color: #f9f0ff;
+  color: #722ed1;
+}
+
+.activity-security {
+  border-right: 3px solid #722ed1;
+}
+
+.activity-settings .activity-icon {
+  background-color: #e6fffb;
+  color: #13c2c2;
+}
+
+.activity-settings {
+  border-right: 3px solid #13c2c2;
+}
+
+/* Styles for positive and negative points text in activities */
+.positive-points {
+  color: #52c41a;
+  font-weight: 500;
+}
+
+.negative-points {
+  color: #f5222d;
+  font-weight: 500;
+}
+
+/* Additional styles for points amount display */
+.points-amount {
+  display: inline-block;
+  background-color: #f6ffed;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: 0 4px;
+  font-weight: 600;
+}
+
+.points-amount.positive {
+  background-color: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.points-amount.negative {
+  background-color: #fff2f0;
+  color: #f5222d;
+  border: 1px solid #ffccc7;
+}
+
+/* Enhanced activity visibility */
+.activity-points-add .activity-description {
+  color: #52c41a; 
+}
+
+.activity-points-deduct .activity-description {
+  color: #f5222d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .activity-item {
+    padding: 12px;
+  }
+  
+  .activity-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+  
+  .activity-title {
+    font-size: 14px;
+  }
+  
+  .activity-description {
+    font-size: 12px;
+  }
+}

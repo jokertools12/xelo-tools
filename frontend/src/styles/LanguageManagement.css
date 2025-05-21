@@ -1,0 +1,110 @@
+.language-management {
+  padding: 20px;
+}
+
+.language-tabs {
+  margin-top: 20px;
+}
+
+.translations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.filters-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.translations-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* RTL Support */
+[dir="rtl"] .translations-actions button {
+  margin-left: 0;
+  margin-right: 16px;
+}
+
+.ant-table-wrapper {
+  margin-top: 16px;
+}
+
+.ant-form-item-tooltip {
+  margin-left: 4px;
+}
+
+/* Language flags in table */
+.language-flag-cell {
+  display: flex;
+  align-items: center;
+}
+
+.language-flag-cell img {
+  width: 24px;
+  height: 18px;
+  margin-right: 8px;
+  object-fit: contain;
+}
+
+[dir="rtl"] .language-flag-cell img {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* Category tags */
+.ant-tag {
+  margin-right: 0;
+  text-transform: capitalize;
+  min-width: 70px;
+  text-align: center;
+}
+
+/* Category filters */
+.ant-dropdown-menu-item .ant-tag {
+  margin-right: 8px;
+}
+
+[dir="rtl"] .ant-dropdown-menu-item .ant-tag {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* Search box */
+.ant-input-search {
+  max-width: 300px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .translations-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .translations-actions {
+    margin-bottom: 16px;
+    width: 100%;
+  }
+  
+  .filters-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .ant-input-search {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .ant-select {
+    width: 100% !important;
+  }
+}

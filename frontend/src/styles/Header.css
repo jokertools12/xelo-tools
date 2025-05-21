@@ -1,0 +1,554 @@
+/* Header Styles - Completely Rebuilt with Modern Effects */
+
+/* Main header with fixed positioning for always-visible scrolling */
+.app-header {
+  background: #ffffff;
+  padding: 0 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; /* Changed to sticky to stay visible when scrolling */
+  top: 0;
+  z-index: 1000; /* Higher z-index to ensure it stays on top */
+  width: 100%;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+/* Sticky header wrapper styling */
+.sticky-header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* Scrolled header style with optimized effect (removed blur filter) */
+.app-header.scrolled {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  height: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  /* Removed backdrop-filter for better performance */
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Header Left Section */
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Page Title with gradient and animation */
+.app-header .page-title {
+  position: relative;
+  margin: 0 !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  background-image: linear-gradient(135deg, #2563eb, #1e40af);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 0;
+}
+
+.app-header .page-title::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 30%;
+  height: 2px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform-origin: left;
+  transition: all 0.2s ease;
+}
+
+.app-header .page-title:hover::after {
+  width: 70%;
+}
+
+.trigger-button {
+  margin-right: 16px;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+}
+
+/* Header Right Section */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right .ant-space {
+  gap: 10px !important;
+}
+
+/* Header Icon Container */
+.header-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Simplified Header Icon Button (removed neumorphic style) */
+.header-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #595959;
+  border-radius: 12px !important;
+  border: none;
+  background: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  margin: 0 5px;
+}
+
+.header-icon .anticon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.header-icon:hover {
+  color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+.header-icon:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+
+/* Enhanced User Profile Dropdown */
+.user-profile-dropdown {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  margin-left: 8px;
+  background: #f9f9f9;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.user-profile-dropdown:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+.user-profile-dropdown:active {
+  transform: translateY(0);
+}
+
+.user-avatar-container {
+  position: relative;
+  margin-right: 12px;
+}
+
+/* Optimized user avatar with simpler effects */
+.user-avatar {
+  background: #2563eb;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.1);
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-profile-dropdown:hover .user-avatar {
+  transform: scale(1.02);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.15);
+}
+
+.user-avatar .anticon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Enhanced User Status without animation */
+.user-status {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  bottom: -1px;
+  right: -1px;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.user-status.online {
+  background: #059669;
+  border-color: #fff;
+  /* Removed animation for better performance */
+}
+
+/* Removed animation */
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  margin-left: 12px;
+}
+
+.username {
+  color: #262626;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+}
+
+.user-role {
+  color: #8c8c8c;
+  font-size: 12px;
+  white-space: nowrap;
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+.user-profile-dropdown:hover .username {
+  color: #2563eb;
+}
+
+/* Enhanced Dropdown Styling with proper z-index */
+.header-dropdown {
+  padding: 12px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  /* Animation removed to fix dropdown functionality */
+  z-index: 1020 !important;
+}
+
+
+/* @keyframes simple-dropdown-fade removed to fix dropdown functionality */
+
+.user-dropdown-menu {
+  width: 250px !important;
+}
+
+
+/* Enhanced user menu items */
+.user-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+  background: #f8f8f8;
+  position: relative;
+}
+
+.user-menu-item:hover {
+  background: #ffffff;
+  transform: translateX(2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.user-menu-item .anticon:first-child {
+  margin-right: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.user-menu-item span:nth-child(2) {
+  flex: 1;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.user-menu-item:hover span {
+  transform: translateX(2px);
+}
+
+.menu-arrow {
+  position: absolute;
+  right: 8px;
+  font-size: 12px;
+  opacity: 0;
+  transition: all 0.2s ease;
+  transform: translateX(-3px);
+}
+
+.user-menu-item:hover .menu-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.logout-item {
+  color: #ff4d4f;
+  background: #fff5f5;
+}
+
+.logout-item:hover {
+  background: #fff0f0;
+  box-shadow: 0 2px 4px rgba(255,77,79,0.1);
+}
+
+/* Fix for antd icon alignment */
+.anticon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+  .menu-button {
+    display: block;
+  }
+  
+  .app-header {
+    padding: 0 16px;
+  }
+  
+  .app-name {
+    display: none;
+  }
+  
+  .header-divider {
+    display: none;
+  }
+  
+  .user-info {
+    display: none;
+  }
+  
+  .header-dropdown {
+    width: 280px !important;
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 16px;
+  }
+  
+  .app-header .page-title {
+    font-size: 18px !important;
+  }
+  
+  .user-info {
+    display: none;
+  }
+  
+  
+  .app-header {
+    height: 56px;
+    padding: 0 12px;
+  }
+  
+  .app-header.scrolled {
+    height: 52px;
+  }
+  
+  .app-header .page-title {
+    font-size: 16px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }
+  
+  /* Improve header icons for touch */
+  .header-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 3px;
+  }
+  
+  .header-right .ant-space {
+    gap: 5px !important;
+  }
+  
+  /* Optimize user dropdown */
+  .user-profile-dropdown {
+    padding: 4px 8px;
+  }
+  
+  .username {
+    max-width: 80px;
+    font-size: 13px;
+  }
+  
+  .user-role {
+    font-size: 11px;
+  }
+  
+  
+  /* Fix avatar sizing */
+  .user-avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    height: 56px;
+    padding: 0 8px;
+  }
+  
+  .app-header.scrolled {
+    height: 50px;
+  }
+  
+  .app-header .page-title {
+    font-size: 16px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+  
+  /* Improve header icons for touch */
+  .header-icon {
+    width: 38px;
+    height: 38px;
+    margin: 0 2px;
+  }
+  
+  .header-right .ant-space {
+    gap: 3px !important;
+  }
+  
+  /* Optimize user dropdown */
+  .user-profile-dropdown {
+    padding: 4px 6px;
+  }
+  
+  .username {
+    max-width: 75px;
+    font-size: 13px;
+  }
+  
+  .user-role {
+    font-size: 10px;
+  }
+  
+  /* Fix avatar sizing */
+  .user-avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .app-header {
+    padding: 0 12px;
+    height: 56px;
+  }
+  
+  .app-logo {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  
+  .app-header .page-title {
+    font-size: 15px !important;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .header-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  
+  .user-avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .header-right .ant-space {
+    gap: 4px !important;
+  }
+  
+  .user-profile-dropdown {
+    padding: 4px 6px;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  .app-header .page-title {
+    max-width: 120px;
+  }
+  
+  .user-info {
+    display: none; /* Hide username text on very small screens */
+  }
+  
+  .user-profile-dropdown {
+    margin-left: 5px;
+  }
+  
+  
+  /* Improve touch targets for very small screens */
+  .header-icon {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  .app-header {
+    height: 50px;
+    padding: 0 6px;
+  }
+  
+  .app-header.scrolled {
+    height: 46px;
+  }
+  
+  .app-header .page-title {
+    max-width: 120px;
+    font-size: 14px !important;
+  }
+  
+  .header-icon {
+    width: 36px;
+    height: 36px;
+    margin: 0 1px;
+  }
+  
+}

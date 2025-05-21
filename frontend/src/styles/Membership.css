@@ -1,0 +1,875 @@
+.membership-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+/* Enhanced wallet balance card styling */
+.wallet-balance-card {
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #dee2e6;
+}
+
+.wallet-balance-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.wallet-icon {
+  font-size: 24px;
+  margin-left: 8px;
+}
+
+.wallet-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.wallet-balance-amount {
+  font-size: 22px;
+  font-weight: 700;
+  color: #212529;
+  margin: 12px 0;
+  text-align: center;
+}
+
+.wallet-balance-status {
+  margin: 12px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.wallet-sufficient,
+.wallet-insufficient {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.wallet-sufficient {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.wallet-insufficient {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #dc3545;
+}
+
+.status-icon {
+  font-size: 18px;
+  margin-left: 8px;
+}
+
+.wallet-balance-after {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #ced4da;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.after-label {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.after-amount {
+  font-weight: 600;
+  color: #495057;
+}
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Current Membership Styles */
+.current-membership {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.current-membership h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.current-membership.premium {
+  background-color: #f0f7ff;
+  border: 1px solid #4a90e2;
+}
+
+.current-membership.free {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+}
+
+/* Plans Styles */
+.plans-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.plan-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Recommended Plan Styling */
+.plan-card.recommended {
+  border: 2px solid #4caf50;
+  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.25);
+}
+
+.recommended-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-bottom-left-radius: 10px;
+  z-index: 2;
+}
+
+/* Discount Badge Styling */
+.discount-badge {
+  position: absolute;
+  top: 20px;
+  left: -12px;
+  background: linear-gradient(90deg, #e53935, #ff7043);
+  color: white;
+  padding: 6px 14px 6px 18px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+  clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%, 8% 50%);
+}
+
+.discount-badge::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: #b71c1c; /* Darker shade for the fold */
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.discount-value {
+  display: block;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.plan-name {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+/* Plan Description Styling */
+.plan-description {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan-price {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #4a90e2;
+}
+
+.plan-duration {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 15px;
+}
+
+/* Points Section Styling - Enhanced */
+.plan-points {
+  margin: 20px auto;
+  background: linear-gradient(to right, rgba(255, 248, 230, 0.8), rgba(255, 236, 179, 0.8));
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px dashed #ffc107;
+  max-width: 90%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-points:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+  border: 1px solid #ffc107;
+}
+
+.plan-points::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.plan-points:hover::after {
+  transform: translateX(100%);
+}
+
+.points-icon-circle {
+  font-size: 1.8rem;
+  background: linear-gradient(145deg, #ffd54f, #ffb300);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.plan-points:hover .points-icon-circle {
+  transform: rotate(15deg) scale(1.05);
+}
+
+.points-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.points-value {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff9800;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.points-text {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Features Container */
+.features-container {
+  flex-grow: 1;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+.plan-features {
+  text-align: right;
+  padding-right: 20px;
+  margin: 0;
+}
+
+.plan-features li {
+  margin-bottom: 10px;
+  position: relative;
+  list-style-type: none;
+}
+
+.plan-features li:before {
+  content: "✓";
+  color: #4a90e2;
+  position: absolute;
+  right: -20px;
+}
+
+/* Button Container - For Uniform Buttons */
+.button-container {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.subscribe-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-btn:hover {
+  background-color: #3a7bd5;
+}
+
+.subscribe-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Payment Form Styles */
+.payment-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #4a90e2;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.payment-summary {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.payment-instructions {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff8e1;
+  border-right: 4px solid #ffc107;
+}
+
+.payment-instructions h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2rem;
+  color: #e65100;
+}
+
+.payment-method-title {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed #ffc107;
+  padding-bottom: 8px;
+}
+
+/* Payment Benefits List Styling */
+.payment-benefits {
+  list-style: none;
+  padding: 0;
+}
+
+.payment-benefits li {
+  margin-bottom: 12px;
+  padding-right: 30px;
+  position: relative;
+}
+
+.benefit-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background-color: #4a90e2;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  top: 0px;
+}
+
+.points-benefit-item {
+  color: #ff9800;
+  font-weight: 500;
+}
+
+/* Wallet Balance Summary Styling */
+.wallet-balance-summary {
+  margin-top: 20px;
+}
+
+.wallet-balance-card {
+  background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #2196f3;
+  text-align: center;
+}
+
+.balance-header {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #0d47a1;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+  position: relative;
+  display: inline-block;
+}
+
+.balance-header::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: #2196f3;
+  margin: 5px auto 0;
+}
+
+.balance-amount {
+  font-size: 1.8rem;
+  color: #0d47a1;
+  margin: 15px 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.balance-after {
+  font-size: 1rem;
+  color: #1565c0;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 8px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.wallet-balance-card::before {
+  content: '💰';
+  position: absolute;
+  font-size: 50px;
+  color: rgba(33, 150, 243, 0.1);
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* Payment Steps Styling */
+.payment-steps {
+  margin-bottom: 15px;
+}
+
+.payment-steps p {
+  margin-bottom: 12px;
+  position: relative;
+  padding-right: 30px;
+}
+
+.step-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background-color: #ffc107;
+  color: #333;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  top: 0px;
+}
+
+/* Account Number Styling */
+.account-number {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e65100;
+  background-color: #fff3e0;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 10px 0 15px 0;
+  direction: ltr;
+  text-align: center;
+  border: 1px dashed #ff9800;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  right: 30px;
+  min-width: 180px;
+}
+
+/* Points Instruction Styling */
+.points-instruction {
+  margin: 15px 0;
+  background-color: #e8f5e9;
+  border-radius: 8px;
+  padding: 12px 15px;
+  border-right: 3px solid #4caf50;
+}
+
+.points-instruction p {
+  margin: 0;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+/* Note Box Styling */
+.note-box {
+  margin-top: 15px;
+  padding: 12px 15px;
+  background-color: #fff8e1;
+  border-radius: 5px;
+  border-right: 3px solid #ffc107;
+}
+
+.payment-instructions ul {
+  padding-right: 20px;
+}
+
+.payment-instructions li {
+  margin-bottom: 8px;
+}
+
+.payment-form {
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.screenshot-preview {
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.screenshot-preview img {
+  max-width: 100%;
+  max-height: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Wallet balance info */
+.wallet-balance-info {
+  background-color: #e8f4fe;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 15px;
+  text-align: center;
+  border: 1px solid #c5e1ff;
+}
+
+.insufficient-funds-warning {
+  color: #d32f2f;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* Points summary in payment */
+.points-summary {
+  color: #ff9800;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #fffaf0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 15px 0;
+  border-left: 4px solid #ff9800;
+}
+
+.points-summary:before {
+  content: "🏆";
+  font-size: 1.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Confirmation Styles */
+.confirmation-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-icon {
+  font-size: 4rem;
+  color: #4caf50;
+  margin-bottom: 20px;
+  display: inline-block;
+  border: 4px solid #4caf50;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+}
+
+.confirmation-icon.instant {
+  background-color: #e8f5e9;
+}
+
+.confirmation-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.confirmation-container p {
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.points-confirmation {
+  background-color: #fff8e6;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 25px 0;
+  color: #ff9800;
+  font-weight: 600;
+  border: 1px dashed #ff9800;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(255, 152, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.points-confirmation:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 152, 0, 0.15);
+}
+
+.points-confirmation.active {
+  background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+  color: #4caf50;
+  border-color: #4caf50;
+  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.1);
+}
+
+.points-confirmation.active:hover {
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.15);
+}
+
+/* Badge for points on plan cards */
+.plan-card .points-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #ff9800;
+  color: white;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.plan-card .points-badge:before {
+  content: "🏆";
+  font-size: 0.9rem;
+}
+
+.confirmation-container button {
+  margin: 10px;
+  padding: 12px 25px;
+}
+
+/* Loading Styles */
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-left-color: #4a90e2;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .plans-container {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-container,
+  .confirmation-container {
+    padding: 20px;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .plan-description {
+    height: auto;
+    min-height: 40px;
+  }
+}
+
+/* Additional Utility Classes */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3a7bd5;
+}
+
+.btn-secondary {
+  background-color: #f8f9fa;
+  color: #4a90e2;
+  border: 1px solid #4a90e2;
+}
+
+.btn-secondary:hover {
+  background-color: #e9ecef;
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.no-plans {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: #666;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}

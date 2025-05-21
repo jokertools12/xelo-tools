@@ -1,0 +1,150 @@
+/* GlobalLoader.css - Unified loading indicators for the entire application */
+
+/* Base loader styles */
+.global-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  cursor: wait; /* Add wait cursor to indicate loading state */
+}
+
+/* Add wait cursor to body when global loader is active */
+body:has(.global-loader) {
+  cursor: wait;
+}
+
+/* Container type - for use inside content areas */
+.global-loader-container {
+  min-height: 200px;
+  width: 100%;
+  padding: 40px 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  pointer-events: none; /* Allow clicks to pass through to interactive elements */
+}
+
+/* Fullscreen type - covers the entire viewport */
+.global-loader-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9999;
+  pointer-events: all; /* Capture all clicks in fullscreen mode */
+}
+
+/* Inline type - for inline loading indicators */
+.global-loader-inline {
+  padding: 10px;
+  min-height: auto;
+  cursor: wait; /* Keep wait cursor for inline loaders */
+}
+
+/* Overlay type - semi-transparent overlay for existing content */
+.global-loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+  backdrop-filter: blur(2px);
+  pointer-events: none; /* Allow clicks through to interactive elements */
+}
+
+/* Make sure buttons and interactive elements remain clickable during overlay loading */
+.global-loader-overlay ~ button,
+.global-loader-overlay ~ .ant-btn,
+.global-loader-overlay ~ .ant-table-wrapper,
+.global-loader-overlay ~ .ant-input,
+.global-loader-overlay ~ .ant-select,
+.global-loader-overlay ~ .ant-tabs {
+  position: relative;
+  z-index: 101; /* Position above the overlay */
+  pointer-events: auto; /* Ensure these elements receive clicks */
+}
+
+/* Customize Ant Design Spin component */
+.global-loader .ant-spin {
+  color: #1890ff;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  direction: ltr !important; /* Force LTR direction on the spinner itself */
+}
+
+.global-loader .ant-spin-text {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #1890ff;
+  font-weight: 500;
+}
+
+/* Customize Ant Design Spin dot animation */
+.global-loader .ant-spin-dot {
+  font-size: 24px;
+  position: relative !important;
+  display: inline-block !important;
+  margin: 0 auto !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.global-loader .ant-spin-dot-item {
+  background-color: #1890ff;
+  opacity: 0.8;
+}
+
+/* RTL Support - improved to ensure proper spinner alignment */
+html[dir="rtl"] .global-loader .ant-spin-text {
+  direction: rtl;
+}
+
+/* Keep spinner animations consistent regardless of text direction */
+.global-loader .ant-spin-nested-loading,
+.global-loader .ant-spin-container,
+.global-loader .ant-spin-spinning {
+  direction: ltr !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+/* Additional fix for RTL specific alignment issues */
+html[dir="rtl"] .global-loader .ant-spin {
+  margin: 0 auto !important;
+  transform: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .global-loader-container {
+    min-height: 150px;
+    padding: 20px 10px;
+  }
+  
+  .global-loader .ant-spin-text {
+    font-size: 12px;
+  }
+}
+
+/* Animation for the loader */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.global-loader {
+  animation: fadeIn 0.3s ease;
+}

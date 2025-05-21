@@ -1,0 +1,334 @@
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  overflow-x: hidden;
+}
+
+/* RTL - Arabic */
+html[dir="rtl"] body {
+  font-family: 'Tajawal', 'Cairo', Arial, sans-serif;
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="rtl"] *:not(.sidebar):not(.ant-layout):not(.site-layout):not(.ant-menu):not(.ant-menu-item) {
+  direction: inherit;
+  text-align: right;
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea {
+  text-align: right;
+}
+
+html[dir="rtl"] .float-right {
+  float: left !important;
+}
+
+html[dir="rtl"] .float-left {
+  float: right !important;
+}
+
+html[dir="rtl"] .margin-right {
+  margin-left: 16px !important;
+  margin-right: 0 !important;
+}
+
+html[dir="rtl"] .margin-left {
+  margin-right: 16px !important;
+  margin-left: 0 !important;
+}
+
+html[dir="rtl"] .padding-right {
+  padding-left: 16px !important;
+  padding-right: 0 !important;
+}
+
+html[dir="rtl"] .padding-left {
+  padding-right: 16px !important;
+  padding-left: 0 !important;
+}
+
+html[dir="rtl"] ::-webkit-scrollbar {
+  width: 6px;
+  display: block;
+}
+
+/* LTR - English */
+html[dir="ltr"] body {
+  font-family: Arial, sans-serif;
+  text-align: left;
+  direction: ltr;
+}
+
+html[dir="ltr"] * {
+  direction: ltr;
+  text-align: left;
+  letter-spacing: normal;
+}
+
+html[dir="ltr"] input,
+html[dir="ltr"] textarea {
+  text-align: left;
+}
+
+html[dir="ltr"] .float-right {
+  float: right !important;
+}
+
+html[dir="ltr"] .float-left {
+  float: left !important;
+}
+
+html[dir="ltr"] .margin-right {
+  margin-right: 16px !important;
+  margin-left: 0 !important;
+}
+
+html[dir="ltr"] .margin-left {
+  margin-left: 16px !important;
+  margin-right: 0 !important;
+}
+
+html[dir="ltr"] .padding-right {
+  padding-right: 16px !important;
+  padding-left: 0 !important;
+}
+
+html[dir="ltr"] .padding-left {
+  padding-left: 16px !important;
+  padding-right: 0 !important;
+}
+
+html[dir="ltr"] ::-webkit-scrollbar {
+  width: 6px;
+  display: block;
+}
+
+/* Common scrollbar styles */
+::-webkit-scrollbar {
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Fix for the gap between sidebar and content */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.ant-layout {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.ant-layout-content {
+  overflow-x: hidden;
+}
+
+.ant-layout.ant-layout-has-sider {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ant Design RTL Overrides */
+html[dir="rtl"] .ant-card,
+html[dir="rtl"] .ant-card-body,
+html[dir="rtl"] .ant-card-head,
+html[dir="rtl"] .ant-card-head-title,
+html[dir="rtl"] .ant-statistic,
+html[dir="rtl"] .ant-statistic-title,
+html[dir="rtl"] .ant-statistic-content,
+html[dir="rtl"] .ant-list,
+html[dir="rtl"] .ant-list-item,
+html[dir="rtl"] .ant-table,
+html[dir="rtl"] .ant-table-cell,
+html[dir="rtl"] .ant-form-item-label,
+html[dir="rtl"] .ant-select-selection-item,
+html[dir="rtl"] .ant-modal-title,
+html[dir="rtl"] .ant-drawer-title,
+html[dir="rtl"] .ant-menu-title-content {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Component positioning for RTL */
+html[dir="rtl"] .ant-layout-sider {
+  float: right !important;
+  right: 0 !important;
+  left: auto !important;
+}
+
+html[dir="rtl"] .ant-layout-header {
+  padding: 0 24px 0 0 !important;
+}
+
+html[dir="rtl"] .ant-layout-content {
+  margin-right: 200px !important;
+  margin-left: 0 !important;
+  transition: margin-right 0.2s !important;
+}
+
+html[dir="rtl"] .ant-layout.ant-layout-has-sider > .ant-layout {
+  margin-right: 200px !important;
+  margin-left: 0 !important;
+  transition: margin-right 0.2s !important;
+}
+
+html[dir="rtl"] .ant-menu-submenu-title {
+  padding-right: 24px !important;
+  padding-left: 16px !important;
+}
+
+html[dir="rtl"] .ant-menu-item {
+  padding-right: 24px !important;
+  padding-left: 16px !important;
+}
+
+html[dir="rtl"] .ant-menu-inline .ant-menu-item::after {
+  right: 0 !important;
+  left: auto !important;
+}
+
+html[dir="rtl"] .ant-menu-submenu-arrow {
+  right: auto !important;
+  left: 16px !important;
+}
+
+html[dir="rtl"] .ant-card-extra {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+html[dir="rtl"] .ant-table-pagination {
+  float: left !important;
+}
+
+html[dir="rtl"] .ant-pagination-prev {
+  margin-right: 0 !important;
+  margin-left: 8px !important;
+}
+
+html[dir="rtl"] .ant-pagination-next {
+  margin-right: 8px !important;
+  margin-left: 0 !important;
+}
+
+html[dir="rtl"] .ant-btn > .anticon + span,
+html[dir="rtl"] .ant-btn > span + .anticon {
+  margin-right: 8px !important;
+  margin-left: 0 !important;
+}
+
+/* Ant Design LTR Overrides */
+html[dir="ltr"] .ant-card,
+html[dir="ltr"] .ant-card-body,
+html[dir="ltr"] .ant-card-head,
+html[dir="ltr"] .ant-card-head-title,
+html[dir="ltr"] .ant-statistic,
+html[dir="ltr"] .ant-statistic-title,
+html[dir="ltr"] .ant-statistic-content,
+html[dir="ltr"] .ant-list,
+html[dir="ltr"] .ant-list-item,
+html[dir="ltr"] .ant-table,
+html[dir="ltr"] .ant-table-cell,
+html[dir="ltr"] .ant-form-item-label,
+html[dir="ltr"] .ant-select-selection-item,
+html[dir="ltr"] .ant-modal-title,
+html[dir="ltr"] .ant-drawer-title,
+html[dir="ltr"] .ant-menu-title-content {
+  text-align: left;
+  direction: ltr;
+}
+
+/* Component positioning for LTR */
+html[dir="ltr"] .ant-layout-sider {
+  float: left !important;
+  left: 0 !important;
+  right: auto !important;
+}
+
+html[dir="ltr"] .ant-layout-header {
+  padding: 0 0 0 24px !important;
+}
+
+html[dir="ltr"] .ant-layout-content {
+  margin-left: 200px !important;
+  margin-right: 0 !important;
+  transition: margin-left 0.2s !important;
+}
+
+html[dir="ltr"] .ant-layout.ant-layout-has-sider > .ant-layout {
+  margin-left: 200px !important;
+  margin-right: 0 !important;
+  transition: margin-left 0.2s !important;
+}
+
+html[dir="ltr"] .ant-menu-submenu-title {
+  padding-left: 24px !important;
+  padding-right: 16px !important;
+}
+
+html[dir="ltr"] .ant-menu-item {
+  padding-left: 24px !important;
+  padding-right: 16px !important;
+}
+
+html[dir="ltr"] .ant-menu-inline .ant-menu-item::after {
+  left: 0 !important;
+  right: auto !important;
+}
+
+html[dir="ltr"] .ant-menu-submenu-arrow {
+  left: auto !important;
+  right: 16px !important;
+}
+
+html[dir="ltr"] .ant-card-extra {
+  margin-right: 0 !important;
+  margin-left: auto !important;
+}
+
+html[dir="ltr"] .ant-table-pagination {
+  float: right !important;
+}
+
+html[dir="ltr"] .ant-pagination-prev {
+  margin-left: 0 !important;
+  margin-right: 8px !important;
+}
+
+html[dir="ltr"] .ant-pagination-next {
+  margin-left: 8px !important;
+  margin-right: 0 !important;
+}
+
+html[dir="ltr"] .ant-btn > .anticon + span,
+html[dir="ltr"] .ant-btn > span + .anticon {
+  margin-left: 8px !important;
+  margin-right: 0 !important;
+}

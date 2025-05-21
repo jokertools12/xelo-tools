@@ -1,0 +1,335 @@
+.language-switcher {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.language-label {
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.language-select {
+  min-width: 100px;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+}
+
+.language-flag {
+  width: 20px;
+  height: 15px;
+  margin-right: 8px;
+  object-fit: contain;
+}
+
+.language-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.language-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.language-button:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.language-button.active {
+  background-color: #1890ff;
+  color: white;
+  border-color: #1890ff;
+}
+
+.language-code {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+/* Enhanced icon switcher styling with modern design */
+.language-icon-switcher {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(240, 242, 245, 0.25));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08),
+              0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  backdrop-filter: blur(4px);
+  margin: 0 4px;
+  height: 36px;
+}
+
+.language-icon-switcher:hover {
+  background: linear-gradient(145deg, rgba(240, 242, 245, 0.25), rgba(255, 255, 255, 0.2));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12),
+              0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transform: translateY(-2px);
+}
+
+.language-icon-switcher:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08),
+              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+.language-current {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 4px;
+}
+
+.language-globe-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(140deg, #4361ee, #3a0ca3);
+  color: white;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3),
+              0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.language-icon-switcher:hover .language-globe-container {
+  transform: rotate(25deg) scale(1.05);
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.5),
+              0 0 0 2px rgba(59, 130, 246, 0.3) inset;
+}
+
+.language-globe {
+  font-size: 16px;
+  animation: floatPulse 3s infinite ease-in-out;
+  z-index: 1;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+}
+
+@keyframes floatPulse {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.12) translateY(-2px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.language-globe-container::after {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+  transform: rotate(45deg) translateX(-50%) translateY(-50%);
+  animation: shine 4s infinite;
+  pointer-events: none;
+}
+
+.language-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%) scale(0);
+  animation: ripple 2.5s infinite ease-out;
+  z-index: 0;
+}
+
+@keyframes ripple {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
+  70% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+}
+
+@keyframes shine {
+  0% { transform: rotate(45deg) translateX(-150%) translateY(-150%); }
+  50% { transform: rotate(45deg) translateX(150%) translateY(150%); }
+  100% { transform: rotate(45deg) translateX(-150%) translateY(-150%); }
+}
+
+.language-code-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: linear-gradient(to bottom, #fafbfc, #f3f4f6);
+  color: #424750;
+  border-radius: 6px;
+  padding: 3px 8px;
+  min-width: 24px;
+  height: 100%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06),
+              0 0 0 1px rgba(0, 0, 0, 0.02) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.language-icon-switcher:hover .language-code-container {
+  background: linear-gradient(to bottom, #f0f2f5, #e6e8eb);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1),
+              0 0 0 1px rgba(0, 0, 0, 0.03) inset;
+}
+
+.language-code {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: #1d4ed8;
+}
+
+.language-name {
+  font-size: 12px;
+  opacity: 0.9;
+  letter-spacing: 0.2px;
+  color: #64748b;
+}
+
+/* Switch language animation with improved flow */
+.language-switch-animation {
+  animation: switchLanguage 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes switchLanguage {
+  0% { transform: translateY(-12px); opacity: 0; }
+  60% { transform: translateY(2px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Enhanced RTL support */
+[dir="rtl"] .language-label {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+[dir="rtl"] .language-flag {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* Eliminate need for specific directional margins by using gap */
+[dir="rtl"] .language-current,
+[dir="ltr"] .language-current {
+  gap: 8px;
+}
+
+/* Better RTL support with proper alignment */
+[dir="rtl"] .language-code-container {
+  align-items: flex-end;
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="ltr"] .language-code-container {
+  align-items: flex-start;
+  text-align: left;
+  direction: ltr;
+}
+
+/* Ensure proper direction for language name in both modes */
+[dir="rtl"] .language-name {
+  font-family: 'Tajawal', 'Cairo', sans-serif;
+}
+
+[dir="ltr"] .language-name {
+  font-family: Arial, sans-serif;
+}
+
+.language-code {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  color: #1d4ed8;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.language-name {
+  font-size: 11px;
+  opacity: 0.9;
+  letter-spacing: 0.2px;
+  color: #64748b;
+  line-height: 1;
+}
+
+/* Responsive adjustments for smaller screens and for header placement */
+@media (max-width: 480px) {
+  .language-icon-switcher {
+    padding: 4px 6px;
+    height: 32px;
+  }
+  
+  .language-globe-container {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .language-code-container {
+    padding: 2px 6px;
+  }
+  
+  .language-code {
+    font-size: 12px;
+  }
+  
+  .language-name {
+    font-size: 10px;
+  }
+}
+
+/* Prevent overflow in header */
+.header-right .language-icon-switcher {
+  max-width: none;
+  width: auto;
+}
+
+/* Improve hover animation */
+.language-icon-switcher:hover .language-ripple {
+  animation-duration: 2s;
+}
+
+/* Text direction classes */
+.rtl-text {
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr-text {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Additional header integration */
+.app-header .language-icon-switcher {
+  margin: 0 8px;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* Fix double font definition */
+.language-code {
+  margin-bottom: 2px;
+}

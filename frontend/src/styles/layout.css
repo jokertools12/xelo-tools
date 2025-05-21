@@ -1,0 +1,418 @@
+/* layout.css - Shared layout and component styling for consistent UI */
+
+/* ===== Container Styling ===== */
+.content-wrapper {
+  padding: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-container {
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+/* ===== Card Styling ===== */
+.card-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-header {
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.card-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #f0f0f0;
+  background-color: #fafafa;
+}
+
+/* Card variations */
+.card-container.primary {
+  border-top: 3px solid #1890ff;
+}
+
+.card-container.success {
+  border-top: 3px solid #52c41a;
+}
+
+.card-container.warning {
+  border-top: 3px solid #faad14;
+}
+
+.card-container.danger {
+  border-top: 3px solid #ff4d4f;
+}
+
+/* ===== Section Headers ===== */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0;
+}
+
+.section-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ===== Table Container ===== */
+.table-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Table fixes for RTL and styling consistency */
+.ant-table-wrapper {
+  direction: rtl;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #fafafa !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+}
+
+/* RTL support for tables */
+[dir="rtl"] .ant-table-column-title {
+  text-align: right;
+}
+
+[dir="rtl"] .ant-table-cell {
+  text-align: right;
+}
+
+/* Table pagination RTL fix */
+[dir="rtl"] .ant-pagination {
+  direction: ltr;
+}
+
+/* ===== Status/Info Container ===== */
+.status-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #f0f7ff;
+  border-radius: 8px;
+  border: 1px solid rgba(24, 144, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.status-info {
+  font-size: 14px;
+  color: #333;
+}
+
+.status-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Status variations */
+.status-container.success {
+  background-color: #f6ffed;
+  border-color: rgba(82, 196, 26, 0.2);
+}
+
+.status-container.warning {
+  background-color: #fffbe6;
+  border-color: rgba(250, 173, 20, 0.2);
+}
+
+.status-container.danger {
+  background-color: #fff2f0;
+  border-color: rgba(255, 77, 79, 0.2);
+}
+
+/* ===== Stats Cards ===== */
+.stats-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stats-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stats-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.stats-title {
+  margin: 0;
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-bottom: 8px;
+}
+
+.stats-value {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+}
+
+/* Stats card variations */
+.stats-card.primary .stats-icon,
+.stats-card.primary .stats-value {
+  color: #1890ff;
+}
+
+.stats-card.success .stats-icon,
+.stats-card.success .stats-value {
+  color: #52c41a;
+}
+
+.stats-card.warning .stats-icon,
+.stats-card.warning .stats-value {
+  color: #faad14;
+}
+
+.stats-card.danger .stats-icon,
+.stats-card.danger .stats-value {
+  color: #ff4d4f;
+}
+
+/* ===== Filter Container ===== */
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-container {
+  flex: 1;
+  max-width: 400px;
+}
+
+/* ===== Progress Container ===== */
+.progress-container {
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.progress-count {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+/* ===== Alert Styling ===== */
+.alert-container {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ===== Modal Styling ===== */
+.ant-modal-content {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ant-modal-header {
+  padding: 16px 24px;
+  background-color: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ant-modal-title {
+  font-weight: 600;
+  color: #262626;
+}
+
+.ant-modal-body {
+  padding: 24px;
+}
+
+.ant-modal-footer {
+  padding: 10px 16px;
+  border-top: 1px solid #f0f0f0;
+  background-color: #fafafa;
+}
+
+/* ===== Drawer Styling ===== */
+.ant-drawer-content-wrapper {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.ant-drawer-header {
+  padding: 16px 24px;
+  background-color: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ant-drawer-title {
+  font-weight: 600;
+  color: #262626;
+}
+
+.ant-drawer-body {
+  padding: 24px;
+}
+
+/* ===== Tag Styling ===== */
+.ant-tag {
+  border-radius: 4px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ===== Divider with Text ===== */
+.divider-with-text {
+  color: #8c8c8c;
+  font-weight: 500;
+  margin: 24px 0;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 16px;
+  }
+  
+  .card-header,
+  .card-body,
+  .card-footer,
+  .section-header,
+  .filter-container,
+  .status-container,
+  .progress-container {
+    padding: 12px;
+  }
+  
+  .section-header,
+  .filter-container,
+  .status-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .section-actions,
+  .status-actions,
+  .filter-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .search-container {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .stats-cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-cards-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-card {
+    width: 100%;
+  }
+}
+
+/* Fix for overlapping tab issues */
+.ant-tabs-content {
+  height: auto !important;
+  position: relative !important;
+}
+
+.ant-tabs-tabpane {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+}

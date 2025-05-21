@@ -1,0 +1,238 @@
+/* tabs.css - Shared tab styling for all components with improved RTL support */
+
+/* Container for tabs to ensure consistent styling across components */
+.tabs-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+/* Tabs Navigation Bar */
+.tabs-container .ant-tabs-nav {
+  margin-bottom: 16px;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix the border bottom for tab nav */
+.tabs-container .ant-tabs-nav::before {
+  border-bottom: 1px solid #f0f0f0;
+  content: '';
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* Individual Tab Styling */
+.tabs-container .ant-tabs-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.65);
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  margin: 0 2px 0 0; /* Default LTR spacing */
+  cursor: pointer;
+}
+
+/* RTL support for tab spacing */
+[dir="rtl"] .tabs-container .ant-tabs-tab {
+  margin: 0 0 0 2px;
+}
+
+/* Tab hover state */
+.tabs-container .ant-tabs-tab:hover {
+  color: #1890ff;
+  background: rgba(24, 144, 255, 0.05);
+}
+
+/* Active tab styling */
+.tabs-container .ant-tabs-tab-active {
+  color: #1890ff;
+  font-weight: 600;
+  background: #fff !important;
+  border-color: #f0f0f0 !important;
+  border-bottom-color: #fff !important;
+}
+
+/* Active tab text color */
+.tabs-container .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #1890ff;
+}
+
+/* Tab Content Container */
+.tabs-container .ant-tabs-content {
+  background: #fff;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s;
+}
+
+/* Tab Content Item */
+.tabs-container .ant-tabs-tabpane {
+  padding: 16px;
+}
+
+/* Ink bar (active indicator) */
+.tabs-container .ant-tabs-ink-bar {
+  background-color: #1890ff;
+  height: 3px;
+  bottom: 0;
+}
+
+/* Tab Icons */
+.tabs-container .tab-icon {
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LTR - icons are before text */
+.tab-icon {
+  margin-right: 8px;
+}
+
+/* RTL - icons are after text */
+[dir="rtl"] .tab-icon {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* Responsive tab adjustments */
+@media (max-width: 768px) {
+  .tabs-container .ant-tabs-tab {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  .tabs-container .ant-tabs-tabpane {
+    padding: 12px;
+  }
+  
+  .tab-icon {
+    font-size: 14px;
+  }
+}
+
+/* Extra small screen adjustments */
+@media (max-width: 480px) {
+  .tabs-container .ant-tabs-tab {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  
+  .tabs-container .ant-tabs-tabpane {
+    padding: 10px;
+  }
+}
+
+/* Card-style tabs */
+.tabs-container.card-tabs .ant-tabs-nav {
+  margin-bottom: 0;
+}
+
+.tabs-container.card-tabs .ant-tabs-tab {
+  background: #f5f5f5;
+  border-radius: 8px 8px 0 0;
+  margin-right: 4px;
+  border: 1px solid #f0f0f0;
+  border-bottom: none;
+}
+
+.tabs-container.card-tabs .ant-tabs-content {
+  border: 1px solid #f0f0f0;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Fix for tab nesting issues */
+.tabs-container .ant-tabs-nav .ant-tabs-nav-wrap {
+  position: relative;
+  display: flex;
+  flex: auto;
+  align-self: stretch;
+}
+
+.tabs-container .ant-tabs-nav .ant-tabs-nav-list {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  transition: transform 0.3s;
+}
+
+/* Input field styling - prevent icon misalignment */
+.tabs-container .ant-input-affix-wrapper,
+.auto-post-group .ant-input-affix-wrapper,
+.auto-post-container .ant-input-affix-wrapper {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+}
+
+/* Fix for prefix icons in input fields - ensure they stay centered */
+.tabs-container .ant-input-affix-wrapper .ant-input-prefix,
+.auto-post-group .ant-input-affix-wrapper .ant-input-prefix,
+.auto-post-container .ant-input-affix-wrapper .ant-input-prefix {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[dir="rtl"] .tabs-container .ant-input-affix-wrapper .ant-input-prefix,
+[dir="rtl"] .auto-post-group .ant-input-affix-wrapper .ant-input-prefix,
+[dir="rtl"] .auto-post-container .ant-input-affix-wrapper .ant-input-prefix {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+/* Fix for suffix icons in input fields - ensure they stay centered */
+.tabs-container .ant-input-affix-wrapper .ant-input-suffix,
+.auto-post-group .ant-input-affix-wrapper .ant-input-suffix,
+.auto-post-container .ant-input-affix-wrapper .ant-input-suffix {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+[dir="rtl"] .tabs-container .ant-input-affix-wrapper .ant-input-suffix,
+[dir="rtl"] .auto-post-group .ant-input-affix-wrapper .ant-input-suffix,
+[dir="rtl"] .auto-post-container .ant-input-affix-wrapper .ant-input-suffix {
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+/* Fix hover and focus states to prevent icon misalignment */
+.tabs-container .ant-input-affix-wrapper:hover,
+.tabs-container .ant-input-affix-wrapper:focus,
+.tabs-container .ant-input-affix-wrapper-focused,
+.auto-post-group .ant-input-affix-wrapper:hover,
+.auto-post-group .ant-input-affix-wrapper:focus,
+.auto-post-group .ant-input-affix-wrapper-focused,
+.auto-post-container .ant-input-affix-wrapper:hover,
+.auto-post-container .ant-input-affix-wrapper:focus,
+.auto-post-container .ant-input-affix-wrapper-focused {
+  border-color: #40a9ff;
+}
+
+.tabs-container .ant-input-affix-wrapper:hover .ant-input-prefix,
+.tabs-container .ant-input-affix-wrapper:focus .ant-input-prefix,
+.tabs-container .ant-input-affix-wrapper-focused .ant-input-prefix,
+.auto-post-group .ant-input-affix-wrapper:hover .ant-input-prefix,
+.auto-post-group .ant-input-affix-wrapper:focus .ant-input-prefix,
+.auto-post-group .ant-input-affix-wrapper-focused .ant-input-prefix,
+.auto-post-container .ant-input-affix-wrapper:hover .ant-input-prefix,
+.auto-post-container .ant-input-affix-wrapper:focus .ant-input-prefix,
+.auto-post-container .ant-input-affix-wrapper-focused .ant-input-prefix {
+  color: #1890ff;
+}

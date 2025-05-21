@@ -1,0 +1,116 @@
+/* ShimmerEffect.css - Enhanced for better table display */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Base shimmer animation */
+.shimmer-effect, 
+.ant-skeleton-input, 
+.ant-skeleton-avatar, 
+.ant-skeleton-title, 
+.ant-skeleton-paragraph > li {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, #f0f0f0 8%, #f8f8f8 18%, #f0f0f0 33%);
+  background-size: 1000px 100%;
+  cursor: wait; /* Add wait cursor to indicate loading state */
+}
+
+/* Table shimmer container */
+.shimmer-table {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Ensure interactive elements remain clickable during shimmer loading */
+.shimmer-table button,
+.shimmer-table .ant-btn,
+.shimmer-table .ant-input,
+.shimmer-table .ant-select,
+.shimmer-table .ant-tabs {
+  position: relative;
+  z-index: 2; /* Position above the shimmer effect */
+  pointer-events: auto; /* Ensure these elements receive clicks */
+}
+
+/* Ant Design table overrides for shimmer */
+.shimmer-ant-table {
+  background: #fff;
+  cursor: wait; /* Add wait cursor to table shimmer */
+}
+
+.shimmer-ant-table .ant-table {
+  background: transparent;
+}
+
+.shimmer-ant-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  padding: 12px 8px;
+  font-weight: 600;
+  color: #595959;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: right;
+}
+
+.shimmer-ant-table .ant-table-tbody > tr > td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.shimmer-ant-table .ant-table-tbody > tr:hover > td {
+  background: #fafafa;
+}
+
+.shimmer-row {
+  transition: background 0.3s;
+}
+
+.shimmer-row:hover {
+  background: #fafafa;
+}
+
+/* Override skeleton sizing */
+.shimmer-ant-table .ant-skeleton-input {
+  min-height: 24px;
+  border-radius: 4px;
+}
+
+/* Text shimmer styles */
+.shimmer-text {
+  width: 100%;
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* RTL support for all shimmer elements */
+.shimmer-table,
+.shimmer-text,
+.shimmer-ant-table .ant-table-thead > tr > th,
+.shimmer-ant-table .ant-table-tbody > tr > td {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shimmer-ant-table .ant-table-thead > tr > th,
+  .shimmer-ant-table .ant-table-tbody > tr > td {
+    padding: 8px 4px;
+  }
+  
+  .shimmer-ant-table .ant-skeleton-input {
+    min-height: 20px;
+  }
+}

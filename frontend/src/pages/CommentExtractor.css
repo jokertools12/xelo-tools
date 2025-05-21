@@ -1,0 +1,323 @@
+/* CommentExtractor.css - Essential component styling only */
+
+/* Tabs Styling */
+.tabs-container .ant-tabs-tab {
+  font-size: 16px;
+  padding: 12px 20px;
+  margin-left: 4px;
+  transition: all 0.3s ease;
+  border-radius: 8px 8px 0 0;
+}
+
+.tabs-container .ant-tabs-tab:hover {
+  color: #1890ff;
+}
+
+.tabs-container .ant-tabs-tab-active {
+  background: #fff;
+  font-weight: 600;
+}
+
+.tabs-container .ant-tabs-tab .tab-icon {
+  margin-left: 8px;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.section-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Extract Button */
+.extract-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.progress-count {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+/* Alert Styling */
+.error-alert, 
+.info-alert {
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+/* Stats Cards */
+.stats-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stats-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.stats-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.stats-title {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.stats-value {
+  margin: 8px 0 0;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Filter Container */
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.search-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-input {
+  height: 40px;
+  border-radius: 6px;
+}
+
+.filter-export {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.export-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Table Container */
+.table-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.selection-info .selected-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.success-icon {
+  color: #52c41a;
+}
+
+.primary-icon {
+  color: #1890ff;
+}
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.deselect-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.deselect-button-disabled {
+  color: #d9d9d9;
+  border-color: #d9d9d9;
+}
+
+.data-table {
+  padding: 0 16px 16px;
+}
+
+.data-table .ant-table-thead > tr > th {
+  font-weight: 600;
+  background-color: #f8f9fa;
+}
+
+.rtl-pagination {
+  direction: ltr;
+}
+
+/* User cell styling */
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+/* Comment Styling */
+.comment-content-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.comment-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.comment-message {
+  flex: 1;
+  word-break: break-word;
+}
+
+/* Form Container Layout Only (Using antd default form styling) */
+.form-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.form-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Removed custom form-item styling to use antd defaults */
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .stats-cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .section-actions {
+    width: 100%;
+  }
+  
+  .filter-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .filter-export {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .table-actions {
+    width: 100%;
+  }
+}

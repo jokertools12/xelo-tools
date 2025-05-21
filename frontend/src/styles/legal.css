@@ -1,0 +1,235 @@
+/* Legal Pages Styling (Terms of Service and Privacy Policy) */
+
+.legal-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  text-align: right;
+  direction: rtl;
+}
+
+.legal-background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.legal-gradient-1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  opacity: 0.8;
+}
+
+.legal-gradient-2 {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  top: -10%;
+  right: -10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79, 99, 255, 0.1) 0%, rgba(79, 99, 255, 0.05) 50%, transparent 70%);
+}
+
+.legal-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234f63ff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.2;
+}
+
+.legal-container {
+  max-width: 1000px;
+  width: 90%;
+  margin: 40px auto 80px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1;
+}
+
+.legal-header {
+  margin-bottom: 40px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 24px;
+}
+
+.legal-breadcrumb {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.legal-title {
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  color: #333;
+  margin-bottom: 12px !important;
+}
+
+.legal-updated {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.legal-content {
+  padding: 10px 0;
+}
+
+.legal-section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  color: #333;
+  margin-bottom: 16px !important;
+  border-right: 3px solid #4f63ff;
+  padding-right: 12px;
+}
+
+.rtl-text {
+  text-align: right;
+  direction: rtl;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.legal-list {
+  padding-right: 20px;
+  margin-bottom: 20px;
+}
+
+.legal-list li {
+  margin-bottom: 10px;
+  position: relative;
+  list-style-type: none;
+  padding-right: 24px;
+}
+
+.legal-list li:before {
+  content: "•";
+  position: absolute;
+  right: 0;
+  color: #4f63ff;
+  font-weight: bold;
+}
+
+.contact-info {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  border-right: 3px solid #4f63ff;
+  margin-top: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed rgba(79, 99, 255, 0.15);
+}
+
+.contact-method:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.contact-icon {
+  font-size: 18px;
+  color: #4f63ff;
+  margin-left: 12px;
+}
+
+.fa-envelope, .fa-map-marker-alt {
+  font-size: 18px;
+  color: #4f63ff;
+  margin-left: 12px;
+}
+
+.legal-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eaeaea;
+}
+
+.legal-back-btn {
+  display: flex;
+  align-items: center;
+}
+
+.legal-other-doc {
+  color: #4f63ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .legal-container {
+    padding: 24px;
+    width: 95%;
+    margin: 20px auto 40px;
+  }
+  
+  .legal-title {
+    font-size: 28px !important;
+  }
+  
+  .section-title {
+    font-size: 20px !important;
+  }
+  
+  .legal-navigation {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .contact-info {
+    padding: 16px;
+  }
+  
+  .contact-method {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .legal-container {
+    padding: 16px;
+  }
+  
+  .legal-title {
+    font-size: 24px !important;
+  }
+  
+  .section-title {
+    font-size: 18px !important;
+  }
+}

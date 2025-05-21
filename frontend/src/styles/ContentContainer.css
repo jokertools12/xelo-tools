@@ -1,0 +1,360 @@
+/* ContentContainer.css - Unified content styles with decorative background pattern */
+
+.content-container {
+  padding: 28px;
+  background: #f0f5ff; /* خلفية زرقاء فاتحة كقاعدة */
+  min-height: 100vh;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding-top: 90px; /* Add padding for fixed header */
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 2; /* Increased z-index to prevent content appearing behind sidebar */
+}
+
+/* Position for overlay loaders */
+.content-container .global-loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Allow clicks to pass through to buttons and interactive elements */
+  z-index: 100; /* Above content but below modals */
+}
+
+/* Gradient overlay background for all pages */
+.content-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: 
+    linear-gradient(120deg, rgba(24, 144, 255, 0.03) 0%, transparent 70%),
+    linear-gradient(240deg, rgba(82, 196, 26, 0.03) 0%, transparent 70%);
+  z-index: -1; /* جعلها خلف جميع العناصر */
+}
+
+/* Decorative wave background pattern for all pages */
+.content-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='rgba(24, 144, 255, 0.05)' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,208C672,213,768,203,864,181.3C960,160,1056,128,1152,128C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* جعلها خلف جميع العناصر */
+  pointer-events: none; /* منع تعارضها مع تفاعل المستخدم */
+}
+
+/* Default width constraint for inner content */
+.content-container > * {
+  width: 100%;
+}
+
+/* Card styles with glass morphism and hover effects */
+.content-container .ant-card {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s ease;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.content-container .ant-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+/* Loading container styling - ensures perfect centering regardless of direction */
+.loading-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+}
+
+/* Center the spinner regardless of RTL/LTR */
+.loading-container .ant-spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  z-index: 10;
+  text-align: center !important;
+  direction: ltr !important; /* Force LTR direction on the spinner itself */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Ensure the spinner dot elements are properly centered */
+.loading-container .ant-spin-dot {
+  position: relative !important;
+  display: inline-block !important;
+  margin: 0 auto !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+/* Keep spinner animations consistent regardless of text direction */
+.loading-container .ant-spin-nested-loading,
+.loading-container .ant-spin-container,
+.loading-container .ant-spin-spinning {
+  direction: ltr !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+/* Additional fix for RTL specific alignment issues */
+.rtl-container .ant-spin,
+[dir="rtl"] .ant-spin {
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Loading state styling */
+.content-loading {
+  position: relative;
+}
+
+/* Styles for content replacement mode (when preserveContent is false) */
+.content-loading:not(:has(*:not(.global-loader))) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  width: 100%;
+}
+
+/* Add appropriate cursor for loading state */
+.content-loading {
+  cursor: wait;
+}
+
+/* Ant Design Spin component styling */
+.content-container .ant-spin {
+  cursor: wait;
+}
+
+.content-container .ant-spin-dot-item {
+  background-color: #1890ff;
+}
+
+.content-container .ant-spin-text {
+  color: #1890ff;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Ensure interactive elements remain clickable during loading */
+.content-loading button,
+.content-loading .ant-btn,
+.content-loading .ant-table-wrapper,
+.content-loading .ant-input,
+.content-loading .ant-select,
+.content-loading .ant-tabs,
+.content-loading .ant-checkbox,
+.content-loading .ant-form-item,
+.content-loading .ant-dropdown-trigger,
+.content-loading .ant-radio,
+.content-loading .ant-collapse {
+  position: relative;
+  z-index: 101; /* Position above the overlay */
+  pointer-events: auto !important; /* Ensure these elements receive clicks */
+  cursor: pointer; /* Reset cursor for interactive elements */
+}
+
+/* Specifically handle table components during loading */
+.content-container .ant-table-wrapper .ant-spin-nested-loading {
+  position: relative;
+}
+
+.content-container .ant-table-wrapper .ant-spin-container.ant-spin-blur {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.content-container .ant-table-wrapper .ant-spin-container.ant-spin-blur button,
+.content-container .ant-table-wrapper .ant-spin-container.ant-spin-blur .ant-btn,
+.content-container .ant-table-wrapper .ant-spin-container.ant-spin-blur .ant-checkbox,
+.content-container .ant-table-wrapper .ant-spin-container.ant-spin-blur .ant-dropdown-trigger {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+/* Make ShimmerEffect cursor style consistent */
+.content-container .shimmer-effect-container {
+  cursor: wait;
+}
+
+.loading-indicator {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.loading-text {
+  font-size: 16px;
+  color: #1890ff;
+  margin-top: 16px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content-container {
+    padding: 10px 8px;
+    padding-top: 72px; /* Adjust for smaller fixed header on mobile */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Improve content spacing on mobile */
+  .content-container > * {
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Ensure forms fit properly on mobile */
+  .content-container form {
+    padding: 10px;
+    width: 100%;
+  }
+  
+  /* Better card styling for mobile */
+  .content-container .ant-card {
+    border-radius: 10px;
+    margin-bottom: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .content-container .ant-card-body {
+    padding: 12px 10px;
+  }
+  
+  /* Optimize tables for mobile */
+  .content-container .ant-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    width: 100%;
+    margin: 0;
+  }
+  
+  /* Remove any extra margins from container elements */
+  .content-container .ant-row {
+    margin-left: -4px !important;
+    margin-right: -4px !important;
+  }
+  
+  .content-container .ant-col {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+  
+  /* Improve loading state on mobile */
+  .content-loading {
+    height: 30vh;
+  }
+  
+  .loading-indicator {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 576px) {
+  .content-container {
+    padding: 8px 6px;
+    padding-top: 64px; /* Adjust for smaller fixed header on small mobile */
+  }
+  
+  /* Further optimize for very small screens */
+  .content-container .ant-form-item {
+    margin-bottom: 12px;
+  }
+  
+  .content-container .ant-input,
+  .content-container .ant-select,
+  .content-container .ant-picker {
+    font-size: 16px !important; /* Prevent iOS zoom on input */
+  }
+  
+  /* Ensure all cards use full width */
+  .content-container [class*="ant-col-"] {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  
+  /* Remove decorative waves that take space on small screens */
+  .content-container::after {
+    height: 200px;
+  }
+  
+  /* Reduce unnecessary spacing */
+  .content-container .ant-card-head {
+    padding: 0 12px;
+    min-height: 40px;
+  }
+  
+  .content-container .ant-card-head-title {
+    padding: 12px 0;
+  }
+}
+
+/* Ensure that all content uses the full available width on phones */
+@media (max-width: 480px) {
+  .content-container {
+    padding: 6px 4px;
+    padding-top: 60px;
+  }
+  
+  .content-container::before,
+  .content-container::after {
+    display: none; /* Remove decorative elements on very small screens */
+  }
+  
+  /* Make cards and tables more compact */
+  .content-container .ant-card-body {
+    padding: 10px 8px;
+  }
+  
+  /* Ensure any fixed-width containers are reset */
+  .content-container .ant-table,
+  .content-container .ant-form,
+  .content-container .ant-card,
+  .content-container .page-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

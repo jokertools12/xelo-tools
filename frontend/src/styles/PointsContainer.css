@@ -1,0 +1,335 @@
+/* PointsContainer.css - Enhanced styling for points container */
+
+/* Base container with enhanced styling */
+.points-container {
+  background: linear-gradient(135deg, rgba(67, 56, 202, 0.4), rgba(99, 102, 241, 0.6));
+  border-radius: 12px;
+  padding: 16px;
+  margin: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.5);
+  border-bottom: none; /* No border at bottom to blend with trigger */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+  transform: translateZ(0); /* Hardware acceleration */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  direction: inherit; /* Inherit direction from parent */
+  width: calc(100% - 16px); /* Account for horizontal margins */
+}
+
+/* Collapsed state styling - also sits on collapse trigger */
+.points-container-collapsed {
+  padding: 8px 4px 4px; /* Reduced horizontal padding for better fit */
+  margin: 0 8px 0; /* No bottom margin */
+  max-height: 65px !important; /* Slightly increased for better proportion */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: pulse 2s infinite alternate;
+  border-radius: 12px 12px 0 0; /* Flat bottom */
+  border-bottom: none; /* No border at bottom */
+}
+
+/* Special styling for the button in collapsed state */
+.points-container-collapsed .recharge-button {
+  width: 46px !important; /* Fixed width for proper centering */
+  height: 46px !important; /* Square shape */
+  border-radius: 12px !important; /* Rounded corners */
+  padding: 0 !important; /* Remove padding */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 4px auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Icon in collapsed state */
+.points-container-collapsed .recharge-button .anticon {
+  font-size: 20px !important; /* Larger icon */
+  margin: 0 !important; /* No margin */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: iconGlow 2s infinite alternate;
+}
+
+/* Hover effect */
+.points-container:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Glowing orb background effect */
+.points-container::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, rgba(99, 102, 241, 0.1) 70%, transparent 100%);
+  top: -20px;
+  right: -20px;
+  opacity: 0.8;
+  filter: blur(15px);
+  z-index: 0;
+  animation: orbMove 8s infinite alternate ease-in-out;
+}
+
+/* Gradient background animation */
+.points-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(79, 70, 229, 0) 0%,
+    rgba(99, 102, 241, 0.15) 50%,
+    rgba(79, 70, 229, 0) 100%);
+  opacity: 0.7;
+  z-index: 0;
+  animation: gradientMove 6s infinite alternate;
+}
+
+/* Container content positioning */
+.points-content {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon styling with pulse animation */
+.points-icon {
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(99, 102, 241, 0.6), rgba(67, 56, 202, 0.8));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  color: white;
+  animation: iconPulse 3s infinite alternate;
+}
+
+/* Title styling */
+.points-title {
+  color: white !important;
+  font-weight: 700 !important;
+  margin-bottom: 8px !important;
+  font-size: 16px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Description styling */
+.points-description {
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-bottom: 14px !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+}
+
+/* Recharge button with gradient and glow */
+.recharge-button {
+  background: linear-gradient(to right, #4338ca, #6366f1, #4338ca) !important;
+  background-size: 200% auto !important;
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
+  position: relative;
+  overflow: hidden;
+  width: 100% !important;
+  margin: 0 auto;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  animation: pulse-glow 2s infinite alternate;
+  z-index: 2;
+  height: 46px !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Button hover state */
+.recharge-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.2) inset !important;
+  background-position: right center !important;
+}
+
+/* Button shimmer effect */
+.recharge-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    transparent 100%
+  );
+  transform: rotate(30deg);
+  animation: buttonShimmer 2s infinite;
+  opacity: 0.3; /* Always slightly visible */
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.recharge-button:hover::after {
+  opacity: 1;
+}
+
+/* Button text styling */
+.recharge-button .button-text {
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    transform: scale(1.03);
+  }
+}
+
+/* New animation for the icon glow effect */
+@keyframes iconGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    transform: scale(1);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 20px rgba(99, 102, 241, 0.7);
+    transform: scale(1.15);
+  }
+}
+
+@keyframes iconPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5);
+  }
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  }
+  100% {
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  }
+}
+
+@keyframes buttonShimmer {
+  0% {
+    transform: rotate(30deg) translateX(-300%);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(30deg) translateX(300%);
+    opacity: 0.3;
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 0%;
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    background-position: 100% 100%;
+    opacity: 0.4;
+  }
+}
+
+@keyframes orbMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-10px, 10px);
+  }
+}
+
+/* Responsive styles for different screen sizes */
+/* Responsive styles for different screen sizes - maintain position on trigger */
+@media (max-height: 650px) {
+  .points-container {
+    padding: 8px 8px 4px !important; /* Less bottom padding */
+    margin: 0 6px 0 !important; /* No bottom margin */
+  }
+  
+  .points-icon {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 20px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .points-title {
+    font-size: 14px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .points-description {
+    font-size: 12px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .recharge-button {
+    height: 40px !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-height: 500px) {
+  .points-container {
+    max-height: 160px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .points-container {
+    padding: 8px 8px 3px !important; /* Less bottom padding */
+    margin: 0 4px 0 !important; /* No bottom margin */
+  }
+  
+  .points-container-collapsed {
+    padding: 6px 6px 2px !important; /* Less bottom padding */
+    margin: 0 2px 0 !important; /* No bottom margin */
+  }
+}
+

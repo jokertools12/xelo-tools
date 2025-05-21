@@ -1,0 +1,1781 @@
+/* تصميم احترافي لصفحة الملف الشخصي - Enhanced with modern effects and animations */
+.profile-container {
+  padding: 0;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* تنسيقات بطاقة الغلاف والصورة الشخصية - تصميم محسن مع تأثيرات حديثة */
+.cover-card {
+  margin-bottom: 30px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  position: relative;
+}
+
+.cover-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 6px;
+  border-radius: 0 16px 16px 0;
+  background: linear-gradient(to bottom, #1890ff, #096dd9);
+  opacity: 0.7;
+}
+
+.cover-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.cover-photo-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-photo {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  transition: all 0.8s ease;
+}
+
+.cover-photo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.01), rgba(0,0,0,0.2));
+  opacity: 0.7;
+  transition: opacity 0.5s ease;
+}
+
+.cover-photo:hover::before {
+  opacity: 0.4;
+}
+
+.cover-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-photo-wrapper:hover .cover-overlay {
+  opacity: 1;
+}
+
+.cover-upload-btn {
+  padding: 0 20px;
+  height: 40px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: linear-gradient(90deg, rgba(24, 144, 255, 0.9), rgba(9, 109, 217, 0.9));
+}
+
+.cover-upload-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* رأس الملف والصورة الشخصية مع تأثيرات متحركة محسنة */
+.profile-header-content {
+  position: relative;
+  height: 80px;
+  margin-top: -80px;
+  padding: 0 30px;
+  display: flex;
+  align-items: flex-end;
+  z-index: 5;
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.avatar-wrapper {
+  position: relative;
+  margin-bottom: -50px;
+  z-index: 10;
+}
+
+.avatar-container {
+  position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.profile-avatar {
+  border: 5px solid #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+}
+
+.profile-avatar::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(45deg);
+  animation: shimmer 3s infinite linear;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.08) rotate(5deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.profile-avatar:hover::before {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.avatar-edit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatar-container:hover .avatar-edit-overlay {
+  opacity: 1;
+}
+
+.avatar-edit-icon {
+  font-size: 24px;
+  color: #fff;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s ease 0.1s;
+}
+
+.avatar-container:hover .avatar-edit-icon {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.user-info-header {
+  margin-right: 30px;
+  padding-bottom: 10px;
+}
+
+.user-info-header h2 {
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.user-detailed-info {
+  padding: 24px 30px 0;
+  margin-top: 40px;
+  animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-subtitle {
+  margin: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+  color: #666;
+}
+
+.user-activity {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.profile-quick-stats {
+  padding: 16px 30px 24px;
+}
+
+
+
+/* استجابة الشاشات مع تحسينات للأجهزة المحمولة */
+@media (max-width: 768px) {
+  .cover-photo {
+    height: 180px; /* Reduce cover photo height */
+  }
+  
+  .profile-header-content {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    margin-top: -60px;
+  }
+  
+  .avatar-wrapper {
+    margin-bottom: -40px;
+  }
+  
+  .profile-avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .user-info-header {
+    margin-right: 0;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .user-info-header h2 {
+    font-size: 20px;
+    margin-top: 50px;
+    color: #333;
+    text-shadow: none;
+  }
+  
+  .user-detailed-info {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  
+  .user-subtitle {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .user-subtitle span {
+    font-size: 12px;
+  }
+  
+  .profile-form-container {
+    padding: 12px;
+  }
+  
+  .profile-form .ant-btn {
+    width: 100%;
+    margin-top: 8px;
+    height: auto;
+    padding: 8px 12px;
+  }
+  
+  .profile-container {
+    padding: 0 10px;
+    margin-top: 60px; /* Adjust for smaller fixed header on mobile */
+  }
+  
+  .profile-form {
+    padding: 12px;
+  }
+  
+  /* Optimize tabs for mobile */
+  .profile-tabs .ant-tabs-nav {
+    margin-bottom: 12px;
+  }
+  
+  .profile-tabs .ant-tabs-tab {
+    padding: 8px 12px;
+    margin: 0 4px;
+  }
+  
+  .tab-icon {
+    margin-left: 4px;
+    font-size: 14px;
+  }
+  
+  .tab-text {
+    font-size: 12px;
+  }
+  
+  /* Better stats cards for mobile */
+  .profile-quick-stats .ant-col {
+    margin-bottom: 10px;
+  }
+  
+  .ant-statistic-title {
+    font-size: 12px;
+  }
+  
+  .ant-statistic-content {
+    font-size: 16px !important;
+  }
+  
+  /* Better spacing for mobile */
+  .tab-content-container {
+    padding: 10px;
+  }
+  
+  /* Use antd default form elements */
+  
+  /* Fix password modal layout on mobile */
+  .modal-body {
+    padding: 15px !important;
+  }
+
+  .profile-container {
+    padding: 0 !important;
+    margin-top: 60px; /* Adjust for smaller fixed header on mobile */
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .cover-card,
+  .profile-card,
+  .profile-tabs-card,
+  .details-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 10px;
+  }
+  
+  .profile-form-container {
+    padding: 10px 8px;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .profile-form {
+    padding: 8px;
+    width: 100%;
+  }
+  
+  /* Make sure all tab content uses full width */
+  .tab-content-container {
+    padding: 8px 6px;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Adjust user details layout */
+  .user-detailed-info {
+    padding: 20px 10px 0;
+  }
+  
+  /* Fix stats card layout */
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 4px;
+    width: 100%;
+  }
+  
+  .stat-card {
+    padding: 16px 12px;
+    width: 100% !important;
+  }
+  
+  /* Better profile header for mobile */
+  .profile-header-content {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further optimization for very small screens */
+  .profile-avatar {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .user-activity {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .user-activity .ant-btn {
+    width: 100%;
+  }
+  
+  .profile-tabs .ant-tabs-nav-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+  }
+  
+  .profile-tabs .ant-tabs-nav-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  /* Optimize profile card layout */
+  .profile-card {
+    padding: 0 !important;
+  }
+  
+  .profile-detail-item {
+    padding: 8px 6px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-detail-icon {
+    margin-left: 10px;
+  }
+  
+  /* Fix bio section on small screens */
+  .bio-section {
+    padding: 12px 10px;
+  }
+  
+  /* Make tabs more compact */
+  .profile-tabs .ant-tabs-tab {
+    padding: 6px 8px;
+    margin: 0 2px;
+  }
+  
+  /* Fix transactions table on mobile */
+  .transactions-card {
+    margin-top: 16px;
+    width: 100% !important;
+  }
+  
+  /* Remove any excessive decorative elements */
+  .stat-card::before,
+  .stat-card::after,
+  .profile-card::before,
+  .profile-tabs-card::before {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .cover-photo {
+    height: 180px;
+  }
+  .profile-avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .profile-container {
+    padding: 0 12px;
+    margin-top: 64px; /* Adjust for smaller fixed header on small mobile */
+  }
+  .ant-form-item-label > label {
+    font-size: 14px;
+  }
+  .ant-input,
+  .ant-select-selector,
+  .ant-picker {
+    font-size: 14px !important;
+  }
+  .points-stats-card,
+  .points-history-card,
+  .account-summary-card {
+    padding: 12px;
+  }
+  .statistic-title {
+    font-size: 14px;
+  }
+  .ant-statistic-content-value {
+    font-size: 20px !important;
+  }
+  .profile-quick-stats .ant-col {
+    margin-bottom: 16px;
+  }
+  .tab-text {
+    display: none;
+  }
+  .profile-tabs .ant-tabs-tab {
+    padding: 12px;
+  }
+}
+
+/* بطاقات المعلومات الشخصية والتبويبات - محسنة */
+.details-card {
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.details-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+}
+
+/* تبويبات الملف مع تأثيرات حديثة محسنة */
+.profile-tabs-card {
+  padding: 24px;
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.profile-tabs-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+.profile-tabs {
+  font-size: 16px;
+}
+
+.profile-tabs .ant-tabs-nav {
+  margin-bottom: 24px;
+}
+
+.profile-tabs .ant-tabs-tab {
+  padding: 12px 16px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.profile-tabs .ant-tabs-tab:hover {
+  color: #1890ff;
+  background: linear-gradient(to right, rgba(24, 144, 255, 0.1), rgba(24, 144, 255, 0.05));
+  transform: translateY(-2px);
+}
+
+.profile-tabs .ant-tabs-tab-active {
+  background: linear-gradient(to right, rgba(24, 144, 255, 0.1), rgba(24, 144, 255, 0.05));
+  border-radius: 8px;
+  transform: translateY(-2px);
+  font-weight: bold;
+}
+
+.tab-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-text {
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tab-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.tab-icon {
+  margin-left: 8px;
+  transition: all 0.3s ease;
+}
+
+.profile-tabs .ant-tabs-tab:hover .tab-icon {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.tab-content-container {
+  padding: 8px 16px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* نموذج المعلومات الشخصية - محسن */
+.profile-form {
+  padding: 24px 0;
+  max-width: 800px;
+}
+
+.update-profile-btn {
+  margin-top: 24px;
+}
+
+/* قسم تغيير كلمة المرور - محسن */
+.password-change-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.security-info-card {
+  margin-bottom: 24px;
+  background: linear-gradient(to right, rgba(249, 240, 255, 0.8), rgba(255, 255, 255, 0.8));
+  border-right: 4px solid #722ed1;
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+}
+
+.security-info-card:hover {
+  box-shadow: 0 12px 30px rgba(114, 46, 209, 0.15);
+  transform: translateY(-5px);
+}
+
+.password-form {
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.password-form:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+.change-password-btn {
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* قسم النقاط والمعاملات مع تأثيرات ديناميكية محسنة */
+.points-section {
+  padding: 24px 0;
+}
+
+.points-stats-card,
+.points-history-card,
+.account-summary-card {
+  height: 100%;
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 28px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.points-stats-card {
+  background: linear-gradient(145deg, #f6ffed, #f0f9e8);
+  border-right: 4px solid #52c41a;
+}
+
+.points-history-card {
+  background: linear-gradient(145deg, #f9f0ff, #f0e6fa);
+  border-right: 4px solid #722ed1;
+}
+
+.account-summary-card {
+  background: linear-gradient(145deg, #fff7e6, #fff2d9);
+  border-right: 4px solid #fa8c16;
+}
+
+.points-stats-card::before,
+.points-history-card::before,
+.account-summary-card::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  opacity: 0.1;
+  z-index: 0;
+  transition: all 0.4s ease;
+}
+
+.points-stats-card::before {
+  background: radial-gradient(#52c41a, transparent);
+}
+
+.points-history-card::before {
+  background: radial-gradient(#722ed1, transparent);
+}
+
+.account-summary-card::before {
+  background: radial-gradient(#fa8c16, transparent);
+}
+
+.points-stats-card:hover::before,
+.points-history-card:hover::before,
+.account-summary-card:hover::before {
+  transform: scale(1.2);
+  opacity: 0.15;
+}
+
+.points-stats-card:hover,
+.points-history-card:hover,
+.account-summary-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Enhanced animated counter for stats values */
+.points-stats-card .ant-statistic-content-value,
+.points-history-card .ant-statistic-content-value,
+.account-summary-card .ant-statistic-content-value,
+.ant-statistic-content-value-int {
+  display: inline-block;
+  animation: countUp 2.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  background: linear-gradient(135deg, #262626, #595959);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+@keyframes countUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Add incremental loading effect for statistics */
+.ant-statistic {
+  position: relative;
+  overflow: hidden;
+}
+
+.ant-statistic::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, rgba(24, 144, 255, 0.2), rgba(24, 144, 255, 0.5));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ant-statistic:hover::before {
+  transform: scaleX(1);
+}
+
+.statistic-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  position: relative;
+  z-index: 1;
+}
+
+.premium-status {
+  margin-top: 16px;
+  animation: fadeIn 0.5s ease 0.3s forwards;
+  opacity: 0;
+}
+
+.recharge-button {
+  margin-top: 16px;
+  width: 100%;
+}
+
+/* بطاقة سجل المعاملات - محسنة */
+.transactions-card {
+  margin-top: 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.transactions-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+}
+
+.card-title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  background: linear-gradient(to right, rgba(240, 245, 255, 0.6), rgba(240, 245, 255, 0.3));
+}
+
+.transactions-table {
+  margin-top: 16px;
+}
+
+.transaction-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.transaction-tag:hover {
+  transform: translateX(3px);
+}
+
+.amount-positive {
+  color: #52c41a;
+  background: rgba(82, 196, 26, 0.1);
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+.amount-negative {
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.1);
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+/* تنسيقات التحميل - محسنة */
+.profile-loading {
+  padding: 24px;
+  margin: 0 auto;
+  margin-top: 80px; /* Add padding for fixed header */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+/* تأثيرات الحركة للعناصر - محسنة */
+.ant-card,
+.ant-btn,
+.ant-input,
+.ant-avatar,
+.ant-tag {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ant-btn:hover,
+.ant-btn:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.ant-input:focus,
+.ant-input:hover {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* تنسيقات النصوص */
+::placeholder {
+  color: #bfbfbf;
+  opacity: 1;
+}
+
+/* تنسيقات الصفحة الرئيسية مع خلفية محسنة وتأثيرات مطورة */
+.profile-page-layout {
+  background: rgb(0 0 0 / 0%);
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.profile-page-layout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(24, 144, 255, 0.08) 0%, transparent 70%),
+              linear-gradient(240deg, rgba(82, 196, 26, 0.08) 0%, transparent 70%);
+  z-index: -1;
+  animation: gradientShift 20s infinite alternate ease-in-out;
+  background-size: 200% 200%;
+}
+
+
+
+/* تنسيق عنوان الصفحة - محسن */
+.profile-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08),
+              0 1px 4px rgba(0, 0, 0, 0.03),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 10;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.profile-header:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.main-title {
+  color: #1a3353;
+  margin-bottom: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #1890ff, #52c41a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.title-icon {
+  color: #1890ff;
+  margin-left: 8px;
+  font-size: 1.5em;
+  animation: bounce 2s infinite ease;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.title-description {
+  font-size: 16px;
+  display: block;
+  color: #666;
+}
+
+/* بطاقة الملف الشخصي - محسنة */
+.profile-card,
+.profile-tabs-card {
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(250, 250, 250, 0.85));
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08),
+              0 2px 8px rgba(0, 0, 0, 0.05),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.profile-card {
+  height: 100%;
+}
+
+.profile-card::before,
+.profile-tabs-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 5px;
+  background: linear-gradient(to bottom, #1890ff, #096dd9);
+  opacity: 0.7;
+  border-radius: 0 16px 16px 0;
+}
+
+.profile-card:hover,
+.profile-tabs-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12),
+              0 8px 16px rgba(0, 0, 0, 0.06),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.profile-header-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(249, 249, 249, 0.8));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.profile-avatar-wrapper {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.profile-avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-avatar {
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatar-edit-button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1890ff;
+  color: white;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 0;
+  font-size: 16px;
+  z-index: 5;
+}
+
+.avatar-edit-button:hover {
+  transform: translateY(-2px) scale(1.1);
+  background: #40a9ff;
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.35);
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-name-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.profile-name {
+  margin: 0 !important;
+  color: #1a3353;
+  background: linear-gradient(90deg, #1a3353, #1890ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.admin-badge {
+  margin-right: 8px;
+}
+
+.admin-badge .ant-badge-status-text {
+  background-color: rgba(82, 196, 26, 0.1);
+  color: #52c41a;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(82, 196, 26, 0.15);
+  transition: all 0.3s ease;
+}
+
+.admin-badge:hover .ant-badge-status-text {
+  background-color: rgba(82, 196, 26, 0.2);
+  box-shadow: 0 3px 8px rgba(82, 196, 26, 0.2);
+  transform: translateY(-1px);
+}
+
+.profile-email {
+  color: #8c8c8c;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.profile-divider {
+  margin: 16px 0;
+  opacity: 0.5;
+}
+
+/* تفاصيل الملف الشخصي - محسنة */
+.profile-details {
+  padding: 0 16px 16px;
+}
+
+.profile-detail-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid transparent;
+}
+
+.profile-detail-item:hover {
+  background-color: rgba(24, 144, 255, 0.05);
+  transform: translateY(-2px) translateX(3px);
+  border: 1px solid rgba(24, 144, 255, 0.08);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+.profile-detail-icon {
+  font-size: 22px;
+  color: #1890ff;
+  margin-left: 16px;
+  margin-top: 2px;
+  transition: all 0.3s ease;
+}
+
+.profile-detail-item:hover .profile-detail-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.detail-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: #8c8c8c;
+}
+
+.detail-value {
+  color: #1a3353;
+  font-weight: 500;
+}
+
+.profile-extra-info {
+  padding: 0 16px 16px;
+}
+
+.bio-section {
+  background: linear-gradient(145deg, rgba(240, 245, 255, 0.6), rgba(245, 250, 255, 0.4));
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(24, 144, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+}
+
+.bio-section:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(24, 144, 255, 0.15);
+  transform: translateY(-3px);
+}
+
+.bio-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #1890ff;
+}
+
+.bio-text {
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* قسم الإحصائيات مع تأثيرات ديناميكية محسنة وتحركات مطورة */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(250, 250, 250, 0.8));
+  border-radius: 16px;
+  padding: 30px;
+  height: 100%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+  z-index: 0;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 6px;
+  border-radius: 0 16px 16px 0;
+}
+
+.stat-card.primary::after {
+  background: linear-gradient(to bottom, #1890ff, #096dd9);
+}
+
+.stat-card.success::after {
+  background: linear-gradient(to bottom, #52c41a, #389e0d);
+}
+
+.stat-card.warning::after {
+  background: linear-gradient(to bottom, #faad14, #d48806);
+}
+
+.stat-card.error::after {
+  background: linear-gradient(to bottom, #ff4d4f, #cf1322);
+}
+
+.stat-icon {
+  font-size: 42px;
+  margin-bottom: 20px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.stat-card.primary .stat-icon {
+  color: #1890ff;
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.stat-card.success .stat-icon {
+  color: #52c41a;
+  background: linear-gradient(135deg, #52c41a, #389e0d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.stat-card.warning .stat-icon {
+  color: #faad14;
+  background: linear-gradient(135deg, #faad14, #d48806);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.stat-card.error .stat-icon {
+  color: #ff4d4f;
+  background: linear-gradient(135deg, #ff4d4f, #cf1322);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.stat-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  animation: countUp 2.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  background: linear-gradient(135deg, #262626, #595959);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.stat-control {
+  margin-right: 8px;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.stat-control:hover {
+  opacity: 1;
+}
+
+.stat-control .ant-btn {
+  padding: 0 4px;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.stat-control .ant-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.stat-control .ant-btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* تنسيقات إضافية لأزرار Space.Compact */
+.stat-title .ant-space-compact {
+  margin-right: 8px;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.stat-title .ant-space-compact:hover {
+  opacity: 1;
+}
+
+.stat-title .ant-space-compact .ant-btn {
+  padding: 0 4px;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.stat-title .ant-space-compact .ant-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.stat-title .ant-space-compact .ant-btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ضمان تفاعل سلس مع الأزرار */
+.ant-space-compact .ant-btn:focus-visible {
+  outline: none;
+}
+
+/* تنسيق الجداول مع تأثيرات حديثة */
+.profile-table {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.profile-table:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.profile-table .ant-table-thead > tr > th {
+  background: linear-gradient(to right, rgba(240, 245, 255, 0.9), rgba(235, 245, 255, 0.8));
+  color: #262626;
+  font-weight: 600;
+  padding: 16px;
+  position: relative;
+}
+
+.profile-table .ant-table-thead > tr > th::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, rgba(24, 144, 255, 0.1), rgba(24, 144, 255, 0.3));
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.profile-table:hover .ant-table-thead > tr > th::after {
+  transform: scaleX(1);
+}
+
+.profile-table .ant-table-tbody > tr {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.profile-table .ant-table-tbody > tr:hover > td {
+  background: rgba(24, 144, 255, 0.05);
+  transform: translateX(5px);
+}
+
+.profile-table .ant-table-tbody > tr > td {
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+/* تنسيق الحالة في الجدول */
+.status-tag {
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.status-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.status-success {
+  background: linear-gradient(to right, rgba(82, 196, 26, 0.1), rgba(82, 196, 26, 0.15));
+  color: #389e0d;
+}
+
+.status-processing {
+  background: linear-gradient(to right, rgba(24, 144, 255, 0.1), rgba(24, 144, 255, 0.15));
+  color: #1890ff;
+}
+
+.status-warning {
+  background: linear-gradient(to right, rgba(250, 173, 20, 0.1), rgba(250, 173, 20, 0.15));
+  color: #faad14;
+}
+
+.status-error {
+  background: linear-gradient(to right, rgba(255, 77, 79, 0.1), rgba(255, 77, 79, 0.15));
+  color: #ff4d4f;
+}
+
+/* تحريك العناصر والرسوم البيانية */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  height: 60vh;
+}
+
+.loading-animation {
+  margin-bottom: 24px;
+  animation: pulse 1.5s ease infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.loading-text {
+  color: #1890ff;
+  font-weight: 500;
+  animation: fadeIn 1s ease;
+}
+
+/* تحسين استجابة الشرائح والرسوم البيانية */
+@media (max-width: 768px) {
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+  .profile-page-content {
+    padding: 16px 12px;
+  }
+  .profile-tabs .ant-tabs-nav-list {
+    display: flex;
+    width: 100%;
+  }
+  .profile-tabs .ant-tabs-tab {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+  }
+  .tab-text {
+    display: none;
+  }
+  .tab-icon {
+    margin: 0;
+    font-size: 20px;
+  }
+}
+
+/* الشرائح والرسوم البيانية */
+.chart-container {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(250, 250, 250, 0.8));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-top: 24px;
+  height: 320px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.chart-container:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+.chart-title {
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+  position: relative;
+  display: inline-block;
+}
+
+.chart-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 40%;
+  height: 2px;
+  background: linear-gradient(to right, #1890ff, rgba(24, 144, 255, 0.2));
+  transition: width 0.3s ease;
+}
+
+.chart-container:hover .chart-title::after {
+  width: 100%;
+}
+
+/* تحميل الصورة */
+.avatar-upload-button {
+  background: linear-gradient(145deg, rgba(24, 144, 255, 0.05), rgba(24, 144, 255, 0.15));
+  color: #1890ff;
+  border: 2px dashed #1890ff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.avatar-upload-button:hover {
+  background: linear-gradient(145deg, rgba(24, 144, 255, 0.1), rgba(24, 144, 255, 0.2));
+  border-color: #40a9ff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.avatar-upload-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #1890ff;
+  animation: pulse 2s infinite alternate;
+}
+
+.avatar-upload-text {
+  font-size: 14px;
+  color: #1890ff;
+  font-weight: 500;
+}
+
+/* تحسينات في اشعارات النظام */
+.ant-notification {
+  z-index: 1010 !important;
+}
+
+.ant-notification-notice {
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  animation: notificationFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes notificationFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Level indicator with enhanced visual design */
+.level-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(79, 70, 229, 0.2), rgba(99, 102, 241, 0.4));
+  margin-left: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.level-indicator:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.level-indicator-icon {
+  margin-right: 4px;
+  font-size: 16px;
+}
+
+.level-1 { background: linear-gradient(145deg, rgba(24, 144, 255, 0.2), rgba(24, 144, 255, 0.4)); }
+.level-2 { background: linear-gradient(145deg, rgba(0, 194, 211, 0.2), rgba(0, 194, 211, 0.4)); }
+.level-3 { background: linear-gradient(145deg, rgba(82, 196, 26, 0.2), rgba(82, 196, 26, 0.4)); }
+.level-4 { background: linear-gradient(145deg, rgba(250, 173, 20, 0.2), rgba(250, 173, 20, 0.4)); }
+.level-5 { background: linear-gradient(145deg, rgba(114, 46, 209, 0.2), rgba(114, 46, 209, 0.4)); }
+.level-6-10 { background: linear-gradient(145deg, rgba(232, 21, 134, 0.2), rgba(232, 21, 134, 0.4)); }
+.level-11-15 { background: linear-gradient(145deg, rgba(237, 64, 20, 0.2), rgba(237, 64, 20, 0.4)); }
+.level-16-20 { background: linear-gradient(145deg, rgba(45, 91, 227, 0.2), rgba(45, 91, 227, 0.4)); }
+.level-21-plus { background: linear-gradient(145deg, rgba(242, 187, 5, 0.2), rgba(242, 187, 5, 0.4)); }
+
+/* Enhanced level progress animation */
+@keyframes levelProgress {
+  0% {
+    width: 0;
+    opacity: 0.8;
+  }
+  100% {
+    width: var(--progress-width);
+    opacity: 1;
+  }
+}
+
+.level-progress-bar {
+  height: 10px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.level-progress-fill {
+  position: absolute;
+  height: 100%;
+  border-radius: 5px;
+  left: 0;
+  top: 0;
+  --progress-width: 50%;
+  width: var(--progress-width);
+  background: linear-gradient(to right, #52c41a, #87d068);
+  animation: levelProgress 1s ease-out forwards;
+}
