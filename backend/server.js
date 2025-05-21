@@ -1535,21 +1535,24 @@ app.use(errorHandler);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
+  // يمكن وضع هذا السطر لفحص حالة السيرفر في بيئة الإنتاج
+  app.get('/', (req, res) => {
+    res.send('Server is running in production!');
+  });
+
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
   );
 } else {
-  // في بيئة التطوير، عرض رسالة تشير إلى استخدام خادم التطوير
   app.get('/', (req, res) => {
-    res.send('Server is running!');
+    res.send('Server is running in development!');
   });
-  
-  // Add a catch-all route for frontend-side routing paths in development mode
-  // This ensures URLs like /reset-password/:token work correctly when accessed directly
+
   app.get('/reset-password/*', (req, res) => {
     res.redirect((process.env.FRONTEND_URL || 'http://localhost:3000') + req.originalUrl);
   });
 }
+
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
