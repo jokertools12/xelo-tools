@@ -1545,7 +1545,8 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
 // Improved server startup with port conflict handling
 const server = app.listen(PORT, () => {
