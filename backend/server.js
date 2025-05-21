@@ -12,7 +12,6 @@ const { checkAchievements, trackSectionVisit } = require('./middleware/achieveme
 const Achievement = require('./models/Achievement');
 const UserAchievement = require('./models/UserAchievement');
 const Language = require('./models/Language');
-const __dirname = path.resolve();
 
 // تضمين النماذج (إذا كان ذلك ضروريًا في تطبيقك)
 require('./models/User');
