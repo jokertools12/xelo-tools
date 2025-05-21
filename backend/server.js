@@ -1541,7 +1541,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // في بيئة التطوير، عرض رسالة تشير إلى استخدام خادم التطوير
   app.get('/', (req, res) => {
-    res.send('API قيد التشغيل. في بيئة التطوير، استخدم خادم React للواجهة الأمامية.');
+    res.send('Server is running!');
   });
   
   // Add a catch-all route for frontend-side routing paths in development mode
