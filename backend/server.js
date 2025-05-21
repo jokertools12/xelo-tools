@@ -1522,6 +1522,11 @@ cleanupOldInstantGroupPosts();
 cleanupOldPageMessageCampaigns();
 runAutoRenewalCheck(); // Run auto-renewal check on startup
 
+// Handle HEAD requests to root path
+app.head('/', (req, res) => {
+  res.status(200).end();
+});
+
 // Error handler
 app.use(notFound);
 app.use(errorHandler);
