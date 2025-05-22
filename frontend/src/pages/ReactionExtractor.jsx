@@ -445,90 +445,51 @@ const ReactionExtractor = () => {
     }
   };
 
-  // Function to fetch active access token from API with improved error handling
+  // Function to fetch active access token from API - simplified version
   const fetchActiveAccessToken = async () => {
     if (fetchingToken) return null;
     
     setFetchingToken(true);
     try {
-      const token = localStorage.getItem('token');
-      
-      // Use fetch instead of axios for better response handling
-      debugLog('Fetching access tokens...');
-      const response = await fetch('/api/users/access-tokens', {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        }
-      });
-      
-      debugLog('Access token response status:', response.status);
-      
-      // Get response text first to handle both JSON and non-JSON responses
-      let responseText = '';
-      try {
-        responseText = await response.text();
-        debugLog('Access token response length:', responseText.length);
-      } catch (textError) {
-        debugLog('Error reading access token response:', textError);
-        throw new Error('Failed to read token response');
-      }
-      
-      // Try to parse the response as JSON
-      let data;
-      try {
-        data = JSON.parse(responseText);
-        debugLog('Access token JSON parsed successfully');
-      } catch (parseError) {
-        debugLog('Error parsing access token response as JSON:', parseError);
-        debugLog('Response first 200 chars:', responseText.substring(0, 200));
-        
-        // If we have a stored token in state, use it as fallback
-        if (activeAccessToken) {
-          debugLog('Using existing active token as fallback');
-          return activeAccessToken;
-        }
-        
-        // Try to extract a token from localStorage as a last resort
-        const fallbackToken = localStorage.getItem('facebook_access_token');
-        if (fallbackToken) {
-          debugLog('Using fallback token from localStorage');
-          setActiveAccessToken(fallbackToken);
-          return fallbackToken;
-        }
-        
-        throw new Error('Invalid token response format');
-      }
-      
-      // Process the tokens from the valid JSON response
-      const tokens = Array.isArray(data) ? data : [];
-      debugLog('Available tokens:', tokens.length);
-      
-      const active = tokens.find(token => token.isActive);
-      
-      if (active) {
-        debugLog('Found active token');
-        setActiveAccessToken(active.accessToken);
-        // Store in localStorage as fallback for future use
-        localStorage.setItem('facebook_access_token', active.accessToken);
-        return active.accessToken;
-      } else if (tokens.length > 0) {
-        debugLog('No active token found, using most recent token');
-        setActiveAccessToken(tokens[0].accessToken);
-        // Store in localStorage as fallback for future use
-        localStorage.setItem('facebook_access_token', tokens[0].accessToken);
-        return tokens[0].accessToken;
-      }
-      
-      // If we have a stored token in state, use it as fallback
+      // Try to use existing token if available
       if (activeAccessToken) {
-        debugLog('No tokens found, using existing active token');
+        debugLog('Using existing active token');
         return activeAccessToken;
       }
       
-      // Try to extract a token from localStorage as a last resort
+      const token = localStorage.getItem('token');
+      
+      // Use axios for API call (matching CommentExtractor approach)
+      debugLog('Fetching access tokens...');
+      const response = await axios.get('/api/users/access-tokens', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      const tokens = response.data;
+      debugLog('Available tokens:', tokens?.length || 0);
+      
+      // Find active token or use any available token
+      if (Array.isArray(tokens) && tokens.length > 0) {
+        const active = tokens.find(token => token.isActive);
+        
+        if (active) {
+          debugLog('Found active token');
+          setActiveAccessToken(active.accessToken);
+          // Store as fallback
+          localStorage.setItem('facebook_access_token', active.accessToken);
+          return active.accessToken;
+        } else {
+          debugLog('No active token found, using first available token');
+          setActiveAccessToken(tokens[0].accessToken);
+          // Store as fallback
+          localStorage.setItem('facebook_access_token', tokens[0].accessToken);
+          return tokens[0].accessToken;
+        }
+      }
+      
+      // Try to get fallback token from localStorage
       const fallbackToken = localStorage.getItem('facebook_access_token');
       if (fallbackToken) {
         debugLog('Using fallback token from localStorage');
@@ -536,16 +497,18 @@ const ReactionExtractor = () => {
         return fallbackToken;
       }
       
+      debugLog('No tokens found anywhere');
       return null;
     } catch (error) {
       debugLog('Error fetching access token:', error);
       
-      // Use fallbacks if available
+      // Try to use existing token as fallback
       if (activeAccessToken) {
         debugLog('Error occurred, using existing active token');
         return activeAccessToken;
       }
       
+      // Try localStorage fallback
       const fallbackToken = localStorage.getItem('facebook_access_token');
       if (fallbackToken) {
         debugLog('Error occurred, using fallback token from localStorage');
@@ -596,13 +559,11 @@ const ReactionExtractor = () => {
 
 
       
-      // Try to construct a valid URL with fields parameter to ensure correct data
-      const endpoint = `/${postId}/reactions`;
-      const params = `fields=id,type,name,from{id,name},created_time&limit=100&summary=total_count&pretty=1`;
-      const initialUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(accessToken)}&${params}`;
+      // Use simpler URL construction like CommentExtractor
+      const url = `/api/facebook/proxy?endpoint=${encodeURIComponent(`/${postId}/reactions`)}&accessToken=${encodeURIComponent(accessToken)}&limit=100&summary=total_count&fields=id,type,name,from{id,name},created_time&pretty=1`;
       
-      debugLog('Initial request URL:', initialUrl);
-      const extractedReactions = await fetchReactions(initialUrl);
+      debugLog('Initial request URL:', url);
+      const extractedReactions = await fetchReactions(url);
       
       if (extractedReactions && extractedReactions.length > 0) {
         messageApi.success(t('extraction_success', { count: extractedReactions.length }));
