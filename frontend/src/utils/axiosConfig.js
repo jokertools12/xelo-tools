@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 // تحديد baseURL للتأكد من أنه يشير إلى الخادم الصحيح
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 // إعداد الطلبات
 axios.interceptors.request.use(
