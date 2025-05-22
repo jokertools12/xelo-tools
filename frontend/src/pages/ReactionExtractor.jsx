@@ -274,22 +274,28 @@ const ReactionExtractor = () => {
       try {
         responseText = await response.text();
         debugLog('Response text received, length:', responseText.length);
+      
+      // Check if the response looks like HTML instead of JSON
+      if (responseText.trim().toLowerCase().startsWith('<!doctype') || 
+          responseText.trim().toLowerCase().startsWith('<html')) {
+        debugLog('Received HTML response instead of JSON');
         
-        // Check if the response looks like HTML instead of JSON
-        if (responseText.trim().toLowerCase().startsWith('<!doctype') || 
-            responseText.trim().toLowerCase().startsWith('<html')) {
-          debugLog('Received HTML response instead of JSON');
-          
-          // Check if it's likely an authentication or login issue
-          if (responseText.includes('login') || 
-              responseText.includes('checkpoint') || 
-              responseText.includes('authenticate') ||
-              responseText.includes('access_token')) {
-            throw new Error(t('auth_error_html_response'));
-          } else {
-            throw new Error(t('html_response_try_token_refresh'));
-          }
+        // Check if it's likely an authentication or login issue
+        if (responseText.includes('login') || 
+            responseText.includes('checkpoint') || 
+            responseText.includes('authenticate') ||
+            responseText.includes('access_token')) {
+          throw new Error(t('auth_error_html_response'));
+        } else {
+          throw new Error(t('html_response_try_token_refresh'));
         }
+      }
+      
+      // Additional check for non-JSON responses that might not start with HTML tags
+      if (!responseText.trim().startsWith('{') && !responseText.trim().startsWith('[')) {
+        debugLog('Response does not appear to be JSON');
+        throw new Error(t('unexpected_response_update_token'));
+      }
       } catch (textError) {
         if (debugMode) console.error('Error getting response text:', textError);
         throw new Error(textError.message || t('response_text_read_failed'));
@@ -313,7 +319,9 @@ const ReactionExtractor = () => {
         }
         
         // Provide a more helpful error message when we receive HTML
-        if (responseText.includes('<!DOCTYPE html>') || responseText.includes('<html')) {
+        if (responseText.includes('<!DOCTYPE html>') || 
+            responseText.includes('<html') || 
+            responseText.includes('HTML')) {
           if (responseText.includes('login') || 
               responseText.includes('checkpoint') || 
               responseText.includes('authenticate')) {
@@ -321,6 +329,9 @@ const ReactionExtractor = () => {
           } else {
             throw new Error(t('html_received_instead_of_json_try_refresh'));
           }
+        } else if (!responseText.trim().startsWith('{') && !responseText.trim().startsWith('[')) {
+          // Additional check for non-JSON responses
+          throw new Error(t('unexpected_response_update_token'));
         } else {
           throw new Error(`${t('server_response_parse_failed')}: ${parseError.message}`);
         }
@@ -684,29 +695,27 @@ const ReactionExtractor = () => {
             });
           }
         });
-      } else if (error.message?.includes("html_response")) {
+      } else if (error.message?.includes("html_response") || error.message?.includes("unexpected_response")) {
         messageApi.error(t('server_returned_html'));
         
-        // Show more detailed help
-        Modal.info({
+        // Show more detailed help with a more prominent warning modal
+        Modal.confirm({
           title: t('html_response_detected'),
+          icon: <ExclamationCircleOutlined style={{ color: '#faad14' }} />,
           content: (
             <div>
               <p>{t('html_response_explanation')}</p>
+              <p><strong>{t('access_token_likely_expired')}</strong></p>
               <ul>
                 <li>{t('check_internet_connection')}</li>
                 <li>{t('check_access_token_valid')}</li>
                 <li>{t('try_refreshing_token')}</li>
               </ul>
-              <Button 
-                type="primary" 
-                onClick={() => handleTokenRefresh()}
-                style={{ marginTop: '10px' }}
-              >
-                {t('refresh_token_now')}
-              </Button>
             </div>
           ),
+          okText: t('refresh_token_now'),
+          cancelText: t('cancel'),
+          onOk: () => handleTokenRefresh(),
         });
       } else {
         messageApi.error(t('extraction_failed', { message: error.message }));
