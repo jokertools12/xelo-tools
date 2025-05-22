@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // تحديد baseURL للتأكد من أنه يشير إلى الخادم الصحيح
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-axios.defaults.baseURL = apiUrl.endsWith('/api') ? apiUrl : `${apiUrl}/api`;
+axios.defaults.baseURL = apiUrl;
 
 // إعداد الطلبات
 axios.interceptors.request.use(
