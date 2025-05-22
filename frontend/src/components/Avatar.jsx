@@ -1,6 +1,7 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import { Avatar as AntAvatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { formatUploadUrl } from '../utils/urlHelper';
 
 const Avatar = forwardRef(({ src, size = 'default', className, ...props }, ref) => {
   const [error, setError] = useState(false);
@@ -20,8 +21,10 @@ const Avatar = forwardRef(({ src, size = 'default', className, ...props }, ref) 
     if (src.startsWith('data:') || src.startsWith('http')) {
       setImageSrc(src);
     } else {
+      // Format URL to handle uploads properly in production
+      const formattedSrc = formatUploadUrl(src);
       const timeStamp = new Date().getTime();
-      setImageSrc(`${src}?t=${timeStamp}`);
+      setImageSrc(`${formattedSrc}?t=${timeStamp}`);
     }
   }, [src]);
 
