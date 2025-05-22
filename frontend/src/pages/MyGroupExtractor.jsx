@@ -1095,7 +1095,7 @@ const MyGroupExtractor = () => {
         }
       };
       
-      const extractedPosts = await fetchPostsData(url, []);
+      const extractedPosts = await fetchPostsData(apiUrl, []);
       
       if (extractedPosts.length > 0) {
         if (!forceStopPostExtraction && !hardTerminationRef.current) {
