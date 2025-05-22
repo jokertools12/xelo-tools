@@ -262,12 +262,8 @@ const ReactionExtractor = () => {
         }
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        debugLog('API Error:', errorData);
-        throw new Error(`HTTP error! status: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
-      }
-
+      debugLog('Response received with status:', response.status);
+      
       let responseText = '';
       try {
         responseText = await response.text();
@@ -282,9 +278,24 @@ const ReactionExtractor = () => {
         data = JSON.parse(responseText);
         debugLog('JSON parsed successfully');
         debugLog('Response structure:', Object.keys(data));
+        
+        // Log sample data for debugging if in debug mode
+        if (debugMode && data.data && Array.isArray(data.data) && data.data.length > 0) {
+          debugLog(`Received ${data.data.length} reactions`);
+          debugLog('First reaction sample:', data.data[0]);
+        }
       } catch (parseError) {
-        if (debugMode) console.error('Parse error:', parseError);
+        if (debugMode) {
+          console.error('Parse error:', parseError);
+          console.error('Response text (first 200 chars):', responseText.substring(0, 200));
+        }
         throw new Error(`${t('server_response_parse_failed')}: ${parseError.message}`);
+      }
+      
+      // Check for HTTP errors after parsing to better handle error responses
+      if (!response.ok) {
+        debugLog('API Error:', data);
+        throw new Error(`HTTP error! status: ${response.status} - ${data.error?.message || 'Unknown error'}`);
       }
 
       // Set total count if this is the first request
