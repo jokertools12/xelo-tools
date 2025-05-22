@@ -9,7 +9,7 @@ This document outlines the steps and configuration changes made to deploy the ap
 1. Updated `.env` file with production settings:
    - Set `NODE_ENV=production`
    - Set `FRONTEND_URL=https://xelo.tools`
-   - Set `BACKEND_URL=https://xelo.tools/api`
+   - Set `BACKEND_URL=https://api.xelo.tools`
 
 2. CORS Configuration
    - The server is configured to accept connections from the xelo.tools domain
@@ -18,7 +18,7 @@ This document outlines the steps and configuration changes made to deploy the ap
 ### Frontend Configuration
 
 1. Created `.env.production` with:
-   - `REACT_APP_API_URL=https://xelo.tools/api`
+   - `REACT_APP_API_URL=https://api.xelo.tools`
 
 2. Updated API Configuration
    - Modified `src/utils/api.js` to use environment variables with fallback
@@ -37,8 +37,8 @@ This document outlines the steps and configuration changes made to deploy the ap
    ```
 
 2. Deploy the backend and frontend to your hosting provider:
-   - Ensure the server runs at the root domain: `https://xelo.tools`
-   - The API should be accessible at: `https://xelo.tools/api`
+   - The frontend should run at: `https://xelo.tools`
+   - The backend API should be accessible at: `https://api.xelo.tools`
 
 3. Set up the domain and DNS:
    - Configure DNS records for xelo.tools to point to your hosting server
@@ -54,8 +54,8 @@ This document outlines the steps and configuration changes made to deploy the ap
 The deployed application has the following structure:
 
 - **Frontend**: Served from the root URL (https://xelo.tools)
-- **Backend API**: Available at /api path (https://xelo.tools/api)
-- **Uploads**: Available at /uploads path (https://xelo.tools/uploads)
-- **Public Assets**: Available at /public path (https://xelo.tools/public)
+- **Backend API**: Available at a separate domain (https://api.xelo.tools)
+- **Uploads**: Available at the backend domain (https://api.xelo.tools/uploads)
+- **Public Assets**: Available at the backend domain (https://api.xelo.tools/public)
 
-This configuration uses a single domain for both frontend and backend, simplifying deployment and avoiding CORS issues.
+This configuration uses separate domains for frontend and backend, providing better domain organization and scalability while requiring proper CORS configuration.
