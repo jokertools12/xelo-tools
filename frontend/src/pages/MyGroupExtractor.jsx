@@ -649,11 +649,10 @@ const MyGroupExtractor = () => {
       
       messageApi.loading(t('extracting_groups'), 1);
       
-      // Fetch groups from Facebook Graph API - explicitly set limit to 100
-      // Using full URL for proper extraction
-      const url = `/v18.0/me/groups?fields=id,name,privacy,member_count&access_token=${activeAccessToken}&limit=100`;
+      // استخدام نقطة النهاية الجديدة في الخلفية بدلاً من الاتصال المباشر بـ Facebook Graph API
+      const apiUrl = `/api/facebook/groups?token=${activeAccessToken}`;
       
-      debugLog('Fetching groups with full URL:', url);
+      debugLog('Fetching groups with backend API:', apiUrl);
       
       const fetchGroupsData = async (url, allGroups = []) => {
         try {
@@ -731,13 +730,8 @@ const MyGroupExtractor = () => {
               if (afterCursor) {
                 debugLog('Extracted after cursor:', afterCursor);
                 
-                // Build a proper pagination URL that works with proxies if needed
-                const originalUrlObj = new URL(url.startsWith('http') ? url : `${window.location.origin}${url}`);
-                originalUrlObj.searchParams.set('after', afterCursor);
-                
-                const nextPageUrl = url.startsWith('http') ? 
-                  originalUrlObj.toString() : 
-                  `${originalUrlObj.pathname}${originalUrlObj.search}`;
+                // استخدام نقطة النهاية الجديدة مع معلمة after للصفحة التالية
+                const nextPageUrl = `${apiUrl}&after=${afterCursor}`;
                 
                 debugLog('Constructed next page URL:', nextPageUrl);
                 
@@ -751,9 +745,20 @@ const MyGroupExtractor = () => {
               debugLog('Error processing pagination:', paginationError);
               
               // Fallback to using the direct next URL if available
-              debugLog('Trying direct next URL as fallback');
-              await new Promise(resolve => setTimeout(resolve, 1000));
-              return await fetchGroupsData(data.paging.next, newTotalGroups);
+              // تحويل عنوان URL المباشر من Facebook إلى نقطة النهاية الخلفية المقابلة
+              if (data.paging.next && data.paging.next.includes('after=')) {
+                const afterMatch = data.paging.next.match(/after=([^&]+)/);
+                if (afterMatch && afterMatch[1]) {
+                  const afterCursor = afterMatch[1];
+                  const fallbackUrl = `${apiUrl}&after=${afterCursor}`;
+                  debugLog('Constructed fallback URL:', fallbackUrl);
+                  
+                  await new Promise(resolve => setTimeout(resolve, 1000));
+                  return await fetchGroupsData(fallbackUrl, newTotalGroups);
+                }
+              }
+              
+              debugLog('Could not extract pagination cursor, stopping pagination');
             }
           } else {
             debugLog('No more pages available, completed fetching all groups');
@@ -765,7 +770,7 @@ const MyGroupExtractor = () => {
         }
       };
       
-      const extractedGroups = await fetchGroupsData(url, []);
+      const extractedGroups = await fetchGroupsData(apiUrl, []);
       
       if (extractedGroups.length > 0) {
         setProgress(100);
@@ -845,12 +850,10 @@ const MyGroupExtractor = () => {
       
       messageApi.loading(t('extracting_posts'), 1);
       
-      // Enhanced URL construction with error checking
-      const baseUrl = `/v18.0/${groupId}/feed`;
-      const fields = 'id,message,created_time,type,permalink_url,reactions.summary(true),comments.summary(true)';
-      const url = `${baseUrl}?fields=${fields}&access_token=${activeAccessToken}&limit=100`;
+      // استخدام نقطة النهاية الجديدة في الخلفية بدلاً من الاتصال المباشر بـ Facebook Graph API
+      const apiUrl = `/api/facebook/group/${groupId}/posts?token=${activeAccessToken}&limit=100`;
       
-      debugLog('Fetching posts with enhanced URL:', url);
+      debugLog('Fetching posts with backend API:', apiUrl);
       
       const fetchPostsData = async (url, allPosts = [], retryCount = 0) => {
         // Check termination flags immediately
@@ -1060,108 +1063,31 @@ const MyGroupExtractor = () => {
                 debugLog('Found next page for posts:', data.paging.next);
                 
                 try {
-                  // Always convert to relative URL to avoid CORS issues
-                  let nextPageUrl = data.paging.next;
+                  // استخراج معلمة after من عنوان URL التالي
+                  const afterMatch = data.paging.next.match(/after=([^&]+)/);
                   
-                  if (nextPageUrl.startsWith('https://graph.facebook.com')) {
-                    // Extract only the path and query parts
-                    const urlObj = new URL(nextPageUrl);
-                    nextPageUrl = urlObj.pathname + urlObj.search;
-                    debugLog('Converted to relative URL for proxy:', nextPageUrl);
-                  }
-                  
-                  // Ensure it starts with /v18.0 for the proxy
-                  if (!nextPageUrl.startsWith('/v18.0')) {
-                    // Try several ways to fix the URL
+                  if (afterMatch && afterMatch[1]) {
+                    const afterCursor = afterMatch[1];
+                    debugLog('Extracted after cursor for posts:', afterCursor);
                     
-                    // Method 1: Extract path from URL if it has /v18.0/ somewhere in it
-                    if (nextPageUrl.includes('/v18.0/')) {
-                      const parts = nextPageUrl.split('/v18.0/');
-                      if (parts.length > 1) {
-                        nextPageUrl = '/v18.0/' + parts[1];
-                        debugLog('Fixed URL using path extraction:', nextPageUrl);
-                      }
-                    } 
-                    // Method 2: Extract ID and rebuild URL
-                    else if (nextPageUrl.includes('/feed') || nextPageUrl.includes('/posts')) {
-                      // Try to extract the group/post ID from the URL path
-                      const pathParts = nextPageUrl.split('/');
-                      let idIndex = -1;
-                      
-                      // Find numeric ID in the path
-                      for (let i = 0; i < pathParts.length; i++) {
-                        if (/^\d+$/.test(pathParts[i])) {
-                          idIndex = i;
-                          break;
-                        }
-                      }
-                      
-                      if (idIndex >= 0) {
-                        // Extract ID and rebuild URL
-                        const id = pathParts[idIndex];
-                        const urlObj = new URL('http://placeholder.com' + nextPageUrl);
-                        nextPageUrl = `/v18.0/${id}/feed?${urlObj.searchParams.toString()}`;
-                        debugLog('Rebuilt URL with extracted ID:', nextPageUrl);
-                      }
-                    }
-                    // Method 3: Default fallback - add /v18.0 prefix
-                    else {
-                      nextPageUrl = nextPageUrl.startsWith('/') 
-                        ? '/v18.0' + nextPageUrl 
-                        : '/v18.0/' + nextPageUrl;
-                      debugLog('Added v18.0 prefix as fallback:', nextPageUrl);
-                    }
+                    // بناء عنوان URL جديد باستخدام نقطة النهاية الخلفية
+                    const nextPageUrl = `${apiUrl}&after=${afterCursor}`;
+                    debugLog('Constructed next page URL with backend API:', nextPageUrl);
+                    
+                    // إضافة تأخير لتجنب تقييد معدل الطلبات
+                    await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
+                    
+                    // استدعاء fetchPostsData مع عنوان URL الجديد
+                    return await fetchPostsData(nextPageUrl, allPosts);
+                  } else {
+                    debugLog('Could not extract after cursor from next URL');
                   }
-                  
-                  // Log the final URL for debugging
-                  debugLog('Final pagination URL to use:', nextPageUrl);
-              
-              // Add a delay to avoid rate limiting
-              await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
-              
-              // Call fetchPostsData with the proxy-friendly URL
-              debugLog('Proceeding to next page with URL:', nextPageUrl);
-              return await fetchPostsData(nextPageUrl, allPosts);
-            } catch (paginationError) {
-              debugLog('Error processing pagination for posts:', paginationError);
-              
-              // Try to extract just the cursor and rebuild the URL
-              try {
-                // Extract the 'after' cursor if possible
-                const urlObj = new URL(data.paging.next);
-                const afterCursor = urlObj.searchParams.get('after');
-                
-                if (afterCursor) {
-                  debugLog('Extracted after cursor for posts:', afterCursor);
-                  
-                  // Rebuild URL with the original base path but new cursor
-                  const urlParts = url.split('?');
-                  const baseUrl = urlParts[0];
-                  const params = new URLSearchParams(urlParts[1]);
-                  params.set('after', afterCursor);
-                  
-                  const rebuiltUrl = `${baseUrl}?${params.toString()}`;
-                  debugLog('Rebuilt pagination URL:', rebuiltUrl);
-                  
-                  // Add a delay to avoid rate limiting
-                  await new Promise(resolve => setTimeout(resolve, 1500));
-                  
-                  // Call fetchPostsData with the rebuilt URL
-                  return await fetchPostsData(rebuiltUrl, allPosts);
+                } catch (paginationError) {
+                  debugLog('Error processing pagination for posts:', paginationError);
                 }
-              } catch (rebuildError) {
-                debugLog('Error rebuilding pagination URL:', rebuildError);
+              } else {
+                debugLog('No more pages available, completed fetching all posts');
               }
-              
-              // Last resort: just try using the URL directly with proxy prefix
-              const fallbackUrl = data.paging.next.replace('https://graph.facebook.com', '');
-              debugLog('Last resort: trying fallback URL:', fallbackUrl);
-              await new Promise(resolve => setTimeout(resolve, 2000));
-              return await fetchPostsData(fallbackUrl, allPosts);
-            }
-          } else {
-          debugLog('No more pages available, completed fetching all posts');
-          }
           
           return allPosts;
         } catch (error) {
@@ -1262,14 +1188,14 @@ const MyGroupExtractor = () => {
       
       messageApi.loading('جاري استخراج أعضاء المجموعة...', 1);
       
-      // Using the Graph API to get members - use full URL for proper extraction
-      const url = `/v18.0/graphql?doc_id=4460078717354812&server_timestamps=true&variables={"cursor":"","groupID":"${groupId}","recruitingGroupFilterNonCompliant":false,"scale":1,"id":"${groupId}"}&fb_api_req_friendly_name=GroupsCometMembersPageNewMembersSectionRefetchQuery&method=post&locale=en_US&pretty=false&format=json&fb_api_caller_class=RelayModern&access_token=${activeAccessToken}`;
+      // Using our backend API to get members
+      const apiUrl = `/api/facebook/group/${groupId}/members?token=${activeAccessToken}`;
       
-      debugLog('Fetching members with full URL');
+      debugLog('Fetching members using backend API endpoint');
       
       let response;
       try {
-        response = await fetch(url);
+        response = await fetch(apiUrl);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -1431,15 +1357,15 @@ const MyGroupExtractor = () => {
     const currentMemberCount = members.length;
     
     try {
-      // Using the Graph API to get members with cursor - ensure we use relative path for proxy compatibility
-      const url = `/v18.0/graphql?doc_id=4460078717354812&server_timestamps=true&variables={"cursor":"${cursor}","groupID":"${groupId}","recruitingGroupFilterNonCompliant":false,"scale":1,"id":"${groupId}"}&fb_api_req_friendly_name=GroupsCometMembersPageNewMembersSectionRefetchQuery&method=post&locale=en_US&pretty=false&format=json&fb_api_caller_class=RelayModern&access_token=${activeAccessToken}`;
+      // Using our backend API to get members with cursor
+      const apiUrl = `/api/facebook/group/${groupId}/members?token=${activeAccessToken}&after=${cursor}`;
       
       debugLog(`Fetching next page of members with cursor: ${cursor.substring(0, 15)}...`);
       
       let response;
       try {
-        debugLog('Member pagination API call to: ' + url);
-        response = await fetch(url);
+        debugLog('Member pagination API call to: ' + apiUrl);
+        response = await fetch(apiUrl);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -1617,31 +1543,33 @@ const MyGroupExtractor = () => {
                 let foundUrl = paginationUrlMatch[1].replace(/\\/g, ''); // Remove any escape characters
                 debugLog(`Found direct pagination URL: ${foundUrl}`);
                 
-                // Convert absolute URL to relative URL to avoid CORS issues
+                // Extract the group ID and cursor from the URL to use with our backend endpoint
                 if (foundUrl.startsWith('https://graph.facebook.com')) {
                   const urlObj = new URL(foundUrl);
-                  foundUrl = urlObj.pathname + urlObj.search;
-                  debugLog(`Converted to relative URL for proxy: ${foundUrl}`);
-                  
-                  // Ensure it starts with /v18.0 for the proxy
-                  if (!foundUrl.startsWith('/v18.0')) {
-                    const pathParts = foundUrl.split('/');
-                    const versionIdx = pathParts.findIndex(p => p.startsWith('v'));
-                    if (versionIdx >= 0) {
-                      foundUrl = '/' + pathParts.slice(versionIdx).join('/');
-                      debugLog(`Adjusted URL with version prefix: ${foundUrl}`);
-                    }
+                  const afterParam = urlObj.searchParams.get('after');
+                  if (afterParam) {
+                    nextCursor = afterParam;
+                    debugLog(`Extracted 'after' cursor from pagination URL: ${nextCursor}`);
                   }
+                  // We'll use our backend endpoint instead of this direct URL
                   
-                  directNextUrl = foundUrl;
+                  // We'll use our backend endpoint with the extracted cursor instead
+                  if (nextCursor) {
+                    directNextUrl = null; // Don't use direct URL, we'll use our backend endpoint
+                    debugLog(`Will use backend endpoint with extracted cursor instead of direct URL`);
+                  } else {
+                    // If we couldn't extract a cursor, we won't use this URL
+                    directNextUrl = null;
+                    debugLog(`Could not extract cursor from pagination URL`);
+                  }
                 }
               }
             } catch (urlError) {
               debugLog('Error processing pagination URL:', urlError);
             }
             
-            // If we found a direct next URL, use it instead of constructing one
-            if (directNextUrl) {
+            // If we have a cursor, use it with our backend endpoint
+            if (nextCursor) {
               // Display status message for user
               if (processedMembers.length > 0) {
                 messageApi.success(`تم استخراج ${processedMembers.length} عضو - جاري استخراج المزيد...`);
@@ -1651,11 +1579,12 @@ const MyGroupExtractor = () => {
               const delayTime = 1500 + Math.floor(Math.random() * 1500);
               debugLog(`Using direct pagination URL with ${delayTime}ms delay`);
               
-              // Schedule the next fetch with the delay using the direct URL
+              // Schedule the next fetch with the delay using our backend endpoint
               setTimeout(async () => {
                 try {
-                  debugLog(`Fetching next page with direct URL: ${directNextUrl}`);
-                  const response = await fetch(directNextUrl);
+                  const apiUrl = `/api/facebook/group/${groupId}/members?token=${activeAccessToken}&after=${nextCursor}`;
+                  debugLog(`Fetching next page with backend endpoint and cursor: ${nextCursor}`);
+                  const response = await fetch(apiUrl);
                   
                   if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -1703,51 +1632,45 @@ const MyGroupExtractor = () => {
                                       nextJsonResponse.match(/"has_next_page":\s*true/i);
                   
                   if (hasMorePages && !isMemberExtractionPaused) {
-                    // Extract new cursor or pagination URL
-                    let newNextUrl = null;
+                    // Extract new cursor for our backend endpoint
+                    let newCursor = null;
                     const nextUrlMatch = nextJsonResponse.match(/"paging":\s*{\s*"next":\s*"([^"]+)"/);
                     
                     if (nextUrlMatch && nextUrlMatch[1]) {
                       let foundNextUrl = nextUrlMatch[1].replace(/\\/g, '');
                       
-                      // Convert to relative URL if needed
+                      // Extract cursor from URL for our backend endpoint
                       if (foundNextUrl.startsWith('https://graph.facebook.com')) {
                         const urlObj = new URL(foundNextUrl);
-                        foundNextUrl = urlObj.pathname + urlObj.search;
-                        
-                        if (!foundNextUrl.startsWith('/v18.0')) {
-                          const pathParts = foundNextUrl.split('/');
-                          const versionIdx = pathParts.findIndex(p => p.startsWith('v'));
-                          if (versionIdx >= 0) {
-                            foundNextUrl = '/' + pathParts.slice(versionIdx).join('/');
-                          }
+                        const afterParam = urlObj.searchParams.get('after');
+                        if (afterParam) {
+                          newCursor = afterParam;
+                          debugLog(`Extracted new 'after' cursor from pagination URL: ${newCursor}`);
                         }
-                        
-                        newNextUrl = foundNextUrl;
                       }
                     }
                     
-                    if (newNextUrl) {
-                      // Schedule next fetch with new URL
-                      setTimeout(async () => {
-                        try {
-                          // Reuse the same fetch logic
-                          const nextResponse = await fetch(newNextUrl);
-                          if (!nextResponse.ok) throw new Error(`HTTP error! status: ${nextResponse.status}`);
-                          // Process response...
-                          // (This would be recursive and complex, so ending here)
-                          
-                          // Continue pagination as needed
-                          fetchNextGroupMembersPage(groupId, groupName, nextCursor);
-                        } catch (error) {
-                          debugLog('Error fetching with newNextUrl:', error);
-                          // Fall back to normal pagination
-                          fetchNextGroupMembersPage(groupId, groupName, nextCursor);
-                        }
+                    if (newCursor) {
+                      // Schedule next fetch with our backend endpoint and the new cursor
+                      setTimeout(() => {
+                        // Use our fetchNextGroupMembersPage function with the new cursor
+                        fetchNextGroupMembersPage(groupId, groupName, newCursor);
                       }, 2000);
                     } else {
-                      // Fall back to normal cursor-based pagination
-                      fetchNextGroupMembersPage(groupId, groupName, nextCursor);
+                      // Try to extract cursor from other parts of the response
+                      const cursorMatch = nextJsonResponse.match(/"end_cursor":\s*"([^"]+)"/i);
+                      if (cursorMatch && cursorMatch[1]) {
+                        const extractedCursor = cursorMatch[1];
+                        debugLog(`Extracted cursor from end_cursor field: ${extractedCursor}`);
+                        setTimeout(() => {
+                          fetchNextGroupMembersPage(groupId, groupName, extractedCursor);
+                        }, 2000);
+                      } else {
+                        // No cursor found, end pagination
+                        debugLog('No cursor found in response, ending pagination');
+                        setLoadingMembers(false);
+                        setExtractionCompleted(true);
+                      }
                     }
                   } else {
                     // No more pages
