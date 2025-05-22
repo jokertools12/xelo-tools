@@ -279,7 +279,16 @@ const ReactionExtractor = () => {
         if (responseText.trim().toLowerCase().startsWith('<!doctype') || 
             responseText.trim().toLowerCase().startsWith('<html')) {
           debugLog('Received HTML response instead of JSON');
-          throw new Error(t('received_html_response'));
+          
+          // Check if it's likely an authentication or login issue
+          if (responseText.includes('login') || 
+              responseText.includes('checkpoint') || 
+              responseText.includes('authenticate') ||
+              responseText.includes('access_token')) {
+            throw new Error(t('auth_error_html_response'));
+          } else {
+            throw new Error(t('html_response_try_token_refresh'));
+          }
         }
       } catch (textError) {
         if (debugMode) console.error('Error getting response text:', textError);
@@ -305,7 +314,13 @@ const ReactionExtractor = () => {
         
         // Provide a more helpful error message when we receive HTML
         if (responseText.includes('<!DOCTYPE html>') || responseText.includes('<html')) {
-          throw new Error(t('html_received_instead_of_json'));
+          if (responseText.includes('login') || 
+              responseText.includes('checkpoint') || 
+              responseText.includes('authenticate')) {
+            throw new Error(t('facebook_login_required'));
+          } else {
+            throw new Error(t('html_received_instead_of_json_try_refresh'));
+          }
         } else {
           throw new Error(`${t('server_response_parse_failed')}: ${parseError.message}`);
         }
@@ -539,6 +554,34 @@ const ReactionExtractor = () => {
     }
   };
 
+  // Try to refresh the token
+  const handleTokenRefresh = async () => {
+    debugLog('Attempting to refresh access token');
+    setActiveAccessToken(''); // Clear current token to force new fetch
+    
+    try {
+      setLoading(true);
+      messageApi.loading(t('refreshing_token'), 1);
+      
+      // Force fetch a new token
+      const newToken = await fetchActiveAccessToken(true);
+      
+      if (newToken) {
+        messageApi.success(t('token_refreshed_success'));
+        return newToken;
+      } else {
+        messageApi.error(t('token_refresh_failed'));
+        return null;
+      }
+    } catch (error) {
+      debugLog('Token refresh error:', error);
+      messageApi.error(t('token_refresh_error'));
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Main handler for extracting reactions
   const handleExtractReactions = async () => {
     if (!postId) {
@@ -573,14 +616,43 @@ const ReactionExtractor = () => {
       
       debugLog('Found active token, starting extraction...');
       messageApi.success(t('extracting_please_wait'), 1);
-
-
       
       // Use simpler URL construction like CommentExtractor
       const url = `/api/facebook/proxy?endpoint=${encodeURIComponent(`/${postId}/reactions`)}&accessToken=${encodeURIComponent(accessToken)}&limit=100&summary=total_count&fields=id,type,name,from{id,name},created_time&pretty=1`;
       
       debugLog('Initial request URL:', url);
-      const extractedReactions = await fetchReactions(url);
+      let extractedReactions;
+      
+      try {
+        extractedReactions = await fetchReactions(url);
+      } catch (initialError) {
+        debugLog('Initial extraction error:', initialError);
+        
+        // If the error suggests HTML response or authentication issues, try refreshing the token
+        if (initialError.message.includes('html_response') || 
+            initialError.message.includes('auth_error') ||
+            initialError.message.includes('token')) {
+            
+          debugLog('Authentication error detected, attempting token refresh');
+          messageApi.info(t('token_issue_attempting_refresh'));
+          
+          const refreshedToken = await handleTokenRefresh();
+          
+          if (refreshedToken) {
+            // Retry with the new token
+            const refreshedUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(`/${postId}/reactions`)}&accessToken=${encodeURIComponent(refreshedToken)}&limit=100&summary=total_count&fields=id,type,name,from{id,name},created_time&pretty=1`;
+            
+            debugLog('Retrying with refreshed token');
+            extractedReactions = await fetchReactions(refreshedUrl);
+          } else {
+            // Token refresh failed, propagate original error
+            throw initialError;
+          }
+        } else {
+          // Not a token issue, propagate the error
+          throw initialError;
+        }
+      }
       
       if (extractedReactions && extractedReactions.length > 0) {
         messageApi.success(t('extraction_success', { count: extractedReactions.length }));
@@ -592,8 +664,50 @@ const ReactionExtractor = () => {
       debugLog('General extraction error:', error);
       setError(`${t('general_error')}: ${error.message}`);
       
-      if (error.message?.includes("blocking, logged-in checkpoint")) {
+      if (error.message?.includes("blocking, logged-in checkpoint") || 
+          error.message?.includes("auth_error") ||
+          error.message?.includes("login_required")) {
         messageApi.error(t('token_not_working'));
+        
+        // Suggest token refresh
+        Modal.confirm({
+          title: t('access_token_issue'),
+          content: t('refresh_access_token_prompt'),
+          okText: t('refresh_token'),
+          cancelText: t('cancel'),
+          onOk: () => {
+            handleTokenRefresh().then(newToken => {
+              if (newToken) {
+                // Auto retry extraction with new token
+                handleExtractReactions();
+              }
+            });
+          }
+        });
+      } else if (error.message?.includes("html_response")) {
+        messageApi.error(t('server_returned_html'));
+        
+        // Show more detailed help
+        Modal.info({
+          title: t('html_response_detected'),
+          content: (
+            <div>
+              <p>{t('html_response_explanation')}</p>
+              <ul>
+                <li>{t('check_internet_connection')}</li>
+                <li>{t('check_access_token_valid')}</li>
+                <li>{t('try_refreshing_token')}</li>
+              </ul>
+              <Button 
+                type="primary" 
+                onClick={() => handleTokenRefresh()}
+                style={{ marginTop: '10px' }}
+              >
+                {t('refresh_token_now')}
+              </Button>
+            </div>
+          ),
+        });
       } else {
         messageApi.error(t('extraction_failed', { message: error.message }));
       }
