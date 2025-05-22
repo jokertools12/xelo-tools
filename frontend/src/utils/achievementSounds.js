@@ -77,7 +77,10 @@ export const preloadAchievementSounds = () => {
   // Only preload in production to avoid unnecessary requests in development
   if (process.env.NODE_ENV !== 'production') return;
   
-  Object.values(SOUND_MAPPINGS).forEach(soundUrl => {
+  Object.values(SOUND_MAPPINGS).forEach(soundPath => {
+    // Format the URL to ensure it works in both development and production
+    const soundUrl = formatUploadUrl(soundPath);
+    
     fetch(soundUrl, { method: 'HEAD' })
       .then(response => {
         if (!response.ok) {
