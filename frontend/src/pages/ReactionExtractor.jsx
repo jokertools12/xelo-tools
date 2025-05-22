@@ -264,13 +264,26 @@ const ReactionExtractor = () => {
 
       debugLog('Response received with status:', response.status);
       
+      // First check if the response is OK before trying to parse it
+      if (!response.ok) {
+        debugLog('HTTP Error:', response.status, response.statusText);
+        throw new Error(`${t('http_error')}: ${response.status} - ${response.statusText}`);
+      }
+      
       let responseText = '';
       try {
         responseText = await response.text();
         debugLog('Response text received, length:', responseText.length);
+        
+        // Check if the response looks like HTML instead of JSON
+        if (responseText.trim().toLowerCase().startsWith('<!doctype') || 
+            responseText.trim().toLowerCase().startsWith('<html')) {
+          debugLog('Received HTML response instead of JSON');
+          throw new Error(t('received_html_response'));
+        }
       } catch (textError) {
         if (debugMode) console.error('Error getting response text:', textError);
-        throw new Error(t('response_text_read_failed'));
+        throw new Error(textError.message || t('response_text_read_failed'));
       }
       
       let data = null;
@@ -290,40 +303,12 @@ const ReactionExtractor = () => {
           console.error('Response text (first 200 chars):', responseText.substring(0, 200));
         }
         
-        // Handle HTML responses by checking if it's HTML content
-        if (responseText.trim().toLowerCase().startsWith('<!doctype') || 
-            responseText.trim().toLowerCase().startsWith('<html')) {
-          
-          // Extract useful information from HTML if possible
-          let errorMessage = 'Server returned HTML instead of JSON. This might indicate an authentication issue.';
-          
-          // Try to extract title or error message from HTML
-          const titleMatch = responseText.match(/<title>(.*?)<\/title>/i);
-          if (titleMatch && titleMatch[1]) {
-            errorMessage += ` Page title: "${titleMatch[1]}"`;
-          }
-          
-          debugLog('HTML response detected:', errorMessage);
-          
-          // Try direct Facebook API as fallback
-          if (url.includes('/api/facebook/proxy') && activeAccessToken) {
-            debugLog('Attempting direct Facebook API call as fallback...');
-            messageApi.loading(t('trying_alternative_method'), 1);
-            
-            // Throw a special error to trigger fallback
-            throw new Error('HTML_RESPONSE_FALLBACK_NEEDED');
-          }
-          
-          throw new Error(errorMessage);
+        // Provide a more helpful error message when we receive HTML
+        if (responseText.includes('<!DOCTYPE html>') || responseText.includes('<html')) {
+          throw new Error(t('html_received_instead_of_json'));
+        } else {
+          throw new Error(`${t('server_response_parse_failed')}: ${parseError.message}`);
         }
-        
-        throw new Error(`${t('server_response_parse_failed')}: ${parseError.message}`);
-      }
-      
-      // Check for HTTP errors after parsing to better handle error responses
-      if (!response.ok) {
-        debugLog('API Error:', data);
-        throw new Error(`HTTP error! status: ${response.status} - ${data.error?.message || 'Unknown error'}`);
       }
 
       // Set total count if this is the first request
@@ -473,7 +458,7 @@ const ReactionExtractor = () => {
     }
   };
 
-  // Function to fetch active access token from API - simplified version
+  // Function to fetch active access token from API - improved version with better error handling
   const fetchActiveAccessToken = async () => {
     if (fetchingToken) return null;
     
@@ -486,6 +471,10 @@ const ReactionExtractor = () => {
       }
       
       const token = localStorage.getItem('token');
+      if (!token) {
+        debugLog('No auth token found in localStorage');
+        throw new Error(t('auth_token_missing'));
+      }
       
       // Use axios for API call (matching CommentExtractor approach)
       debugLog('Fetching access tokens...');
@@ -586,69 +575,12 @@ const ReactionExtractor = () => {
       messageApi.success(t('extracting_please_wait'), 1);
 
 
-      try {
-        // Use simpler URL construction like CommentExtractor
-        const url = `/api/facebook/proxy?endpoint=${encodeURIComponent(`/${postId}/reactions`)}&accessToken=${encodeURIComponent(accessToken)}&limit=100&summary=total_count&fields=id,type,name,from{id,name},created_time&pretty=1`;
-        
-        debugLog('Initial request URL:', url);
-        const extractedReactions = await fetchReactions(url);
-        
-        if (extractedReactions && extractedReactions.length > 0) {
-          messageApi.success(t('extraction_success', { count: extractedReactions.length }));
-        } else {
-          setError(t('no_reactions_found'));
-          messageApi.warning(t('no_reactions_found_short'));
-        }
-      } catch (error) {
-        // If the error is our special signal for HTML response, try direct Facebook API call
-        if (error.message === 'HTML_RESPONSE_FALLBACK_NEEDED') {
-          debugLog('Trying direct Facebook API call...');
-          messageApi.loading(t('trying_direct_api_call'), 2);
-          
-          try {
-            // Create a simple mock response with empty data to show the UI is working
-            const mockReactions = [
-              {
-                userId: 'mock_user_1',
-                userName: 'Sample User 1',
-                reactionType: 'LIKE',
-                key: 'mock_reaction_1',
-                reactionDate: new Date().toISOString(),
-                extractedAt: new Date().toISOString()
-              },
-              {
-                userId: 'mock_user_2',
-                userName: 'Sample User 2',
-                reactionType: 'LOVE',
-                key: 'mock_reaction_2',
-                reactionDate: new Date().toISOString(),
-                extractedAt: new Date().toISOString()
-              }
-            ];
-            
-            setReactions(mockReactions);
-            setTotalReactions(mockReactions.length);
-            setExtractedCount(mockReactions.length);
-            setProgress(100);
-            
-            messageApi.warning(t('using_sample_data'));
-            setError(t('proxy_failed_using_sample_data'));
-          } catch (fallbackError) {
-            debugLog('Fallback also failed:', fallbackError);
-            setError(`${t('all_methods_failed')}: ${fallbackError.message}`);
-            messageApi.error(t('extraction_failed_completely'));
-          }
-        } else {
-          debugLog('General extraction error:', error);
-          setError(`${t('general_error')}: ${error.message}`);
-          
-          if (error.message?.includes("blocking, logged-in checkpoint")) {
-            messageApi.error(t('token_not_working'));
-          } else {
-            messageApi.error(t('extraction_failed', { message: error.message }));
-          }
-        }
-      }
+      
+      // Use simpler URL construction like CommentExtractor
+      const url = `/api/facebook/proxy?endpoint=${encodeURIComponent(`/${postId}/reactions`)}&accessToken=${encodeURIComponent(accessToken)}&limit=100&summary=total_count&fields=id,type,name,from{id,name},created_time&pretty=1`;
+      
+      debugLog('Initial request URL:', url);
+      const extractedReactions = await fetchReactions(url);
       
       if (extractedReactions && extractedReactions.length > 0) {
         messageApi.success(t('extraction_success', { count: extractedReactions.length }));
