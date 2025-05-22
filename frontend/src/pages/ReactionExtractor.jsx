@@ -252,14 +252,27 @@ const ReactionExtractor = () => {
       // Get the auth token for backend API requests
       const token = localStorage.getItem('token');
       
-      const response = await fetch(proxyUrl, {
+      // Get the current base URL - essential for deployed environments
+      const baseUrl = window.location.origin;
+      // Ensure proxyUrl is absolute when deployed, but remains relative for local dev
+      const fullProxyUrl = proxyUrl.startsWith('/') 
+        ? (window.location.hostname === 'localhost' ? proxyUrl : `${baseUrl}${proxyUrl}`)
+        : proxyUrl;
+      
+      debugLog('Using full proxy URL for fetch:', fullProxyUrl);
+      
+      const response = await fetch(fullProxyUrl, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-          'User-Agent': 'Mozilla/5.0'
-        }
+          'User-Agent': 'Mozilla/5.0',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
+        },
+        credentials: 'same-origin'
       });
 
       debugLog('Response received with status:', response.status);
@@ -502,11 +515,19 @@ const ReactionExtractor = () => {
         throw new Error(t('auth_token_missing'));
       }
       
+      // Determine the correct API URL for the current environment
+      const baseUrl = window.location.origin;
+      const apiUrl = window.location.hostname === 'localhost' 
+        ? '/api/users/access-tokens' 
+        : `${baseUrl}/api/users/access-tokens`;
+      
       // Use axios for API call (matching CommentExtractor approach)
-      debugLog('Fetching access tokens...');
-      const response = await axios.get('/api/users/access-tokens', {
+      debugLog('Fetching access tokens from:', apiUrl);
+      const response = await axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
         },
       });
       
