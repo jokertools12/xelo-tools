@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 // Use environment variable with fallback for API URL
-const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-const API_URL = apiBaseUrl.endsWith('/api') ? apiBaseUrl : `${apiBaseUrl}/api`;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const loginUser = async (email, password) => {
   try {
