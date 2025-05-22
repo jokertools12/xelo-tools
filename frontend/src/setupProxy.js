@@ -48,9 +48,9 @@ module.exports = function(app) {
   );
 
   // For development: توجيه طلبات API إلى الخادم الخلفي
-  // In production, these requests will go directly to the same domain
+  // In production, these requests will go directly to the new backend domain
   const backendTarget = process.env.NODE_ENV === 'production' 
-    ? 'https://xelo.tools' 
+    ? 'https://api.xelo.tools' 
     : 'http://localhost:5000';
     
   app.use(
