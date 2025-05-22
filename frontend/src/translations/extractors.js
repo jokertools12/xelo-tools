@@ -228,6 +228,36 @@ const extractorTranslations = {
     missing_id: 'الرجاء إدخال المعرف',
     no_access_token: 'لا يوجد رمز وصول',
     
+    // أخطاء استجابة HTML
+    server_response_parse_failed: 'فشل تحليل استجابة الخادم',
+    received_html_response: 'تم استلام استجابة HTML بدلاً من JSON',
+    html_received_instead_of_json: 'تم استلام HTML بدلاً من JSON',
+    html_received_instead_of_json_try_refresh: 'تم استلام HTML بدلاً من JSON. حاول تحديث رمز الوصول',
+    html_response_try_token_refresh: 'استجابة HTML غير متوقعة. قد تحتاج إلى تحديث رمز الوصول',
+    auth_error_html_response: 'خطأ في المصادقة: تم استلام استجابة HTML تشير إلى مشكلة في تسجيل الدخول',
+    facebook_login_required: 'مطلوب تسجيل الدخول إلى فيسبوك. يرجى تحديث رمز الوصول',
+    
+    // تحديث رمز الوصول
+    refreshing_token: 'جاري تحديث رمز الوصول...',
+    token_refreshed_success: 'تم تحديث رمز الوصول بنجاح',
+    token_refresh_failed: 'فشل تحديث رمز الوصول',
+    token_refresh_error: 'خطأ أثناء تحديث رمز الوصول',
+    token_issue_attempting_refresh: 'مشكلة في رمز الوصول. جاري محاولة التحديث...',
+    access_token_issue: 'مشكلة في رمز الوصول',
+    refresh_access_token_prompt: 'يبدو أن رمز الوصول قد انتهت صلاحيته أو غير صالح. هل تريد تحديثه؟',
+    refresh_token: 'تحديث الرمز',
+    refresh_token_now: 'تحديث الرمز الآن',
+    
+    // رسائل خطأ إضافية
+    http_error: 'خطأ HTTP',
+    token_not_working: 'رمز الوصول لا يعمل',
+    server_returned_html: 'الخادم أعاد استجابة HTML بدلاً من البيانات المتوقعة',
+    html_response_detected: 'تم اكتشاف استجابة HTML',
+    html_response_explanation: 'تلقى الخادم استجابة HTML بدلاً من JSON. قد يكون هذا بسبب:',
+    check_internet_connection: 'تحقق من اتصالك بالإنترنت',
+    check_access_token_valid: 'تأكد من أن رمز الوصول صالح',
+    try_refreshing_token: 'حاول تحديث رمز الوصول',
+    
     // رسائل النجاح
     extraction_success: 'تم استخراج {count} عنصر بنجاح',
     save_success: 'تم الحفظ بنجاح',
@@ -409,6 +439,36 @@ const extractorTranslations = {
     invalid_id: 'Invalid ID',
     missing_id: 'Please enter ID',
     no_access_token: 'No access token',
+    
+    // HTML Response Errors
+    server_response_parse_failed: 'Failed to parse server response',
+    received_html_response: 'Received HTML response instead of JSON',
+    html_received_instead_of_json: 'HTML received instead of JSON',
+    html_received_instead_of_json_try_refresh: 'HTML received instead of JSON. Try refreshing your access token',
+    html_response_try_token_refresh: 'Unexpected HTML response. You may need to refresh your access token',
+    auth_error_html_response: 'Authentication error: Received HTML response indicating login issue',
+    facebook_login_required: 'Facebook login required. Please refresh your access token',
+    
+    // Token Refresh
+    refreshing_token: 'Refreshing access token...',
+    token_refreshed_success: 'Access token refreshed successfully',
+    token_refresh_failed: 'Failed to refresh access token',
+    token_refresh_error: 'Error refreshing access token',
+    token_issue_attempting_refresh: 'Token issue detected. Attempting refresh...',
+    access_token_issue: 'Access Token Issue',
+    refresh_access_token_prompt: 'Your access token appears to be expired or invalid. Would you like to refresh it?',
+    refresh_token: 'Refresh Token',
+    refresh_token_now: 'Refresh Token Now',
+    
+    // Additional Error Messages
+    http_error: 'HTTP Error',
+    token_not_working: 'Access token is not working',
+    server_returned_html: 'Server returned HTML instead of expected data',
+    html_response_detected: 'HTML Response Detected',
+    html_response_explanation: 'The server received an HTML response instead of JSON. This might be due to:',
+    check_internet_connection: 'Check your internet connection',
+    check_access_token_valid: 'Ensure your access token is valid',
+    try_refreshing_token: 'Try refreshing your access token',
     
     // Success Messages
     extraction_success: 'Successfully extracted {count} items',
