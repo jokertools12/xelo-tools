@@ -142,7 +142,7 @@ const CommentExtractor = () => {
     }
   ];
 
-  // Improved comment fetching with detailed debugging
+  // Improved comment fetching with detailed debugging and backend proxy
   const fetchComments = async (url, allComments = []) => {
     setLoadingComments(true);
     debugLog('====== COMMENT FETCHING DEBUG ======');
@@ -154,7 +154,49 @@ const CommentExtractor = () => {
         throw new Error(t('access_token_missing'));
       }
       
-      const response = await fetch(url, {
+      // Ensure we're using the backend proxy
+      let proxyUrl = url;
+      if (!url.startsWith('/api/facebook/proxy')) {
+        // If it's a direct Facebook URL (from pagination), convert it to use our proxy
+        if (url.includes('graph.facebook.com')) {
+          // Extract path and query from direct Facebook URL
+          const urlObj = new URL(url);
+          const endpoint = urlObj.pathname.replace('/v18.0', '');
+          proxyUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(activeAccessToken)}`;
+          
+          // Add any other query parameters
+          urlObj.searchParams.forEach((value, key) => {
+            if (key !== 'access_token') {
+              proxyUrl += `&${key}=${encodeURIComponent(value)}`;
+            }
+          });
+          
+          debugLog('Converted direct Facebook URL to proxy URL:', proxyUrl);
+        } 
+        // If it's a relative path but not using our proxy
+        else if (url.startsWith('/v18.0')) {
+          const endpoint = url.replace('/v18.0', '').split('?')[0];
+          const queryParams = url.includes('?') ? url.split('?')[1] : '';
+          const queryObj = new URLSearchParams(queryParams);
+          
+          // Remove access token from query params as we'll add it separately
+          queryObj.delete('access_token');
+          
+          // Build new proxy URL
+          proxyUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(activeAccessToken)}`;
+          
+          // Add remaining query parameters
+          queryObj.forEach((value, key) => {
+            proxyUrl += `&${key}=${encodeURIComponent(value)}`;
+          });
+          
+          debugLog('Converted relative path to proxy URL:', proxyUrl);
+        }
+      }
+      
+      debugLog('Using proxy URL for fetch:', proxyUrl);
+      
+      const response = await fetch(proxyUrl, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -164,7 +206,7 @@ const CommentExtractor = () => {
         credentials: 'same-origin'
       });
 
-        debugLog('Response received with status:', response.status);
+      debugLog('Response received with status:', response.status);
       
         let responseText = '';
         try {
@@ -298,19 +340,24 @@ const CommentExtractor = () => {
         debugLog('Found next page, will fetch after delay:', data.paging.next);
         
         try {
+          // Always use the backend proxy for pagination
+          const nextUrl = data.paging.next;
+          debugLog('Next page URL from API:', nextUrl);
+          
           // Extract the 'after' parameter from the next URL
-          const nextUrl = new URL(data.paging.next);
-          const afterParam = nextUrl.searchParams.get('after');
+          const urlObj = new URL(nextUrl);
+          const afterParam = urlObj.searchParams.get('after');
           debugLog('Extracted after parameter:', afterParam);
           
           if (afterParam) {
-            // Construct a proper pagination URL that works with our proxy
-            // Create a URL object from the original URL to preserve all parameters
-            const originalUrlObj = new URL(url, window.location.origin);
-            originalUrlObj.searchParams.set('after', afterParam);
+            // Create a new proxy URL with the after parameter
+            const endpoint = url.startsWith('/api/facebook/proxy') 
+              ? new URLSearchParams(url.split('?')[1]).get('endpoint') 
+              : `/${postId}/comments`;
             
-            const paginationUrl = originalUrlObj.pathname + originalUrlObj.search;
-            debugLog('Constructed pagination URL:', paginationUrl);
+            const paginationUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(activeAccessToken)}&fields=id,message,from{id,name},created_time&limit=100&after=${encodeURIComponent(afterParam)}`;
+            
+            debugLog('Constructed pagination URL using backend proxy:', paginationUrl);
             
             // Add a delay to avoid rate limiting
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -418,10 +465,10 @@ const CommentExtractor = () => {
       messageApi.success(t('extracting_commenters'), 1);
       
       
-      // Extract comments using Graph API
+      // Extract comments using Graph API via backend proxy
       try {
-        debugLog('Extracting comments from Graph API');
-        const url = `/v18.0/${postId}/comments?access_token=${accessToken}&fields=id,message,from{id,name},created_time&limit=100`;
+        debugLog('Extracting comments from Graph API via backend proxy');
+        const url = `/api/facebook/proxy?endpoint=${encodeURIComponent(`/${postId}/comments`)}&accessToken=${encodeURIComponent(accessToken)}&fields=id,message,from{id,name},created_time&limit=100`;
         
         const extractedComments = await fetchComments(url, []);
         debugLog('Extraction result:', extractedComments?.length || 0, 'comments');
