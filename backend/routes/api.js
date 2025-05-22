@@ -32,8 +32,6 @@ const currencyRatesRoutes = require('./api/currencyRates');
 const pointsRoutes = require('./api/points');
 // استيراد مسارات الوكيل لـ Facebook API
 const facebookProxyRoutes = require('./api/facebookProxy');
-// استيراد مسارات Facebook API الجديدة
-const facebookRoutes = require('./api/facebook');
 // استيراد مسارات الذكاء الاصطناعي
 const aiRoutes = require('./api/ai');
 // استيراد مسارات نظام الرد على التعليقات
@@ -63,8 +61,6 @@ router.use('/currency-rates', currencyRatesRoutes);
 router.use('/points', pointsRoutes);
 // تسجيل مسارات الوكيل لـ Facebook API
 router.use('/facebook', facebookProxyRoutes);
-// تسجيل مسارات Facebook API الجديدة
-router.use('/facebook', facebookRoutes);
 // تسجيل مسارات الذكاء الاصطناعي
 router.use('/ai', aiRoutes);
 // تسجيل مسارات نظام الرد على التعليقات
