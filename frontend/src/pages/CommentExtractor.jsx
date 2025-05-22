@@ -154,56 +154,71 @@ const CommentExtractor = () => {
         throw new Error(t('access_token_missing'));
       }
       
-      // Ensure we're using the backend proxy
-      let proxyUrl = url;
-      if (!url.startsWith('/api/facebook/proxy')) {
-        // If it's a direct Facebook URL (from pagination), convert it to use our proxy
-        if (url.includes('graph.facebook.com')) {
-          // Extract path and query from direct Facebook URL
-          const urlObj = new URL(url);
-          const endpoint = urlObj.pathname.replace('/v18.0', '');
-          proxyUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(activeAccessToken)}`;
-          
-          // Add any other query parameters
-          urlObj.searchParams.forEach((value, key) => {
-            if (key !== 'access_token') {
-              proxyUrl += `&${key}=${encodeURIComponent(value)}`;
-            }
-          });
-          
-          debugLog('Converted direct Facebook URL to proxy URL:', proxyUrl);
-        } 
-        // If it's a relative path but not using our proxy
-        else if (url.startsWith('/v18.0')) {
-          const endpoint = url.replace('/v18.0', '').split('?')[0];
-          const queryParams = url.includes('?') ? url.split('?')[1] : '';
-          const queryObj = new URLSearchParams(queryParams);
-          
-          // Remove access token from query params as we'll add it separately
-          queryObj.delete('access_token');
-          
-          // Build new proxy URL
-          proxyUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(activeAccessToken)}`;
-          
-          // Add remaining query parameters
-          queryObj.forEach((value, key) => {
+      // Always ensure we're using the backend proxy
+      let proxyUrl;
+      
+      // If it's already a proxy URL, use it directly
+      if (url.startsWith('/api/facebook/proxy')) {
+        proxyUrl = url;
+        debugLog('Using existing proxy URL:', proxyUrl);
+      }
+      // If it's a direct Facebook URL (from pagination), convert it to use our proxy
+      else if (url.includes('graph.facebook.com')) {
+        // Extract path and query from direct Facebook URL
+        const urlObj = new URL(url);
+        const endpoint = urlObj.pathname.replace('/v18.0', '');
+        proxyUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(activeAccessToken)}`;
+        
+        // Add any other query parameters
+        urlObj.searchParams.forEach((value, key) => {
+          if (key !== 'access_token') {
             proxyUrl += `&${key}=${encodeURIComponent(value)}`;
-          });
-          
-          debugLog('Converted relative path to proxy URL:', proxyUrl);
-        }
+          }
+        });
+        
+        debugLog('Converted direct Facebook URL to proxy URL:', proxyUrl);
+      } 
+      // If it's a relative path
+      else if (url.startsWith('/v18.0')) {
+        const endpoint = url.replace('/v18.0', '').split('?')[0];
+        const queryParams = url.includes('?') ? url.split('?')[1] : '';
+        const queryObj = new URLSearchParams(queryParams);
+        
+        // Remove access token from query params as we'll add it separately
+        queryObj.delete('access_token');
+        
+        // Build new proxy URL
+        proxyUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(activeAccessToken)}`;
+        
+        // Add remaining query parameters
+        queryObj.forEach((value, key) => {
+          proxyUrl += `&${key}=${encodeURIComponent(value)}`;
+        });
+        
+        debugLog('Converted relative path to proxy URL:', proxyUrl);
+      }
+      // Any other format of URL, assume it's a Facebook endpoint and convert it
+      else {
+        // Treat it as an endpoint
+        proxyUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(url)}&accessToken=${encodeURIComponent(activeAccessToken)}`;
+        debugLog('Treating as endpoint and converting to proxy URL:', proxyUrl);
       }
       
       debugLog('Using proxy URL for fetch:', proxyUrl);
+      
+      debugLog('Using proxy URL for fetch:', proxyUrl);
+      
+      // Get the auth token for backend API requests
+      const token = localStorage.getItem('token');
       
       const response = await fetch(proxyUrl, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
           'User-Agent': 'Mozilla/5.0'
-        },
-        credentials: 'same-origin'
+        }
       });
 
       debugLog('Response received with status:', response.status);
@@ -351,9 +366,15 @@ const CommentExtractor = () => {
           
           if (afterParam) {
             // Create a new proxy URL with the after parameter
-            const endpoint = url.startsWith('/api/facebook/proxy') 
-              ? new URLSearchParams(url.split('?')[1]).get('endpoint') 
-              : `/${postId}/comments`;
+            let endpoint;
+            
+            // Try to extract the endpoint from the current URL if it's already a proxy
+            if (url.startsWith('/api/facebook/proxy')) {
+              const params = new URLSearchParams(url.split('?')[1]);
+              endpoint = params.get('endpoint');
+            } else {
+              endpoint = `/${postId}/comments`;
+            }
             
             const paginationUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(endpoint)}&accessToken=${encodeURIComponent(activeAccessToken)}&fields=id,message,from{id,name},created_time&limit=100&after=${encodeURIComponent(afterParam)}`;
             
@@ -465,7 +486,7 @@ const CommentExtractor = () => {
       messageApi.success(t('extracting_commenters'), 1);
       
       
-      // Extract comments using Graph API via backend proxy
+      // Always use the backend proxy to extract comments
       try {
         debugLog('Extracting comments from Graph API via backend proxy');
         const url = `/api/facebook/proxy?endpoint=${encodeURIComponent(`/${postId}/comments`)}&accessToken=${encodeURIComponent(accessToken)}&fields=id,message,from{id,name},created_time&limit=100`;
