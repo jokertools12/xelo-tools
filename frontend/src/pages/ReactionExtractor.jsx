@@ -192,8 +192,8 @@ const ReactionExtractor = () => {
     debugLog('Starting fetch from URL:', url);
     debugLog('Current reactions count before fetch:', allReactions.length);
     
-    try {
-      if (!url.includes('access_token=')) {
+      try {
+      if (!url.includes('access_token=') && !url.includes('accessToken=')) {
         throw new Error(t('access_token_missing'));
       }
       
