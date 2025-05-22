@@ -442,8 +442,8 @@ const ReactionExtractor = () => {
 
 
       
-      // Start extraction process
-      const initialUrl = `/v18.0/${postId}/reactions?access_token=${accessToken}&pretty=1&limit=100&summary=total_count`;
+      // Start extraction process with backend proxy to avoid CORS issues in production
+      const initialUrl = `/api/facebook/proxy?endpoint=${encodeURIComponent(`/${postId}/reactions`)}&accessToken=${encodeURIComponent(accessToken)}&limit=100&summary=total_count&pretty=1`;
       const extractedReactions = await fetchReactions(initialUrl);
       
       if (extractedReactions && extractedReactions.length > 0) {
