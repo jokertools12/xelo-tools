@@ -2,6 +2,7 @@
  * Utility for handling achievement notification sounds
  * Provides fallback handling if sound files are missing
  */
+import { formatUploadUrl } from './urlHelper';
 
 // Map of achievement types to sound files
 const SOUND_MAPPINGS = {
@@ -24,7 +25,9 @@ const failedSounds = new Set();
 export const playAchievementSound = (achievementType = 'default') => {
   return new Promise((resolve) => {
     // Get sound URL based on achievement type, or use default
-    const soundUrl = SOUND_MAPPINGS[achievementType] || SOUND_MAPPINGS.default;
+    const soundPath = SOUND_MAPPINGS[achievementType] || SOUND_MAPPINGS.default;
+    // Format the URL to ensure it works in both development and production
+    const soundUrl = formatUploadUrl(soundPath);
     
     // If we already tried and failed with this sound, don't try again
     if (failedSounds.has(soundUrl)) {
