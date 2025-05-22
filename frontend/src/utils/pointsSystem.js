@@ -3,8 +3,7 @@ import { message } from 'antd';
 import api from './api';
 
 // API Base URL with production support
-const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-const API_BASE_URL = apiUrl.endsWith('/api') ? apiUrl : `${apiUrl}/api`;
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 // Points costs for different operations
 export const POINTS_COSTS = {
