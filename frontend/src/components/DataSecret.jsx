@@ -15,8 +15,7 @@ import '../styles/DataSecret.css'; // Import dedicated CSS file
 
 const BATCH_SIZE = 250;
 // Use environment variable with production support
-const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-const API_BASE_URL = apiUrl.endsWith('/api') ? apiUrl : `${apiUrl}/api`;
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const ShimmerRow = ({ columns }) => {
   return (
